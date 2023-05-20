@@ -18,11 +18,11 @@
 
 ## Getting Started
 
-**Step 1:** Clone repository
+**Step 1:** Clone repository.
 
     git clone https://github.com/lvhau20895/handbook.git
 
-**Step 2:** Reinstall **node_modules** based on "package.json" for client and server
+**Step 2:** Reinstall **node_modules** based on "package.json" for client and server.
 
     npm install
 
@@ -30,7 +30,7 @@ or
 
     yarn install
 
-**Step 3:**: Run server and client in development environment
+**Step 3:** Run server and client in development environment.
 
 Server
 
