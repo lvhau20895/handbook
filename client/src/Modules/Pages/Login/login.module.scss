@@ -1,0 +1,185 @@
+@import "/src/Assets/Scss/main.scss";
+
+.login {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: opacity 0.5s linear;
+    @keyframes opacity {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    form {
+        position: relative;
+        width: 350px;
+        height: 420px;
+        background: $color-light;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        .title {
+            text-align: center;
+            color: $color-black;
+            font-size: 25px;
+            margin-bottom: 30px;
+        }
+
+        .main {
+            width: 100%;
+
+            .group {
+                width: 100%;
+                display: grid;
+                grid-template-columns: 10% 90%;
+                grid-template-rows: 50px 35px;
+
+                .icon {
+                    height: 100%;
+                    color: $color-main-light;
+                    font-size: 25px;
+                    display: flex;
+                    align-items: center;
+                    user-select: none;
+                    margin-right: 10px;
+                }
+
+                .control {
+                    position: relative;
+
+                    input {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 5px;
+                        border: 2px solid rgba(0, 0, 0, 0.1);
+                        outline: none;
+                        padding: 0 10px;
+                        caret-color: $color-main-light;
+                        color: $color-black;
+                        font-weight: bold;
+                        transition: all 0.2s linear;
+                        &:focus,
+                        &:not(:placeholder-shown) {
+                            border-color: $color-main-light;
+                            ~ label {
+                                top: 0;
+                                left: 8px;
+                                font-size: 10px;
+                                background: $color-light;
+                                color: $color-main-light;
+                                padding: 0 4px;
+                            }
+                        }
+                        &:not(:focus) {
+                            border-color: rgba(0, 0, 0, 0.1);
+                            ~ label {
+                                color: $color-gray;
+                            }
+                        }
+                    }
+
+                    label {
+                        position: absolute;
+                        top: 50%;
+                        left: 15px;
+                        transform: translateY(-50%);
+                        font-size: 12px;
+                        font-weight: bold;
+                        color: $color-gray;
+                        transition: all 0.2s linear;
+                        pointer-events: none;
+                    }
+
+                    .showPassword {
+                        position: absolute;
+                        top: 50%;
+                        right: 15px;
+                        transform: translateY((-50%));
+                        border: none;
+                        background: transparent;
+                        color: $color-gray;
+                        font-size: 25px;
+                        width: 25px;
+                        height: 25px;
+                        cursor: pointer;
+                    }
+
+                    .password {
+                        padding-right: 55px;
+                    }
+
+                    .message {
+                        display: block;
+                        color: $color-red;
+                        font-size: 12px;
+                        font-weight: bold;
+                        margin-top: 5px;
+                    }
+                }
+            }
+        }
+
+        .submit {
+            text-align: center;
+            margin-bottom: 50px;
+
+            button {
+                padding: 15px 30px;
+                border-radius: 5px;
+                border: none;
+                outline: none;
+                background: $color-main-dark;
+                color: $color-light;
+                font-size: 14px;
+                font-weight: bold;
+                letter-spacing: 1px;
+                transition: background 0.1s linear;
+                cursor: pointer;
+                &:hover {
+                    background: $color-main-light;
+                }
+            }
+        }
+
+        .link {
+            width: 100%;
+
+            p {
+                font-size: 14px;
+                margin-bottom: 5px;
+                color: $color-black;
+
+                a {
+                    text-decoration: none;
+                    color: $color-main-light;
+                    font-weight: bold;
+                    transition: color 0.1s linear;
+                    &:hover {
+                        color: $color-main-dark;
+                    }
+                }
+            }
+
+            a {
+                font-size: 14px;
+                font-weight: bold;
+                color: $color-main-light;
+                text-decoration: none;
+                transition: color 0.1s linear;
+                &:hover {
+                    color: $color-main-dark;
+                }
+            }
+        }
+    }
+}

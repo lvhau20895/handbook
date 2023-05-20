@@ -1,0 +1,14 @@
+body.dark {
+	--background: #333;
+	--text: #fff;
+}
+
+body.light {
+	--background: #eee;
+	--text: #000;
+}
+
+body {
+	background: var(--background);
+	transition: all 0.2s linear;
+}

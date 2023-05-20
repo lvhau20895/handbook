@@ -1,0 +1,152 @@
+@import "/src/Assets/Scss/main.scss";
+
+.forgot {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: opacity 0.5s linear;
+    @keyframes opacity {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    form {
+        position: relative;
+        width: 350px;
+        height: 420px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+        background: $color-light;
+        padding: 20px;
+
+        .back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 20px;
+            color: $color-gray;
+            transition: color 0.1s linear;
+            &:hover {
+                color: $color-dark;
+            }
+        }
+
+        .title {
+            text-align: center;
+            color: $color-gray;
+            font-size: 25px;
+            margin-bottom: 50px;
+        }
+
+        .group {
+            display: flex;
+            margin-bottom: 30px;
+
+            .icon {
+                width: 10%;
+                height: 40px;
+                color: $color-main-light;
+                font-size: 25px;
+                margin-right: 10px;
+                display: flex;
+                align-items: center;
+                user-select: none;
+            }
+
+            .control {
+                position: relative;
+                width: 90%;
+                height: 40px;
+
+                input {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 5px;
+                    border: 2px solid rgba(0, 0, 0, 0.1);
+                    outline: none;
+                    caret-color: $color-main-light;
+                    color: $color-black;
+                    padding: 0 15px;
+                    font-weight: bold;
+                    transition: all 0.2s linear;
+                    &:focus,
+                    &:not(:placeholder-shown) {
+                        border-color: $color-main-light;
+
+                        ~ label {
+                            top: 0;
+                            left: 8px;
+                            font-size: 12px;
+                            background: $color-light;
+                            color: $color-main-light;
+                            padding: 0 4px;
+                        }
+                    }
+                    &:not(:focus) {
+                        border-color: rgba(0, 0, 0, 0.1);
+
+                        ~ label {
+                            color: $color-gray;
+                        }
+                    }
+                }
+
+                label {
+                    position: absolute;
+                    top: 50%;
+                    left: 15px;
+                    transform: translateY(-50%);
+                    color: $color-gray;
+                    font-size: 14px;
+                    font-weight: bold;
+                    transition: all 0.2s linear;
+                    pointer-events: none;
+                }
+            }
+        }
+
+        .submit {
+            text-align: center;
+
+            button {
+                padding: 15px 30px;
+                border-radius: 5px;
+                border: none;
+                outline: none;
+                background: $color-main-dark;
+                color: $color-light;
+                font-size: 14px;
+                font-weight: bold;
+                letter-spacing: 1px;
+                transition: background 0.1s linear;
+                text-transform: uppercase;
+                cursor: pointer;
+                &:hover {
+                    background: $color-main-light;
+                }
+            }
+        }
+
+        .link {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 15px;
+
+            a {
+                text-decoration: none;
+                color: $color-main-light;
+                font-weight: bold;
+                transition: color 0.1s linear;
+                &:hover {
+                    color: $color-main-dark;
+                }
+            }
+        }
+    }
+}
