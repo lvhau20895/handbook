@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import login from "./login.module.scss";
 import { Link } from "react-router-dom";
 import { BiUser } from "react-icons/bi";
 import { HiOutlineKey } from "react-icons/hi";
 import { RiEye2Line, RiEyeCloseLine } from "react-icons/ri";
+import Validation from "Utils/Validation";
+import login from "./login.module.scss";
 
 const Login = () => {
     const [values, setValues] = useState({
@@ -14,24 +15,6 @@ const Login = () => {
 
     const [errors, setErrors] = useState({});
 
-    const validation = () => {
-        const { username, password } = values;
-        const message = {};
-        if (username === "") {
-            message.username = "Please enter your username";
-        } else if (username.length < 5 || username.length > 10) {
-            message.username = "Username from 5 to 10 character";
-        }
-
-        if (password === "") {
-            message.password = "Please enter your password";
-        } else if (password.length < 5 || password.length > 10) {
-            message.password = "Password from 5 to 10 character";
-        }
-
-        return message;
-    };
-
     const handleChange = (e) => {
         const { value, name } = e.target;
         setValues({ ...values, [name]: value });
@@ -39,7 +22,7 @@ const Login = () => {
 
     const handleBlur = (e) => {
         const { name } = e.target;
-        const message = validation();
+        const message = Validation("login", values);
         setErrors({ ...errors, [name]: message[name] });
     };
 
@@ -50,6 +33,10 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const message = Validation("login", values);
+        if (Object.keys(message).length > 0) {
+            return setErrors(message);
+        }
     };
 
     return (
@@ -78,7 +65,9 @@ const Login = () => {
                             <label htmlFor="username">Username</label>
                             {errors.username && (
                                 <span className={login.message}>
-                                    * {errors.username}
+                                    *{" "}
+                                    {errors.username?.charAt(0).toUpperCase() +
+                                        errors.username?.slice(1)}
                                 </span>
                             )}
                         </div>
@@ -115,7 +104,9 @@ const Login = () => {
                             </button>
                             {errors.password && (
                                 <span className={login.message}>
-                                    * {errors.password}
+                                    *{" "}
+                                    {errors.password?.charAt(0).toUpperCase() +
+                                        errors.password?.slice(1)}
                                 </span>
                             )}
                         </div>

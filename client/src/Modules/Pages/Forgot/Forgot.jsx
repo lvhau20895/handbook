@@ -3,18 +3,33 @@ import { GoMail } from "react-icons/go";
 import forgot from "./forgot.module.scss";
 import { Link } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
+import Validation from "Utils/Validation";
 const Forgot = () => {
-    const [value, setValue] = useState("");
+    const [values, setValues] = useState({
+        email: "",
+    });
+    const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
-        setValue(e.target.value);
+        const { value } = e.target;
+        if (value.startsWith(" ")) return;
+        setValues({ ...values, email: value });
+    };
+
+    const handleBlur = () => {
+        const message = Validation("forgot", values);
+        setErrors({ ...errors, email: message.email });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(value);
-        setValue("");
+        const message = Validation("forgot", values);
+
+        if (Object.keys(message).length > 0) {
+            return setErrors(message);
+        }
     };
+    console.log(errors);
 
     return (
         <div className={forgot.forgot}>
@@ -36,10 +51,17 @@ const Forgot = () => {
                             placeholder=" "
                             spellCheck="false"
                             autoComplete="off"
-                            value={value}
+                            value={values.email}
                             onChange={handleChange}
+                            onBlur={handleBlur}
                         />
                         <label htmlFor="email">Email</label>
+                        {errors.email && (
+                            <span className={forgot.message}>
+                                {errors.email?.charAt(0).toUpperCase() +
+                                    errors.email?.slice(1)}
+                            </span>
+                        )}
                     </div>
                 </div>
 

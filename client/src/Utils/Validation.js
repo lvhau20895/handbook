@@ -1,66 +1,70 @@
-const Validation = (type, values) => {
-	// const checkRequired = (name, value) => {
-	// 	if (value.trim() === "") return `Please enter your ${name}`;
-	// 	return;
-	// };
+const Validation = (form, values) => {
+    const message = {};
 
-	// const checkLength = (name, value, min, max) => {
-	// 	if (
-	// 		value.length < min ||
-	// 		value.length > max ||
-	// 		value.indexOf(" ") !== -1
-	// 	) {
-	// 		return `${name} from ${min} to ${max} characters & no spaces`;
-	// 	}
-	// 	return;
-	// };
+    const checkRequired = (name, value) => {
+        if (value.trim() === "") message[name] = `Please enter your ${name}`;
+    };
 
-	const message = {};
-	switch (type) {
-		case "register":
-			const { username, email, password, confirmPassword } = values;
+    const checkLength = (name, value, min, max) => {
+        if (
+            (value.length >= 1 && value.length < min) ||
+            value.length > max ||
+            value.indexOf(" ") !== -1
+        )
+            message[
+                name
+            ] = `${name} from ${min} to ${max} characters & no spaces`;
+    };
 
-			if (username === "") {
-				message.username = "Please enter your username";
-			} else if (
-				username.length < 5 ||
-				username.length > 10 ||
-				username.indexOf(" ") !== -1
-			) {
-				message.username =
-					"Username from 5 to 10 characters & no spaces";
-			}
+    const checkEmail = (email) => {
+        if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,3}$/.test(email) && email.length >= 1)
+            message.email = "Invalid email";
+    };
 
-			if (email === "") {
-				message.email = "Please enter your email";
-			} else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,3}$/.test(email)) {
-				message.email = "Invalid email";
-			}
+    const checkConfirmPassword = (password, confirmPassword) => {
+        if (confirmPassword !== password)
+            message.confirmPassword = "Incorrect password";
+    };
 
-			if (password === "") {
-				message.password = "Please enter your password";
-			} else if (
-				password.trim().length < 5 ||
-				password.trim().length > 10 ||
-				password.indexOf(" ") !== -1
-			) {
-				message.password =
-					"Password from 5 to 10 characters & no spaces";
-			}
+    switch (form) {
+        case "register":
+            {
+                const { username, email, password, confirmPassword } = values;
+                checkRequired("username", username);
+                checkLength("username", username, 5, 10);
 
-			if (confirmPassword === "") {
-				message.confirmPassword = "Please enter your confirmPassword";
-			} else if (confirmPassword !== password) {
-				message.confirmPassword = "Incorrect password";
-			}
+                checkRequired("email", email);
+                checkEmail(email);
 
-			break;
+                checkRequired("password", password);
+                checkLength("password", password, 5, 20);
 
-		default:
-			break;
-	}
+                checkRequired("confirmPassword", confirmPassword);
+                checkConfirmPassword(password, confirmPassword);
+            }
+            break;
+        case "login":
+            {
+                const { username, password } = values;
+                checkRequired("username", username);
+                checkLength("username", username, 5, 10);
 
-	return message;
+                checkRequired("password", password);
+                checkLength("password", password, 5, 20);
+            }
+            break;
+        case "forgot":
+            {
+                const { email } = values;
+                checkRequired("email", email);
+                checkEmail(email);
+            }
+            break;
+        default:
+            break;
+    }
+
+    return message;
 };
 
 export default Validation;
