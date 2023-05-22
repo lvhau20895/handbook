@@ -2,7 +2,12 @@ const Validation = (form, values) => {
     const message = {};
 
     const checkRequired = (name, value) => {
-        if (value.trim() === "") message[name] = `Please enter your ${name}`;
+        const formatName = name.replace(
+            /[A-Z]/g,
+            (char) => ` ${char.toLowerCase()}`
+        );
+        if (value.trim() === "")
+            message[name] = `Please enter your ${formatName}`;
     };
 
     const checkLength = (name, value, min, max) => {
@@ -11,9 +16,9 @@ const Validation = (form, values) => {
             value.length > max ||
             value.indexOf(" ") !== -1
         )
-            message[
-                name
-            ] = `${name} from ${min} to ${max} characters & no spaces`;
+            message[name] = `${
+                name[0].toUpperCase() + name.slice(1)
+            } from ${min} to ${max} characters & no spaces`;
     };
 
     const checkEmail = (email) => {

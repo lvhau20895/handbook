@@ -84,9 +84,7 @@ const Register = () => {
                             <label htmlFor="username">Username</label>
                             {errors.username && (
                                 <span className={register.message}>
-                                    *{" "}
-                                    {errors.username?.charAt(0).toUpperCase() +
-                                        errors.username?.slice(1)}
+                                    * {errors.username}
                                 </span>
                             )}
                         </div>
@@ -112,9 +110,7 @@ const Register = () => {
                             <label htmlFor="email">Email</label>
                             {errors.email && (
                                 <span className={register.message}>
-                                    *{" "}
-                                    {errors.email?.charAt(0).toUpperCase() +
-                                        errors.email?.slice(1)}
+                                    * {errors.email}
                                 </span>
                             )}
                         </div>
@@ -155,9 +151,7 @@ const Register = () => {
                             </button>
                             {errors.password && (
                                 <span className={register.message}>
-                                    *{" "}
-                                    {errors.password?.charAt(0).toUpperCase() +
-                                        errors.password?.slice(1)}
+                                    * {errors.password}
                                 </span>
                             )}
                         </div>
@@ -202,11 +196,7 @@ const Register = () => {
                             </button>
                             {errors.confirmPassword && (
                                 <span className={register.message}>
-                                    *{" "}
-                                    {errors.confirmPassword
-                                        ?.charAt(0)
-                                        .toUpperCase() +
-                                        errors.confirmPassword?.slice(1)}
+                                    * {errors.confirmPassword}
                                 </span>
                             )}
                         </div>

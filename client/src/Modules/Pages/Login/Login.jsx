@@ -17,6 +17,7 @@ const Login = () => {
 
     const handleChange = (e) => {
         const { value, name } = e.target;
+        if (value.startsWith(" ")) return;
         setValues({ ...values, [name]: value });
     };
 
@@ -65,9 +66,7 @@ const Login = () => {
                             <label htmlFor="username">Username</label>
                             {errors.username && (
                                 <span className={login.message}>
-                                    *{" "}
-                                    {errors.username?.charAt(0).toUpperCase() +
-                                        errors.username?.slice(1)}
+                                    * {errors.username}
                                 </span>
                             )}
                         </div>
@@ -104,9 +103,7 @@ const Login = () => {
                             </button>
                             {errors.password && (
                                 <span className={login.message}>
-                                    *{" "}
-                                    {errors.password?.charAt(0).toUpperCase() +
-                                        errors.password?.slice(1)}
+                                    * {errors.password}
                                 </span>
                             )}
                         </div>

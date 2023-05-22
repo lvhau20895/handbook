@@ -29,12 +29,11 @@ const Forgot = () => {
             return setErrors(message);
         }
     };
-    console.log(errors);
 
     return (
         <div className={forgot.forgot}>
             <form onSubmit={handleSubmit}>
-                <Link to="/login" className={forgot.back}>
+                <Link to={-1} className={forgot.back}>
                     <BiArrowBack />
                 </Link>
 
@@ -58,8 +57,7 @@ const Forgot = () => {
                         <label htmlFor="email">Email</label>
                         {errors.email && (
                             <span className={forgot.message}>
-                                {errors.email?.charAt(0).toUpperCase() +
-                                    errors.email?.slice(1)}
+                                * {errors.email}
                             </span>
                         )}
                     </div>
