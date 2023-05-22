@@ -4,12 +4,14 @@ const cors = require("cors");
 const server = require("http").createServer;
 const socket = require("./socket");
 const connectDatabase = require("../Configs/connect");
+const router = require("../Routers");
 
 const app = express();
 const port = 1995;
 
 app.use(express.json());
 app.use(cors());
+app.use("/api", router);
 
 app.get("/", (req, res) => {
 	res.send("hello world");
