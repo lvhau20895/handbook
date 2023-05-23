@@ -10,11 +10,11 @@
 ## Back End
 
 -   NodeJS ExpressJS
--   express cors chalk@4.1.2 dotenv mongoose nodemon socket.io
+-   express cors chalk@4.1.2 dotenv mongoose nodemon socket.io bcrypt jsonwebtoken
 
 ## Database
 
--   MongoDB [MongoDB Atlas](mongodb+srv://handbook:20081995@cluster0.er3t48o.mongodb.net/lvh?retryWrites=true&w=majority) MongoDB Compass
+-   MongoDB [MongoDB Atlas](mongodb+srv://admin:20081995@website.sbpdqtg.mongodb.net/handbook?retryWrites=true&w=majority) MongoDB Compass
 
 ## Getting Started
 

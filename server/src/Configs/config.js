@@ -5,5 +5,6 @@ module.exports = {
 	password: process.env.DB_PASSWORD,
 	code: process.env.DB_CODE,
 	database: process.env.DB_DATABASE,
-	dialect: process.env.DB_DIALECT
+	dialect: process.env.DB_DIALECT,
+	key: process.env.SECRET_KEY
 };
