@@ -1,0 +1,9 @@
+@import "/src/Assets/Scss/main.scss";
+
+.notification {
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateY(-50%);
+}

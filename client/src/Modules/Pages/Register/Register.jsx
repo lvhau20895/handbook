@@ -7,8 +7,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Validation from "Utils/Validation";
 import useRequest from "Modules/Hooks/useRequest";
 import userAPI from "Apis/userAPI";
-import { Bounce, Slide, ToastContainer, toast } from "react-toastify";
 import register from "./register.module.scss";
+import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
 	const [values, setValues] = useState({
@@ -69,32 +69,18 @@ const Register = () => {
 		const newValues = { username, email, password };
 		try {
 			await handleRegister(newValues);
-			toast.dismiss();
-			toast.success("Sign up success!", {
-				position: "top-center",
-				autoClose: 1000,
-				closeOnClick: true,
-				pauseOnHover: true,
-				theme: "light",
-				transition: Slide
-			});
+			toast.success("Here is your toast.");
 			setTimeout(() => {
 				navigate("/login");
 			}, 2000);
 		} catch (error) {
-			toast.dismiss();
-			toast.error(error, {
-				position: "top-center",
-				autoClose: false,
-				closeOnClick: true,
-				theme: "light"
-			});
+			toast.error("Here is your toast.");
 		}
 	};
 
 	return (
 		<div className={register.register}>
-			<ToastContainer />
+			<Toaster />
 			<form onSubmit={handleSubmit}>
 				<Link to="/login" className={register.back}>
 					<BiArrowBack />
