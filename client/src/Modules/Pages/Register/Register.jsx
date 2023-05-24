@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Validation from "Utils/Validation";
 import useRequest from "Modules/Hooks/useRequest";
 import userAPI from "Apis/userAPI";
-import { Slide, ToastContainer, toast } from "react-toastify";
+import { Bounce, Slide, ToastContainer, toast } from "react-toastify";
 import register from "./register.module.scss";
 
 const Register = () => {
@@ -61,25 +61,35 @@ const Register = () => {
 
 	const handleSubmit = async e => {
 		e.preventDefault();
-		// const message = Validation("register", values);
-		// if (Object.keys(message).length > 0) {
-		// 	return setErrors(message);
-		// }
-		// try {
-		// 	await handleRegister(values);
-		// } catch (error) {}
-		toast.success("Successful registration!", {
-			position: "top-center",
-			autoClose: 1000,
-			closeOnClick: true,
-			pauseOnHover: true,
-			theme: "light",
-
-			transition: Slide
-		});
-		setTimeout(() => {
-			navigate("/login");
-		}, 2000);
+		const message = Validation("register", values);
+		if (Object.keys(message).length > 0) {
+			return setErrors(message);
+		}
+		const { username, email, password } = values;
+		const newValues = { username, email, password };
+		try {
+			await handleRegister(newValues);
+			toast.dismiss();
+			toast.success("Sign up success!", {
+				position: "top-center",
+				autoClose: 1000,
+				closeOnClick: true,
+				pauseOnHover: true,
+				theme: "light",
+				transition: Slide
+			});
+			setTimeout(() => {
+				navigate("/login");
+			}, 2000);
+		} catch (error) {
+			toast.dismiss();
+			toast.error(error, {
+				position: "top-center",
+				autoClose: false,
+				closeOnClick: true,
+				theme: "light"
+			});
+		}
 	};
 
 	return (
@@ -245,7 +255,11 @@ const Register = () => {
 				</div>
 
 				<div className={register.submit}>
-					<button type="submit" tabIndex="5">
+					<button
+						type="submit"
+						disabled={loading ? true : false}
+						tabIndex="5"
+					>
 						Sign Up
 					</button>
 				</div>

@@ -16,7 +16,7 @@ const reducer = (state, { type, payload }) => {
 		case "REQUEST_REJECTED":
 			return { ...state, error: payload, loading: false };
 		case "REQUEST_FINAL": {
-			return { ...state, isLoading: false };
+			return { ...state, loading: false };
 		}
 		default:
 			return state;
