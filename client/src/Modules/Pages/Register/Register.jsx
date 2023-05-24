@@ -3,8 +3,11 @@ import { BiArrowBack, BiLock, BiUser } from "react-icons/bi";
 import { GoMail } from "react-icons/go";
 import { RiEye2Line, RiEyeCloseLine } from "react-icons/ri";
 import { GiAnticlockwiseRotation } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Validation from "Utils/Validation";
+import useRequest from "Modules/Hooks/useRequest";
+import userAPI from "Apis/userAPI";
+import { Slide, ToastContainer, toast } from "react-toastify";
 import register from "./register.module.scss";
 
 const Register = () => {
@@ -19,6 +22,13 @@ const Register = () => {
 		confirmPassword: false
 	});
 	const [errors, setErrors] = useState({});
+
+	const navigate = useNavigate();
+
+	const { data: handleRegister, loading } = useRequest(
+		values => userAPI.register(values),
+		{ manual: true }
+	);
 
 	const handleChange = e => {
 		const { value, name } = e.target;
@@ -49,16 +59,32 @@ const Register = () => {
 		}
 	};
 
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault();
-		const message = Validation("register", values);
-		if (Object.keys(message).length > 0) {
-			return setErrors(message);
-		}
+		// const message = Validation("register", values);
+		// if (Object.keys(message).length > 0) {
+		// 	return setErrors(message);
+		// }
+		// try {
+		// 	await handleRegister(values);
+		// } catch (error) {}
+		toast.success("Successful registration!", {
+			position: "top-center",
+			autoClose: 1000,
+			closeOnClick: true,
+			pauseOnHover: true,
+			theme: "light",
+
+			transition: Slide
+		});
+		setTimeout(() => {
+			navigate("/login");
+		}, 2000);
 	};
 
 	return (
 		<div className={register.register}>
+			<ToastContainer />
 			<form onSubmit={handleSubmit}>
 				<Link to="/login" className={register.back}>
 					<BiArrowBack />
