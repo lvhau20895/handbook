@@ -6,10 +6,12 @@ import { GiAnticlockwiseRotation } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Validation from "Utils/Validation";
-import Notification from "Utils/Notification";
+import { Confirm } from "Utils/Notification";
+import Swal from "sweetalert2";
 import useRequest from "Modules/Hooks/useRequest";
 import userAPI from "Apis/userAPI";
 import style from "./register.module.scss";
+import Notification from "Modules/Components/Notification";
 
 const Register = () => {
 	const [values, setValues] = useState({
@@ -23,6 +25,11 @@ const Register = () => {
 		confirmPassword: false
 	});
 	const [errors, setErrors] = useState({});
+	const [notification, setNotification] = useState({
+		open: false,
+		icon: "",
+		message: ""
+	});
 
 	const navigate = useNavigate();
 
@@ -60,6 +67,10 @@ const Register = () => {
 		}
 	};
 
+	const handleClose = () => {
+		setNotification({ ...notification, open: false });
+	};
+
 	const handleSubmit = async e => {
 		e.preventDefault();
 		const message = Validation("register", values);
@@ -76,18 +87,18 @@ const Register = () => {
 				password: "",
 				confirmPassword: ""
 			});
-			Notification("success", "Sign up success!", 1500);
 			setTimeout(() => {
 				navigate("/login");
 			}, 1500);
 		} catch (error) {
-			Notification("error", error);
+			setNotification({ open: true, icon: "error", message: "success" });
 		}
 	};
 
 	return (
 		<div className={style.register}>
 			<Toaster />
+			<Notification option={notification} onClose={handleClose} />
 			<form onSubmit={handleSubmit}>
 				<Link to="/login" className={style.back}>
 					<BiArrowBack />

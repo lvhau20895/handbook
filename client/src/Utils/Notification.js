@@ -13,4 +13,17 @@ const Notification = (...params) => {
 	});
 };
 
-export default Notification;
+const Confirm = () => {
+	toast(
+		<div>
+			<span>text</span>
+			<div>
+				<button>ok</button>
+				<button>close</button>
+			</div>
+		</div>,
+		{ position: "center-center" }
+	);
+};
+
+export { Notification, Confirm };

@@ -1,0 +1,10 @@
+@import "/src/Assets/Scss/main.scss";
+
+.notification {
+	.model {
+		position: fixed;
+		top: 0;
+		width: 100%;
+		z-index: 1000;
+	}
+}
