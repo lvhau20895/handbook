@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { GoMail } from "react-icons/go";
-import forgot from "./forgot.module.scss";
 import { Link } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import Validation from "Utils/Validation";
+import style from "./forgot.module.scss";
+
 const Forgot = () => {
 	const [values, setValues] = useState({
 		email: ""
@@ -34,22 +35,22 @@ const Forgot = () => {
 	};
 
 	return (
-		<div className={forgot.forgot}>
+		<div className={style.forgot}>
 			<form onSubmit={handleSubmit}>
-				<Link to={-1} className={forgot.back}>
+				<Link to={-1} className={style.back}>
 					<BiArrowBack />
 				</Link>
 
-				<h1 className={forgot.title}>Forgot Password</h1>
+				<h1 className={style.title}>Forgot Password</h1>
 
-				<div className={forgot.group}>
-					<label htmlFor="email" className={forgot.icon}>
+				<div className={style.group}>
+					<label htmlFor="email" className={style.icon}>
 						<GoMail />
 					</label>
-					<div className={forgot.control}>
+					<div className={style.control}>
 						<input
 							id="email"
-							className={errors.email && forgot.error}
+							className={errors.email && style.error}
 							type="text"
 							placeholder=" "
 							spellCheck="false"
@@ -58,20 +59,20 @@ const Forgot = () => {
 							onChange={handleChange}
 							onBlur={handleBlur}
 						/>
-						<span className={forgot.placeholder}>Email</span>
+						<span className={style.placeholder}>Email</span>
 						{errors.email && (
-							<span className={forgot.message}>
+							<span className={style.message}>
 								* {errors.email}
 							</span>
 						)}
 					</div>
 				</div>
 
-				<div className={forgot.submit}>
+				<div className={style.submit}>
 					<button type="submit">Send</button>
 				</div>
 
-				<p className={forgot.link}>
+				<p className={style.link}>
 					<Link to="/register">Create a new account</Link>
 				</p>
 			</form>

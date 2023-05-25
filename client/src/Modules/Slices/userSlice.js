@@ -2,32 +2,46 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userAPI from "Apis/userAPI";
 
 const initialState = {
-    user: {},
-    loading: false,
-    error: true,
+	user: {},
+	token: JSON.parse(localStorage.getItem("token")) || null,
+	loading: false,
+	error: true
 };
 
-const handleBuilder = (builder, func, data) => {
-    builder.addCase(func.pending, (state) => {
-        state.loading = true;
-    });
-    builder.addCase(func.fulfilled, (state, { payload }) => {
-        state[data] = payload;
-        state.loading = false;
-    });
-    builder.addCase(func.rejected, (state, { payload }) => {
-        state.error = payload;
-        state.loading = false;
-    });
-};
+export const login = createAsyncThunk(
+	"user/login",
+	async (values, { rejectWithValue }) => {
+		try {
+			const data = await userAPI.login(values);
+			localStorage.setItem("token", data);
+			return data;
+		} catch (error) {
+			return rejectWithValue(error);
+		}
+	}
+);
 
-const login = createAsyncThunk("user/login");
+const getData = (builder, data, func) => {
+	builder.addCase(func.pending, state => {
+		state.loading = true;
+	});
+	builder.addCase(func.fulfilled, (state, { payload }) => {
+		state[data] = payload;
+		state.loading = false;
+	});
+	builder.addCase(func.rejected, (state, { payload }) => {
+		state.error = payload;
+		state.loading = false;
+	});
+};
 
 const userSlice = createSlice({
-    name: "user",
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase();
-    },
+	name: "user",
+	initialState,
+	reducers: {},
+	extraReducers: builder => {
+		getData(builder, "token", login);
+	}
 });
+
+export default userSlice.reducer;

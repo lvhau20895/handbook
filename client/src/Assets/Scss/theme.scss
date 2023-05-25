@@ -1,11 +1,13 @@
 body.dark {
 	--background: #333;
 	--text: #fff;
+	--notification: #000;
 }
 
 body.light {
 	--background: #eee;
 	--text: #000;
+	--notification: #fff;
 }
 
 body {

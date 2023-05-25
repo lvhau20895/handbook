@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { BiMoon, BiSun } from "react-icons/bi";
-import theme from "./theme.module.scss";
+import style from "./theme.module.scss";
 
 const Theme = () => {
 	const [checked, setChecked] = useState(
-		JSON.parse(localStorage.getItem("mode")) || false
+		JSON.parse(localStorage.getItem("theme")) || false
 	);
 
 	useEffect(() => {
-		localStorage.setItem("mode", JSON.stringify(checked));
+		localStorage.setItem("theme", JSON.stringify(checked));
 
 		if (checked) {
 			document.body.classList.add("dark");
@@ -25,10 +25,10 @@ const Theme = () => {
 
 	return (
 		<div
-			className={`${theme.switchMode} ${checked ? theme.active : ""}`}
+			className={`${style.switchMode} ${checked ? style.active : ""}`}
 			onClick={handleSwitchMode}
 		>
-			<span className={theme.icon}>
+			<span className={style.icon}>
 				{checked ? <BiMoon /> : <BiSun />}
 			</span>
 		</div>

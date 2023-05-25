@@ -1,16 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import store from "./store";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 import "sweetalert2/src/sweetalert2.scss";
 import "./Assets/Scss/main.scss";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-	<BrowserRouter>
-		<App />
-	</BrowserRouter>
+	<Provider store={store}>
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
+	</Provider>
 );
 
 reportWebVitals();

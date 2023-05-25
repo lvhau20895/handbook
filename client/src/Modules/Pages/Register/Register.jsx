@@ -4,11 +4,12 @@ import { GoMail } from "react-icons/go";
 import { RiEye2Line, RiEyeCloseLine } from "react-icons/ri";
 import { GiAnticlockwiseRotation } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import Validation from "Utils/Validation";
+import Notification from "Utils/Notification";
 import useRequest from "Modules/Hooks/useRequest";
 import userAPI from "Apis/userAPI";
-import register from "./register.module.scss";
-import toast, { Toaster } from "react-hot-toast";
+import style from "./register.module.scss";
 
 const Register = () => {
 	const [values, setValues] = useState({
@@ -69,33 +70,39 @@ const Register = () => {
 		const newValues = { username, email, password };
 		try {
 			await handleRegister(newValues);
-			toast.success("Here is your toast.");
+			setValues({
+				username: "",
+				email: "",
+				password: "",
+				confirmPassword: ""
+			});
+			Notification("success", "Sign up success!", 1500);
 			setTimeout(() => {
 				navigate("/login");
-			}, 2000);
+			}, 1500);
 		} catch (error) {
-			toast.error("Here is your toast.");
+			Notification("error", error);
 		}
 	};
 
 	return (
-		<div className={register.register}>
+		<div className={style.register}>
 			<Toaster />
 			<form onSubmit={handleSubmit}>
-				<Link to="/login" className={register.back}>
+				<Link to="/login" className={style.back}>
 					<BiArrowBack />
 				</Link>
-				<h1 className={register.title}>Sign Up</h1>
+				<h1 className={style.title}>Sign Up</h1>
 
-				<div className={register.main}>
-					<div className={register.group}>
-						<label htmlFor="username" className={register.icon}>
+				<div className={style.main}>
+					<div className={style.group}>
+						<label htmlFor="username" className={style.icon}>
 							<BiUser />
 						</label>
-						<div className={register.control}>
+						<div className={style.control}>
 							<input
 								id="username"
-								className={errors.username && register.error}
+								className={errors.username && style.error}
 								type="text"
 								placeholder=" "
 								spellCheck="false"
@@ -106,25 +113,23 @@ const Register = () => {
 								onChange={handleChange}
 								onBlur={handleBlur}
 							/>
-							<span className={register.placeholder}>
-								Username
-							</span>
+							<span className={style.placeholder}>Username</span>
 							{errors.username && (
-								<span className={register.message}>
+								<span className={style.message}>
 									* {errors.username}
 								</span>
 							)}
 						</div>
 					</div>
 
-					<div className={register.group}>
-						<label htmlFor="email" className={register.icon}>
+					<div className={style.group}>
+						<label htmlFor="email" className={style.icon}>
 							<GoMail />
 						</label>
-						<div className={register.control}>
+						<div className={style.control}>
 							<input
 								id="email"
-								className={errors.email && register.error}
+								className={errors.email && style.error}
 								type="text"
 								placeholder=" "
 								spellCheck="false"
@@ -135,24 +140,24 @@ const Register = () => {
 								onChange={handleChange}
 								onBlur={handleBlur}
 							/>
-							<span className={register.placeholder}>Email</span>
+							<span className={style.placeholder}>Email</span>
 							{errors.email && (
-								<span className={register.message}>
+								<span className={style.message}>
 									* {errors.email}
 								</span>
 							)}
 						</div>
 					</div>
 
-					<div className={register.group}>
-						<label htmlFor="password" className={register.icon}>
+					<div className={style.group}>
+						<label htmlFor="password" className={style.icon}>
 							<BiLock />
 						</label>
-						<div className={register.control}>
+						<div className={style.control}>
 							<input
 								id="password"
-								className={`${register.password} ${
-									errors.password ? register.error : ""
+								className={`${style.password} ${
+									errors.password ? style.error : ""
 								}`}
 								type={
 									showPassword.password ? "text" : "password"
@@ -166,11 +171,9 @@ const Register = () => {
 								onChange={handleChange}
 								onBlur={handleBlur}
 							/>
-							<span className={register.placeholder}>
-								Password
-							</span>
+							<span className={style.placeholder}>Password</span>
 							<button
-								className={register.showPassword}
+								className={style.showPassword}
 								onMouseDown={e =>
 									handleShowPassword(e, "password")
 								}
@@ -182,25 +185,25 @@ const Register = () => {
 								)}
 							</button>
 							{errors.password && (
-								<span className={register.message}>
+								<span className={style.message}>
 									* {errors.password}
 								</span>
 							)}
 						</div>
 					</div>
 
-					<div className={register.group}>
+					<div className={style.group}>
 						<label
 							htmlFor="confirm-password"
-							className={register.icon}
+							className={style.icon}
 						>
 							<GiAnticlockwiseRotation />
 						</label>
-						<div className={register.control}>
+						<div className={style.control}>
 							<input
 								id="confirm-password"
-								className={`${register.password} ${
-									errors.confirmPassword && register.error
+								className={`${style.password} ${
+									errors.confirmPassword && style.error
 								}`}
 								type={
 									showPassword.confirmPassword
@@ -216,11 +219,11 @@ const Register = () => {
 								onChange={handleChange}
 								onBlur={handleBlur}
 							/>
-							<span className={register.placeholder}>
+							<span className={style.placeholder}>
 								Confirm Password
 							</span>
 							<button
-								className={register.showPassword}
+								className={style.showPassword}
 								onMouseDown={e =>
 									handleShowPassword(e, "confirmPassword")
 								}
@@ -232,7 +235,7 @@ const Register = () => {
 								)}
 							</button>
 							{errors.confirmPassword && (
-								<span className={register.message}>
+								<span className={style.message}>
 									* {errors.confirmPassword}
 								</span>
 							)}
@@ -240,7 +243,7 @@ const Register = () => {
 					</div>
 				</div>
 
-				<div className={register.submit}>
+				<div className={style.submit}>
 					<button
 						type="submit"
 						disabled={loading ? true : false}

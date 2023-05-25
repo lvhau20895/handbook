@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiUser } from "react-icons/bi";
 import { HiOutlineKey } from "react-icons/hi";
 import { RiEye2Line, RiEyeCloseLine } from "react-icons/ri";
 import Validation from "Utils/Validation";
-import login from "./login.module.scss";
+import style from "./login.module.scss";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
 	const [values, setValues] = useState({
@@ -12,8 +13,10 @@ const Login = () => {
 		password: ""
 	});
 	const [showPassword, setShowPassword] = useState(false);
-
 	const [errors, setErrors] = useState({});
+
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const handleChange = e => {
 		const { value, name } = e.target;
@@ -34,28 +37,30 @@ const Login = () => {
 		e.button === 0 && setShowPassword(!showPassword);
 	};
 
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault();
 		const message = Validation("login", values);
 		if (Object.keys(message).length > 0) {
 			return setErrors(message);
 		}
+		try {
+		} catch (error) {}
 	};
 
 	return (
-		<div className={login.login}>
+		<div className={style.login}>
 			<form onSubmit={handleSubmit}>
-				<h1 className={login.title}>Sign In</h1>
+				<h1 className={style.title}>Sign In</h1>
 
-				<div className={login.main}>
-					<div className={login.group}>
-						<label htmlFor="username" className={login.icon}>
+				<div className={style.main}>
+					<div className={style.group}>
+						<label htmlFor="username" className={style.icon}>
 							<BiUser />
 						</label>
-						<div className={login.control}>
+						<div className={style.control}>
 							<input
 								id="username"
-								className={errors.username && login.error}
+								className={errors.username && style.error}
 								type="text"
 								placeholder=" "
 								spellCheck="false"
@@ -66,24 +71,24 @@ const Login = () => {
 								onChange={handleChange}
 								onBlur={handleBlur}
 							/>
-							<span className={login.placeholder}>Username</span>
+							<span className={style.placeholder}>Username</span>
 							{errors.username && (
-								<span className={login.message}>
+								<span className={style.message}>
 									* {errors.username}
 								</span>
 							)}
 						</div>
 					</div>
 
-					<div className={login.group}>
-						<label htmlFor="password" className={login.icon}>
+					<div className={style.group}>
+						<label htmlFor="password" className={style.icon}>
 							<HiOutlineKey />
 						</label>
-						<div className={login.control}>
+						<div className={style.control}>
 							<input
 								id="password"
-								className={`${login.password} ${
-									errors.password ? login.error : ""
+								className={`${style.password} ${
+									errors.password ? style.error : ""
 								}`}
 								type={showPassword ? "text" : "password"}
 								placeholder=" "
@@ -95,9 +100,9 @@ const Login = () => {
 								onChange={handleChange}
 								onBlur={handleBlur}
 							/>
-							<span className={login.placeholder}>Password</span>
+							<span className={style.placeholder}>Password</span>
 							<button
-								className={login.showPassword}
+								className={style.showPassword}
 								onMouseDown={e => handleShowPassword(e)}
 							>
 								{showPassword ? (
@@ -107,7 +112,7 @@ const Login = () => {
 								)}
 							</button>
 							{errors.password && (
-								<span className={login.message}>
+								<span className={style.message}>
 									* {errors.password}
 								</span>
 							)}
@@ -115,13 +120,13 @@ const Login = () => {
 					</div>
 				</div>
 
-				<div className={login.submit}>
+				<div className={style.submit}>
 					<button type="submit" tabIndex="3">
 						Sign In
 					</button>
 				</div>
 
-				<div className={login.link}>
+				<div className={style.link}>
 					<p>
 						Don't have an account?{" "}
 						<Link to="/register">Sign Up</Link>
