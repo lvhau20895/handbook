@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiArrowBack, BiLock, BiUser } from "react-icons/bi";
 import { GoMail } from "react-icons/go";
 import { RiEye2Line, RiEyeCloseLine } from "react-icons/ri";
 import { GiAnticlockwiseRotation } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
 import Validation from "Utils/Validation";
 import useRequest from "Modules/Hooks/useRequest";
 import userAPI from "Apis/userAPI";
@@ -25,10 +24,26 @@ const Register = () => {
 	const [errors, setErrors] = useState({});
 	const [notification, setNotification] = useState({
 		open: false,
-		confirm: false,
+		modal: false,
+		type: "",
+		content: "",
 		icon: "",
 		message: ""
 	});
+
+	console.log(notification);
+
+	// useEffect(() => {
+	// 	if (notification.open) {
+	// 		const timer = setTimeout(() => {
+	// 			setNotification({ ...notification, open: false });
+	// 		}, 3000);
+
+	// 		return () => {
+	// 			clearTimeout(timer);
+	// 		};
+	// 	}
+	// }, [notification]);
 
 	const navigate = useNavigate();
 
@@ -71,11 +86,11 @@ const Register = () => {
 	};
 
 	const handleConfirm = () => {
-		setNotification({ ...notification, confirm: false, open: true });
+		setNotification({ ...notification, modal: false, open: true });
 	};
 
 	const handleCloseModal = () => {
-		setNotification({ ...notification, confirm: false });
+		setNotification({ ...notification, modal: false });
 	};
 
 	const handleSubmit = async e => {
@@ -100,7 +115,9 @@ const Register = () => {
 		} catch (error) {
 			setNotification({
 				...notification,
-				confirm: true,
+				modal: true,
+				type: "delete",
+				content: "Do you want to sign out?",
 				icon: "error",
 				message: "success"
 			});
@@ -109,12 +126,11 @@ const Register = () => {
 
 	return (
 		<div className={style.register}>
-			<Toaster />
 			<Notification
 				option={notification}
-				onClose={handleCloseNotification}
+				// onClose={handleCloseNotification}
 				onConfirm={handleConfirm}
-				onCloseModal={handleCloseModal}
+				onCancel={handleCloseModal}
 			/>
 			<form onSubmit={handleSubmit}>
 				<Link to="/login" className={style.back}>

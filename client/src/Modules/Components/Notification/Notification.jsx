@@ -8,25 +8,28 @@ import {
 } from "react-icons/ai";
 import style from "./notification.module.scss";
 
-const Notification = ({ option, onClose, onConfirm, onCloseModal }) => {
-	const { open, confirm, icon, message } = option;
+const Notification = ({ option, onClose, onConfirm, onCancel }) => {
+	const { open, modal, type, content, icon, message } = option;
 
 	useEffect(() => {
-		const timer = setTimeout(() => {
-			onClose();
-		}, 3000);
+		if (open) {
+			const timer = setTimeout(() => {
+				onClose();
+			}, 2000);
 
-		return () => {
-			clearTimeout(timer);
-		};
-	}, [onClose]);
+			return () => {
+				clearTimeout(timer);
+			};
+		}
+	}, [open, onClose]);
+	console.log(option);
 
 	const handleConfirm = () => {
 		onConfirm();
 	};
 
-	const handleClose = () => {
-		onCloseModal();
+	const handleCancel = () => {
+		onCancel();
 	};
 
 	const icons = {
@@ -36,19 +39,31 @@ const Notification = ({ option, onClose, onConfirm, onCloseModal }) => {
 		info: <AiFillInfoCircle />,
 		question: <AiFillQuestionCircle />
 	};
-
 	return (
 		<div className={style.notification}>
-			{confirm && (
+			{modal && (
 				<div className={style.modal}>
+					<div className={style.overlay} onClick={handleCancel}></div>
 					<div className={style.box}>
-						<p>hihi</p>
-						<button onClick={handleConfirm}>Yes</button>
-						<button onClick={handleClose}>No</button>
+						<p className={style.content}>{content}</p>
+						<div className={style.action}>
+							<button
+								className={style.confirm}
+								onClick={handleConfirm}
+							>
+								Yes
+							</button>
+							<button
+								className={style.cancel}
+								onClick={handleCancel}
+							>
+								No
+							</button>
+						</div>
 					</div>
-					<div className={style.overlay} onClick={handleClose}></div>
 				</div>
 			)}
+
 			{open && (
 				<div className={style.alert}>
 					<div className={style[icon]}>{icons[icon]}</div>
