@@ -7,7 +7,7 @@ import style from "./auth.module.scss";
 const Auth = () => {
 	return (
 		<div className={style.auth}>
-			<div className={style.switchMode}>
+			<div className={style.header}>
 				<Logo />
 				<Theme />
 			</div>
