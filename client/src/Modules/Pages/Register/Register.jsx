@@ -9,6 +9,7 @@ import useRequest from "Modules/Hooks/useRequest";
 import userAPI from "Apis/userAPI";
 import style from "./register.module.scss";
 import Notification from "Modules/Components/Notification";
+import Confirm from "Modules/Components/Confirm/Confirm";
 
 const Register = () => {
 	const [values, setValues] = useState({
@@ -22,14 +23,8 @@ const Register = () => {
 		confirmPassword: false
 	});
 	const [errors, setErrors] = useState({});
-	const [notification, setNotification] = useState({
-		open: false,
-		modal: false,
-		type: "",
-		content: "",
-		icon: "",
-		message: ""
-	});
+	const [notification, setNotification] = useState(null);
+	const [confirm, setConfirm] = useState(null);
 
 	const navigate = useNavigate();
 
@@ -67,16 +62,12 @@ const Register = () => {
 		}
 	};
 
-	const handleCloseNotification = () => {
-		setNotification({ ...notification, open: false });
-	};
-
 	const handleConfirm = () => {
-		setNotification({ ...notification, modal: false, open: true });
-	};
-
-	const handleCloseModal = () => {
-		setNotification({ ...notification, modal: false, type: "" });
+		setNotification({
+			icon: "error",
+			message: "not found",
+			time: 2000
+		});
 	};
 
 	const handleSubmit = async e => {
@@ -99,25 +90,22 @@ const Register = () => {
 				navigate("/login");
 			}, 1500);
 		} catch (error) {
+			// setConfirm({
+			// 	type: "delete",
+			// 	content: "Do you want to delete data?"
+			// });
 			setNotification({
-				...notification,
-				modal: true,
-				type: "delete",
-				content: "Do you want to sign out?",
 				icon: "error",
-				message: "success"
+				message: error,
+				time: 3000
 			});
 		}
 	};
 
 	return (
 		<div className={style.register}>
-			<Notification
-				option={notification}
-				onClose={handleCloseNotification}
-				onConfirm={handleConfirm}
-				onCancel={handleCloseModal}
-			/>
+			{notification && <Notification option={notification} />}
+			{confirm && <Confirm option={confirm} onConfirm={handleConfirm} />}
 			<form onSubmit={handleSubmit}>
 				<Link to="/login" className={style.back}>
 					<BiArrowBack />
