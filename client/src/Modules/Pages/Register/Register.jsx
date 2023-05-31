@@ -31,20 +31,6 @@ const Register = () => {
 		message: ""
 	});
 
-	console.log(notification);
-
-	// useEffect(() => {
-	// 	if (notification.open) {
-	// 		const timer = setTimeout(() => {
-	// 			setNotification({ ...notification, open: false });
-	// 		}, 3000);
-
-	// 		return () => {
-	// 			clearTimeout(timer);
-	// 		};
-	// 	}
-	// }, [notification]);
-
 	const navigate = useNavigate();
 
 	const { data: handleRegister, loading } = useRequest(
@@ -90,7 +76,7 @@ const Register = () => {
 	};
 
 	const handleCloseModal = () => {
-		setNotification({ ...notification, modal: false });
+		setNotification({ ...notification, modal: false, type: "" });
 	};
 
 	const handleSubmit = async e => {
@@ -128,7 +114,7 @@ const Register = () => {
 		<div className={style.register}>
 			<Notification
 				option={notification}
-				// onClose={handleCloseNotification}
+				onClose={handleCloseNotification}
 				onConfirm={handleConfirm}
 				onCancel={handleCloseModal}
 			/>

@@ -50,7 +50,13 @@
 					cursor: pointer;
 					transition: all 0.2s linear;
 					&.confirm {
-						background: $color-orange;
+						background: $color-main-dark;
+						&.delete {
+							background: $color-red;
+						}
+						&.logout {
+							background: $color-orange;
+						}
 					}
 					&.cancel {
 						background: $color-gray;

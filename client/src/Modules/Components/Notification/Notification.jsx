@@ -22,7 +22,6 @@ const Notification = ({ option, onClose, onConfirm, onCancel }) => {
 			};
 		}
 	}, [open, onClose]);
-	console.log(option);
 
 	const handleConfirm = () => {
 		onConfirm();
@@ -48,7 +47,9 @@ const Notification = ({ option, onClose, onConfirm, onCancel }) => {
 						<p className={style.content}>{content}</p>
 						<div className={style.action}>
 							<button
-								className={style.confirm}
+								className={`${style.confirm} ${
+									type && style[type]
+								}`}
 								onClick={handleConfirm}
 							>
 								Yes
