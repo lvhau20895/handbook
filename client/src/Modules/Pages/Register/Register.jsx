@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BiArrowBack, BiLock, BiUser } from "react-icons/bi";
 import { GoMail } from "react-icons/go";
 import { RiEye2Line, RiEyeCloseLine } from "react-icons/ri";
@@ -9,7 +9,6 @@ import useRequest from "Modules/Hooks/useRequest";
 import userAPI from "Apis/userAPI";
 import style from "./register.module.scss";
 import Notification from "Modules/Components/Notification";
-import Confirm from "Modules/Components/Confirm/Confirm";
 
 const Register = () => {
 	const [values, setValues] = useState({
@@ -23,8 +22,7 @@ const Register = () => {
 		confirmPassword: false
 	});
 	const [errors, setErrors] = useState({});
-	const [notification, setNotification] = useState(null);
-	const [confirm, setConfirm] = useState(null);
+	const [notification, setNotification] = useState({});
 
 	const navigate = useNavigate();
 
@@ -62,14 +60,6 @@ const Register = () => {
 		}
 	};
 
-	const handleConfirm = () => {
-		setNotification({
-			icon: "error",
-			message: "not found",
-			time: 2000
-		});
-	};
-
 	const handleSubmit = async e => {
 		e.preventDefault();
 		const message = Validation("register", values);
@@ -80,6 +70,11 @@ const Register = () => {
 		const newValues = { username, email, password };
 		try {
 			await handleRegister(newValues);
+			setNotification({
+				icon: "success",
+				message: "Sign up success!",
+				time: 1500
+			});
 			setValues({
 				username: "",
 				email: "",
@@ -90,10 +85,6 @@ const Register = () => {
 				navigate("/login");
 			}, 1500);
 		} catch (error) {
-			// setConfirm({
-			// 	type: "delete",
-			// 	content: "Do you want to delete data?"
-			// });
 			setNotification({
 				icon: "error",
 				message: error,
@@ -104,8 +95,7 @@ const Register = () => {
 
 	return (
 		<div className={style.register}>
-			{notification && <Notification option={notification} />}
-			{confirm && <Confirm option={confirm} onConfirm={handleConfirm} />}
+			<Notification option={notification} />
 			<form onSubmit={handleSubmit}>
 				<Link to="/login" className={style.back}>
 					<BiArrowBack />

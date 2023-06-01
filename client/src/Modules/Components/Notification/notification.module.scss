@@ -8,7 +8,7 @@
 	justify-content: center;
 	align-items: center;
 	background: var(--notification);
-	padding: 10px 20px 10px 10px;
+	padding: 10px;
 	box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
 	border-radius: 5px;
 	visibility: hidden;
@@ -44,6 +44,6 @@
 
 	.message {
 		margin-left: 10px;
-		color: $color-gray;
+		color: var(--text);
 	}
 }

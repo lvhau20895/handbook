@@ -5,7 +5,7 @@
 ## Front End
 
 -   HTML5 SCSS ReactJS Redux
--   axios react-icons react-redux @reduxjs/toolkit react-router-dom sass socket.io-client react-toastify
+-   axios react-icons react-redux @reduxjs/toolkit react-router-dom sass socket.io-client
 
 ## Back End
 

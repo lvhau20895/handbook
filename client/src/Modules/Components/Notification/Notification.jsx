@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import {
 	AiFillCheckCircle,
@@ -12,10 +11,10 @@ import style from "./notification.module.scss";
 const Notification = ({ option }) => {
 	const { icon, message, time } = option;
 
-	const [show, setShow] = useState(true);
+	const [show, setShow] = useState(false);
 
 	useEffect(() => {
-		if (!show) setShow(true);
+		if (Object.keys(option).length >= 1) setShow(true);
 
 		if (time) {
 			const timer = setTimeout(() => {
@@ -26,7 +25,7 @@ const Notification = ({ option }) => {
 				clearTimeout(timer);
 			};
 		}
-	}, [option]);
+	}, [option, time]);
 
 	const icons = {
 		success: <AiFillCheckCircle />,

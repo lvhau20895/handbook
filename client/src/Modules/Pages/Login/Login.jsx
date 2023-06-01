@@ -4,8 +4,10 @@ import { BiUser } from "react-icons/bi";
 import { HiOutlineKey } from "react-icons/hi";
 import { RiEye2Line, RiEyeCloseLine } from "react-icons/ri";
 import Validation from "Utils/Validation";
-import style from "./login.module.scss";
 import { useDispatch } from "react-redux";
+import Notification from "Modules/Components/Notification";
+import style from "./login.module.scss";
+import { login } from "Modules/Slices/userSlice";
 
 const Login = () => {
 	const [values, setValues] = useState({
@@ -14,6 +16,7 @@ const Login = () => {
 	});
 	const [showPassword, setShowPassword] = useState(false);
 	const [errors, setErrors] = useState({});
+	const [notification, setNotification] = useState({});
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -44,11 +47,31 @@ const Login = () => {
 			return setErrors(message);
 		}
 		try {
-		} catch (error) {}
+			await dispatch(login(values)).unwrap();
+			setNotification({
+				icon: "success",
+				message: "Login successfully!",
+				time: 1500
+			});
+			setValues({
+				username: "",
+				password: ""
+			});
+			setTimeout(() => {
+				navigate("/");
+			}, 1500);
+		} catch (error) {
+			setNotification({
+				icon: "error",
+				message: error,
+				time: 3000
+			});
+		}
 	};
 
 	return (
 		<div className={style.login}>
+			<Notification option={notification} />
 			<form onSubmit={handleSubmit}>
 				<h1 className={style.title}>Sign In</h1>
 

@@ -1,13 +1,12 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import style from "./confirm.module.scss";
 
 const Confirm = ({ option, onConfirm }) => {
 	const { type, content } = option;
-	const [open, setOpen] = useState(true);
+	const [open, setOpen] = useState(false);
 
 	useEffect(() => {
-		if (!open) setOpen(true);
+		if (Object.keys(option).length >= 1) setOpen(true);
 	}, [option]);
 
 	const handleConfirm = () => {
