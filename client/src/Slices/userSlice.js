@@ -2,10 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userAPI from "Apis/userAPI";
 
 const initialState = {
-	user: {},
 	token: JSON.parse(localStorage.getItem("token")) || null,
 	loading: false,
-	error: true
+	error: null
 };
 
 export const login = createAsyncThunk(
@@ -38,7 +37,6 @@ const getData = (builder, data, func) => {
 const userSlice = createSlice({
 	name: "user",
 	initialState,
-	reducers: {},
 	extraReducers: builder => {
 		getData(builder, "token", login);
 	}

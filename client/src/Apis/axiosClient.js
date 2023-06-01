@@ -9,10 +9,12 @@ const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.request.use(config => {
-	const { token } = store.getState().user;
+	const { token } = store.getState().user || null;
+
 	if (token) {
 		config.headers.Authorization = `Bearer ${token}`;
 	}
+
 	return config;
 });
 

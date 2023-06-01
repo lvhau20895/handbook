@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Logo from "Modules/Components/Logo";
-import Theme from "Modules/Components/Theme";
+import Logo from "Components/Logo";
+import Theme from "Components/Theme";
 import style from "./auth.module.scss";
 
 const Auth = () => {

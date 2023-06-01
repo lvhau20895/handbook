@@ -3,11 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { BiUser } from "react-icons/bi";
 import { HiOutlineKey } from "react-icons/hi";
 import { RiEye2Line, RiEyeCloseLine } from "react-icons/ri";
-import Validation from "Utils/Validation";
 import { useDispatch } from "react-redux";
-import Notification from "Modules/Components/Notification";
+import { login } from "../../Slices/userSlice";
+import Validation from "Utils/Validation";
+import Notification from "Components/Notification";
 import style from "./login.module.scss";
-import { login } from "Modules/Slices/userSlice";
 
 const Login = () => {
 	const [values, setValues] = useState({

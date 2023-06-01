@@ -4,11 +4,11 @@ import { GoMail } from "react-icons/go";
 import { RiEye2Line, RiEyeCloseLine } from "react-icons/ri";
 import { GiAnticlockwiseRotation } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
-import Validation from "Utils/Validation";
-import useRequest from "Modules/Hooks/useRequest";
+import useRequest from "Hooks/useRequest";
 import userAPI from "Apis/userAPI";
+import Validation from "Utils/Validation";
+import Notification from "Components/Notification";
 import style from "./register.module.scss";
-import Notification from "Modules/Components/Notification";
 
 const Register = () => {
 	const [values, setValues] = useState({
