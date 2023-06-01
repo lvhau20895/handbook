@@ -1,15 +1,15 @@
-// import React from "react";
-// import { useSelector } from "react-redux";
-// import { Navigate, Outlet } from "react-router-dom";
+import React from "react";
+import { useSelector } from "react-redux";
+import { Navigate, Outlet } from "react-router-dom";
 
-// const CheckoutRoute = () => {
-// 	const { token } = useSelector(state => state.user);
+const CheckoutRoute = () => {
+    const { token } = useSelector((state) => state.user);
 
-// 	if (!token) {
-// 		return <Navigate to="/login" replace />;
-// 	}
+    if (!token) {
+        return <Navigate to="/login" />;
+    }
 
-// 	return <Outlet />;
-// };
+    return <Outlet />;
+};
 
-// export default CheckoutRoute;
+export default CheckoutRoute;

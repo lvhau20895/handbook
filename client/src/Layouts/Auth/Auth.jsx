@@ -1,22 +1,29 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Logo from "Components/Logo";
 import Theme from "Components/Theme";
 import style from "./auth.module.scss";
 
 const Auth = () => {
-	return (
-		<div className={style.auth}>
-			<div className={style.header}>
-				<Logo />
-				<Theme />
-			</div>
+    const { token, logged } = useSelector((state) => state.user);
 
-			<Outlet />
+    if (token && logged) {
+        return <Navigate to="/" />;
+    }
 
-			<p className={style.copyright}>© 2023 HandBook, App v1.0.</p>
-		</div>
-	);
+    return (
+        <div className={style.auth}>
+            <div className={style.header}>
+                <Logo />
+                <Theme />
+            </div>
+
+            <Outlet />
+
+            <p className={style.copyright}>© 2023 HandBook, App v1.0.</p>
+        </div>
+    );
 };
 
 export default Auth;
