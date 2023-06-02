@@ -1,16 +1,16 @@
 body.dark {
-	--background: #333;
-	--text: #fff;
-	--notification: #000;
+    --background: #333;
+    --text: #fff;
+    --notification: #000;
 }
 
 body.light {
-	--background: #eee;
-	--text: #000;
-	--notification: #fff;
+    --background: #eee;
+    --text: #000;
+    --notification: #fff;
 }
 
 body {
-	background: var(--background);
-	transition: all 0.2s linear;
+    background: var(--background);
+    transition: all 0.2s linear;
 }

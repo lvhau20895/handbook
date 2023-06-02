@@ -1,16 +1,8 @@
 @import "/src/Assets/Scss/main.scss";
 
 .logo {
-	img {
-		width: 60px;
-		height: 60px;
-	}
-	@keyframes rotate {
-		0% {
-			transform: rotate(0);
-		}
-		100% {
-			transform: rotate(360deg);
-		}
-	}
+    img {
+        width: 60px;
+        height: 60px;
+    }
 }

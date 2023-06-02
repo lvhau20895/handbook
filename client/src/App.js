@@ -1,4 +1,3 @@
-import Loading from "Components/Loading";
 import Auth from "Layouts/Auth";
 import Main from "Layouts/Main";
 import Forgot from "Pages/Forgot";
@@ -9,24 +8,23 @@ import CheckoutRoute from "Routes/CheckoutRoute";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
-	return (
-		<div className="App">
-			<Routes>
-				<Route path="/loading" element={<Loading />} />
-				<Route element={<CheckoutRoute />}>
-					<Route path="/" element={<Main />}>
-						<Route index element={<Home />} />
-					</Route>
-				</Route>
+    return (
+        <div className="App">
+            <Routes>
+                <Route element={<CheckoutRoute />}>
+                    <Route path="/" element={<Main />}>
+                        <Route index element={<Home />} />
+                    </Route>
+                </Route>
 
-				<Route path="/" element={<Auth />}>
-					<Route path="/login" element={<Login />} />
-					<Route path="/register" element={<Register />} />
-					<Route path="/forgot" element={<Forgot />} />
-				</Route>
-			</Routes>
-		</div>
-	);
+                <Route path="/" element={<Auth />}>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/forgot" element={<Forgot />} />
+                </Route>
+            </Routes>
+        </div>
+    );
 }
 
 export default App;
