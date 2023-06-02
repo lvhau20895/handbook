@@ -85,6 +85,7 @@ const Register = () => {
 				navigate("/login");
 			}, 1500);
 		} catch (error) {
+			console.log(error);
 			setNotification({
 				icon: "error",
 				message: error,

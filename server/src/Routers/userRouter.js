@@ -6,6 +6,7 @@ const userRouter = express.Router();
 
 userRouter.post("/register", register);
 userRouter.post("/login", login);
+// userRouter.post("/forgot", )
 userRouter.get("/get-user", privateAPI, getUser);
 
 module.exports = userRouter;

@@ -23,6 +23,9 @@ axiosClient.interceptors.response.use(
 		return response.data.result;
 	},
 	error => {
+		if (error.message === "Network Error") {
+			return Promise.reject("Network Error");
+		}
 		return Promise.reject(error.response.data.message);
 	}
 );

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { GoMail } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
+import { useDispatch } from "react-redux";
 import Validation from "Utils/Validation";
 import style from "./forgot.module.scss";
 
@@ -10,6 +11,8 @@ const Forgot = () => {
 		email: ""
 	});
 	const [errors, setErrors] = useState({});
+
+	const dispatch = useDispatch();
 
 	const handleChange = e => {
 		const { value } = e.target;
