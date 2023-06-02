@@ -50,7 +50,6 @@ const Login = () => {
 			await dispatch(login(values)).unwrap();
 			navigate("/");
 		} catch (error) {
-			console.log(error);
 			setNotification({
 				icon: "error",
 				message: error,

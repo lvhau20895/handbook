@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { GoMail } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
-import { useDispatch } from "react-redux";
 import Validation from "Utils/Validation";
+import useRequest from "Hooks/useRequest";
+import userAPI from "Apis/userAPI";
+import Notification from "Components/Notification";
 import style from "./forgot.module.scss";
 
 const Forgot = () => {
@@ -11,9 +13,12 @@ const Forgot = () => {
 		email: ""
 	});
 	const [errors, setErrors] = useState({});
+	const [notification, setNotification] = useState({});
 
-	const dispatch = useDispatch();
-
+	const { data: handleForgot, loading } = useRequest(
+		values => userAPI.forgot(values),
+		{ manual: true }
+	);
 	const handleChange = e => {
 		const { value } = e.target;
 		if (value.startsWith(" ")) return;
@@ -28,17 +33,32 @@ const Forgot = () => {
 		}
 	};
 
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault();
 		const message = Validation("forgot", values);
 
 		if (Object.keys(message).length > 0) {
 			return setErrors(message);
 		}
+		try {
+			await handleForgot(values);
+			setNotification({
+				icon: "success",
+				message: "Send mail success",
+				time: 3000
+			});
+		} catch (error) {
+			setNotification({
+				icon: "error",
+				message: error,
+				time: 3000
+			});
+		}
 	};
 
 	return (
 		<div className={style.forgot}>
+			<Notification option={notification} />
 			<form onSubmit={handleSubmit}>
 				<Link to={-1} className={style.back}>
 					<BiArrowBack />
@@ -72,7 +92,9 @@ const Forgot = () => {
 				</div>
 
 				<div className={style.submit}>
-					<button type="submit">Send</button>
+					<button type="submit" disabled={loading}>
+						Send
+					</button>
 				</div>
 
 				<p className={style.link}>

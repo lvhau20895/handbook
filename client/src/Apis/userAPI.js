@@ -7,6 +7,10 @@ const userAPI = {
 
 	login: values => {
 		return axiosClient.post("user/login", values);
+	},
+
+	forgot: values => {
+		return axiosClient.post("user/forgot", values);
 	}
 };
 

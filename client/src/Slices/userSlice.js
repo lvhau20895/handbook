@@ -13,7 +13,6 @@ export const login = createAsyncThunk(
 		try {
 			const data = await userAPI.login(values);
 			localStorage.setItem("token", JSON.stringify(data));
-			console.log(data);
 			return data;
 		} catch (error) {
 			return rejectWithValue(error);

@@ -44,34 +44,42 @@ const login = async (req, res) => {
 	}
 };
 
-// const forgot = async (req, res) => {
-// 	const { email } = req.body;
-// 	try {
-// 		const checkUser = await User.findOne({ email });
-// 		if (!checkUser) return failCode(res, "email do not exists");
-//         const newUser =
-// 		let transporter = nodemailer.createTransport({
-// 			service: "gmail",
-// 			auth: { user, pass }
-// 		});
-// 		const newPassword = Math.floor(Math.random() * (999999 - 1) + 1);
-// 		await transporter.sendMail({
-// 			from: `'Admin' <${user}>`,
-// 			to: email,
-// 			subject: "Reset",
-// 			html: `
-//                 <div style="font-family: Arial, Helvetica, sans-serif;">
-//                     <p style="margin-bottom: 50px;">Your temporary password is <strong>"${newPassword}"</strong><p>
-//                     <a style="text-decoration: none; background: #3bba99; color: #eee; padding: 20px; border-radius: 5px; font-weight: bold;" href="http://localhost:3000/">Go to Handbook</a>
-//                 </div>
-//             `
-// 		});
-// 	} catch (error) {}
-// };
+const forgot = async (req, res) => {
+	const { email } = req.body;
+	try {
+		const checkUser = await User.findOne({ email });
+		if (!checkUser) return failCode(res, "email do not exists");
+		const newPassword = Math.floor(
+			Math.random() * (999999 - 100000) + 100000
+		);
+		await User.updateOne(
+			{ email: checkUser.email },
+			{ $set: { password: bcrypt.hashSync(newPassword.toString(), 10) } }
+		);
+		let transporter = nodemailer.createTransport({
+			service: "gmail",
+			auth: { user, pass }
+		});
+		await transporter.sendMail({
+			from: `'Admin Handbook' <${user}>`,
+			to: email,
+			subject: "Support Handbook",
+			html: `
+                <div style="font-family: Arial, Helvetica, sans-serif;">
+                    <p>Your temporary password is <strong>"${newPassword}"</strong><p>
+                    <a style="display: inline-block; text-decoration: none; background: #3bba99; color: #eee; padding: 20px; border-radius: 5px; font-weight: bold; margin: 30px 0;" href="http://localhost:3000/">Go to Handbook</a>
+                </div>
+            `
+		});
+		successCode(res, "successfully", checkUser.updatedAt);
+	} catch (error) {
+		errorCode(res, "error: " + error);
+	}
+};
 
 const getUser = async (req, res) => {
 	const data = await User.find();
 	successCode(res, "ok", data);
 };
 
-module.exports = { register, login, getUser };
+module.exports = { register, login, forgot, getUser };

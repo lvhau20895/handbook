@@ -85,7 +85,6 @@ const Register = () => {
 				navigate("/login");
 			}, 1500);
 		} catch (error) {
-			console.log(error);
 			setNotification({
 				icon: "error",
 				message: error,
@@ -253,11 +252,7 @@ const Register = () => {
 				</div>
 
 				<div className={style.submit}>
-					<button
-						type="submit"
-						disabled={loading ? true : false}
-						tabIndex="5"
-					>
+					<button type="submit" disabled={loading} tabIndex="5">
 						Sign Up
 					</button>
 				</div>
