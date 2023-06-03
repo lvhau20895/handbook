@@ -61,7 +61,7 @@ const forgot = async (req, res) => {
 			auth: { user, pass }
 		});
 		await transporter.sendMail({
-			from: `'Admin Handbook' <${user}>`,
+			from: `'Handbook' <${user}>`,
 			to: email,
 			subject: "Support Handbook",
 			html: `
