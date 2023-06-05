@@ -66,7 +66,7 @@
 						padding: 0 10px;
 						caret-color: $color-main-light;
 						color: $color-black;
-						font-weight: bold;
+						font-weight: $fw-bold;
 						transition: all 0.2s linear;
 						&:focus,
 						&:not(:placeholder-shown) {
@@ -93,8 +93,8 @@
 						top: 50%;
 						left: 15px;
 						transform: translateY(-50%);
-						font-size: 12px;
-						font-weight: bold;
+						font-size: 14px;
+						font-weight: $fw-medium;
 						color: $color-gray;
 						transition: all 0.2s linear;
 						pointer-events: none;
@@ -122,7 +122,7 @@
 						display: block;
 						color: $color-red;
 						font-size: 12px;
-						font-weight: bold;
+						font-weight: $fw-medium;
 						margin-top: 5px;
 					}
 
@@ -152,7 +152,7 @@
 				background: $color-main-dark;
 				color: $color-light;
 				font-size: 14px;
-				font-weight: bold;
+				font-weight: $fw-bold;
 				letter-spacing: 1px;
 				transition: background 0.1s linear;
 				cursor: pointer;
@@ -165,15 +165,15 @@
 		.link {
 			width: 100%;
 
-			p {
-				font-size: 14px;
-				margin-bottom: 5px;
+			.register {
+				font-size: 13px;
+				font-weight: $fw-medium;
 				color: $color-black;
 
 				a {
 					text-decoration: none;
 					color: $color-main-light;
-					font-weight: bold;
+					font-weight: $fw-bold;
 					transition: color 0.1s linear;
 					&:hover {
 						color: $color-main-dark;
@@ -181,9 +181,9 @@
 				}
 			}
 
-			a {
-				font-size: 14px;
-				font-weight: bold;
+			.forgot {
+				font-size: 13px;
+				font-weight: $fw-medium;
 				color: $color-main-light;
 				text-decoration: none;
 				transition: color 0.1s linear;

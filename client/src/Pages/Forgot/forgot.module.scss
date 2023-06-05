@@ -39,7 +39,7 @@
 		.title {
 			text-align: center;
 			color: $color-gray;
-			font-size: 25px;
+			font-size: 20px;
 			margin-bottom: 50px;
 		}
 
@@ -72,7 +72,7 @@
 					caret-color: $color-main-light;
 					color: $color-black;
 					padding: 0 15px;
-					font-weight: bold;
+					font-weight: $fw-bold;
 					transition: all 0.2s linear;
 					&:focus,
 					&:not(:placeholder-shown) {
@@ -103,7 +103,7 @@
 					transform: translateY(-50%);
 					color: $color-gray;
 					font-size: 14px;
-					font-weight: bold;
+					font-weight: $fw-medium;
 					transition: all 0.2s linear;
 					pointer-events: none;
 				}
@@ -154,8 +154,9 @@
 		.instruct {
 			margin-top: 30px;
 			text-align: center;
-			font-weight: bold;
-			color: $color-black;
+			font-size: 15px;
+			font-weight: $fw-medium;
+			color: $color-gray;
 		}
 
 		.link {
@@ -164,10 +165,10 @@
 			left: 20px;
 			font-size: 15px;
 
-			a {
+			.register {
 				text-decoration: none;
 				color: $color-main-light;
-				font-weight: bold;
+				font-weight: $fw-medium;
 				transition: color 0.1s linear;
 				&:hover {
 					color: $color-main-dark;

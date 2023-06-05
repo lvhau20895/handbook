@@ -38,7 +38,7 @@
 		}
 
 		.content {
-			font-weight: bold;
+			font-weight: $fw-medium;
 			color: $color-gray;
 		}
 
@@ -52,7 +52,7 @@
 				height: 30px;
 				margin: 0 5px;
 				border-radius: 5px;
-				font-weight: bold;
+				font-weight: $fw-bold;
 				color: $color-white;
 				cursor: pointer;
 				transition: all 0.2s linear;
@@ -61,7 +61,7 @@
 					&.delete {
 						background: $color-red;
 					}
-					&.logout {
+					&.warning {
 						background: $color-orange;
 					}
 				}

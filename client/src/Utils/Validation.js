@@ -17,7 +17,7 @@ const Validation = (form, values) => {
 		)
 			message[name] = `${
 				name[0].toUpperCase() + name.slice(1)
-			} from ${min} to ${max} characters & no spaces`;
+			} ${min} - ${max} characters & no spaces`;
 	};
 
 	const checkEmail = email => {

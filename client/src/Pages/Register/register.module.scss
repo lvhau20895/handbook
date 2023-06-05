@@ -79,7 +79,7 @@
 						padding: 0 10px;
 						caret-color: $color-main-light;
 						color: $color-black;
-						font-weight: bold;
+						font-weight: $fw-bold;
 						transition: all 0.2s linear;
 						&:focus,
 						&:not(:placeholder-shown) {
@@ -108,7 +108,7 @@
 						transform: translateY((-50%));
 						color: $color-gray;
 						font-size: 12px;
-						font-weight: bold;
+						font-weight: $fw-medium;
 						pointer-events: none;
 						transition: all 0.2s linear;
 					}
@@ -134,7 +134,7 @@
 
 					.message {
 						font-size: 12px;
-						font-weight: bold;
+						font-weight: $fw-medium;
 						color: $color-red;
 					}
 
@@ -162,7 +162,7 @@
 				outline: none;
 				background: $color-main-dark;
 				color: $color-light;
-				font-weight: bold;
+				font-weight: $fw-bold;
 				letter-spacing: 1px;
 				transition: opacity 0.1s linear;
 				cursor: pointer;

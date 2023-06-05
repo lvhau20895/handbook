@@ -110,7 +110,9 @@ const Forgot = () => {
 				)}
 
 				<p className={style.link}>
-					<Link to="/register">Create a new account</Link>
+					<Link className={style.register} to="/register">
+						Create a new account
+					</Link>
 				</p>
 			</form>
 		</div>
