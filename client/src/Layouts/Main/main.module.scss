@@ -1,0 +1,14 @@
+@import "/src/Assets/Scss/main.scss";
+
+.main {
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        height: 10%;
+    }
+
+    .content {
+        height: 90%;
+    }
+}
