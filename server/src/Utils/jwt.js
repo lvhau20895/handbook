@@ -16,10 +16,12 @@ const generateToken = (data) => {
 };
 
 const checkToken = (token, bearerToken) => {
-    bearerToken = bearerToken.split(" ")[1];
     jwt.verify(token, lock);
-    const data = jwt.verify(bearerToken, key);
-    return data;
+    if (bearerToken) {
+        bearerToken = bearerToken.split(" ")[1];
+        const data = jwt.verify(bearerToken, key);
+        return data;
+    }
 };
 
 const decodeToken = (token) => {

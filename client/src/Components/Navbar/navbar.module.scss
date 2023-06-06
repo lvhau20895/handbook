@@ -1,1 +1,19 @@
 @import "/src/Assets/Scss/main.scss";
+
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .item {
+        margin-right: 25px;
+        background: transparent;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 25px;
+        color: var(--color-text);
+        cursor: pointer;
+    }
+}
