@@ -1,31 +1,53 @@
 const jwt = require("jsonwebtoken");
 const { key } = require("../Configs/config");
+const { successCode, errorCode } = require("./response");
 
 const lock = "lvh-20081995";
 const tokenAdmin = () => {
-    const token = jwt.sign({ l: "le", v: "van", h: "hau" }, lock, {
-        algorithm: "HS256",
-        expiresIn: "100d",
-    });
-    return token;
+	const token = jwt.sign({ l: "le", v: "van", h: "hau" }, lock, {
+		algorithm: "HS256",
+		expiresIn: "100d"
+	});
+	return token;
 };
 
-const generateToken = (data) => {
-    const token = jwt.sign(data, key, { algorithm: "HS256" });
-    return token;
+const generateToken = data => {
+	const token = jwt.sign(data, key, { algorithm: "HS256", expiresIn: "20s" });
+	return token;
 };
 
-const checkToken = (token, bearerToken) => {
-    jwt.verify(token, lock);
-    if (bearerToken) {
-        bearerToken = bearerToken.split(" ")[1];
-        const data = jwt.verify(bearerToken, key);
-        return data;
-    }
+const checkToken = token => {
+	jwt.verify(token, lock);
 };
 
-const decodeToken = (token) => {
-    return jwt.decode(token);
+const checkBearerToken = bearerToken => {
+	bearerToken = bearerToken.split(" ")[1];
+	const data = jwt.verify(bearerToken, key);
+	return data;
 };
 
-module.exports = { tokenAdmin, generateToken, checkToken, decodeToken };
+const decodeToken = token => {
+	return jwt.decode(token);
+};
+
+const refreshToken = (req, res) => {
+	let bearerToken = req.headers["authorization"];
+	bearerToken = bearerToken.split(" ")[1];
+
+	try {
+		const result = decodeToken(bearerToken);
+		const newToken = generateToken({ id: result.id, role: result.role });
+		successCode(res, "refresh token success", newToken);
+	} catch (error) {
+		errorCode(res, "error: " + error);
+	}
+};
+
+module.exports = {
+	tokenAdmin,
+	generateToken,
+	checkToken,
+	checkBearerToken,
+	decodeToken,
+	refreshToken
+};

@@ -11,6 +11,10 @@ const userAPI = {
 
 	forgot: values => {
 		return axiosClient.post("user/forgot", values);
+	},
+
+	getUser: () => {
+		return axiosClient.get("user/get-user");
 	}
 };
 

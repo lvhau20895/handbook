@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userAPI from "Apis/userAPI";
 
 const initialState = {
+	user: {},
 	token: JSON.parse(localStorage.getItem("token")) || null,
 	loading: false,
 	error: null
@@ -13,6 +14,18 @@ export const login = createAsyncThunk(
 		try {
 			const data = await userAPI.login(values);
 			localStorage.setItem("token", JSON.stringify(data));
+			return data;
+		} catch (error) {
+			return rejectWithValue(error);
+		}
+	}
+);
+
+export const getUser = createAsyncThunk(
+	"user/get-user",
+	async (_, { rejectWithValue }) => {
+		try {
+			const data = await userAPI.getUser();
 			return data;
 		} catch (error) {
 			return rejectWithValue(error);
@@ -39,6 +52,7 @@ const userSlice = createSlice({
 	initialState,
 	extraReducers: builder => {
 		getData(builder, "token", login);
+		getData(builder, "user", getUser);
 	}
 });
 
