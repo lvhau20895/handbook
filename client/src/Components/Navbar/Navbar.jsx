@@ -8,30 +8,30 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "Slices/userSlice";
 
 const Navbar = () => {
-	const { user } = useSelector(state => state.user);
-	const dispatch = useDispatch();
-	console.log(user);
-	useEffect(() => {
-		dispatch(getUser());
-	}, []);
+    const { user } = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+    console.log(user);
+    useEffect(() => {
+        dispatch(getUser());
+    }, []);
 
-	return (
-		<div className={style.navbar}>
-			<button className={style.item}>
-				<AiOutlineUserAdd />
-			</button>
+    return (
+        <div className={style.navbar}>
+            <button className={style.item}>
+                <AiOutlineUserAdd />
+            </button>
 
-			<button className={style.item}>
-				<BiMessageRounded />
-			</button>
+            <button className={style.item}>
+                <BiMessageRounded />
+            </button>
 
-			<button className={style.item}>
-				<IoNotificationsOutline />
-			</button>
+            <button className={style.item}>
+                <IoNotificationsOutline />
+            </button>
 
-			<Theme />
-		</div>
-	);
+            <Theme />
+        </div>
+    );
 };
 
 export default Navbar;

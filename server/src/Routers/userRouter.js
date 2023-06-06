@@ -1,12 +1,12 @@
 const express = require("express");
 const {
-	register,
-	login,
-	forgot,
-	getUser
+    register,
+    login,
+    forgot,
+    getUser,
 } = require("../Controllers/userController");
 const privateAPI = require("../Middlewares/privateAPI");
-const decryptToken = require("../Middlewares/DecryptToken");
+const decryptToken = require("../Middlewares/decryptToken");
 
 const userRouter = express.Router();
 
