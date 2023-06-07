@@ -1,5 +1,5 @@
 const { checkToken } = require("../Utils/jwt");
-const { errorCode } = require("../Utils/response");
+const { errorToken } = require("../Utils/response");
 
 const privateAPI = (req, res, next) => {
 	const { token } = req.headers;
@@ -7,7 +7,7 @@ const privateAPI = (req, res, next) => {
 		checkToken(token);
 		next();
 	} catch (error) {
-		errorCode(res, error.message);
+		errorToken(res, error.message);
 	}
 };
 
