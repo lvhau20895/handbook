@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Theme from "Components/Theme";
-import { BiMessageRounded } from "react-icons/bi";
-import { IoNotificationsOutline } from "react-icons/io5";
+import { BiBell, BiMessageRounded } from "react-icons/bi";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import style from "./navbar.module.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +12,7 @@ const Navbar = () => {
     console.log(user);
     useEffect(() => {
         dispatch(getUser());
-    }, []);
+    }, [dispatch]);
 
     return (
         <div className={style.navbar}>
@@ -26,7 +25,7 @@ const Navbar = () => {
             </button>
 
             <button className={style.item}>
-                <IoNotificationsOutline />
+                <BiBell />
             </button>
 
             <Theme />

@@ -38,14 +38,13 @@ const refreshToken = (req, res) => {
     } catch (error) {
         if (error.name === "TokenExpiredError") {
             const result = decodeToken(bearerToken.split(" ")[1]);
-            console.log(result);
             const newToken = generateToken({
                 id: result.id,
                 role: result.role,
             });
-            successCode(res, "refresh token success", newToken);
+            return successCode(res, "refresh token success", newToken);
         }
-        errorCode(res, "error: " + error);
+        return errorCode(res, "error: " + error);
     }
 };
 

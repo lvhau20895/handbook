@@ -1,21 +1,27 @@
 import axiosClient from "./axiosClient";
 
 const userAPI = {
-	register: values => {
-		return axiosClient.post("user/register", values);
-	},
+    refreshToken: (bearer) => {
+        return axiosClient.get("refresh-token", {
+            headers: { Authorization: bearer },
+        });
+    },
 
-	login: values => {
-		return axiosClient.post("user/login", values);
-	},
+    register: (values) => {
+        return axiosClient.post("user/register", values);
+    },
 
-	forgot: values => {
-		return axiosClient.post("user/forgot", values);
-	},
+    login: (values) => {
+        return axiosClient.post("user/login", values);
+    },
 
-	getUser: () => {
-		return axiosClient.get("user/get-user");
-	}
+    forgot: (values) => {
+        return axiosClient.post("user/forgot", values);
+    },
+
+    getUser: () => {
+        return axiosClient.get("user/get-user");
+    },
 };
 
 export default userAPI;

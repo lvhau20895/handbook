@@ -1,5 +1,6 @@
 import axios from "axios";
 import store from "../store";
+import { refreshToken } from "Slices/userSlice";
 
 const axiosClient = axios.create({
     baseURL: "http://localhost:1995/api/",
@@ -27,22 +28,18 @@ axiosClient.interceptors.response.use(
         }
         const originalRequest = error.config;
         if (
+            error.response.status === 500 &&
             error.response.data.message === "jwt expired" &&
             !originalRequest.retry
         ) {
             originalRequest.retry = true;
             try {
                 const bearerToken = originalRequest.headers["Authorization"];
-                const newToken = await axiosClient.get("refresh-token", {
-                    headers: {
-                        Authorization: bearerToken,
-                    },
-                });
-                localStorage.setItem("token", JSON.stringify(newToken));
-                originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
+                await store.dispatch(refreshToken(bearerToken));
+
                 return axiosClient(originalRequest);
             } catch (error) {
-                console.log(error);
+                return Promise.reject(error);
             }
         }
         return Promise.reject(error.response.data.message);
