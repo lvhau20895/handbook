@@ -7,13 +7,17 @@
 
     .item {
         margin-right: 25px;
-        background: transparent;
         border: none;
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 25px;
-        color: var(--color-text);
+        background: transparent;
+        color: var(--icon);
         cursor: pointer;
+    }
+
+    .user {
+        margin-right: 25px;
     }
 }
