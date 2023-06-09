@@ -1,22 +1,24 @@
 body.dark {
-    --background: #333;
-    --background-content: #222;
-    --color-line: rgba(255, 255, 255, 0.1);
-    --title: #fff;
-    --content: #eee;
-    --notification: #000;
+	--background: #333;
+	--background-content: #222;
+	--color-line: rgba(255, 255, 255, 0.1);
+	--title: #fff;
+	--content: #eee;
+	--notification: #000;
+	--rgba: rgba(255, 255, 255, 0.2);
 }
 
 body.light {
-    --background: #eee;
-    --background-content: #fff;
-    --color-line: rgba(0, 0, 0, 0.1);
-    --title: #000;
-    --content: #555;
-    --notification: #fff;
+	--background: #eee;
+	--background-content: #fff;
+	--color-line: rgba(0, 0, 0, 0.1);
+	--title: #000;
+	--content: #555;
+	--notification: #fff;
+	--rgba: rgba(0, 0, 0, 0.2);
 }
 
 body {
-    background: var(--background);
-    transition: all 0.2s linear;
+	background: var(--background);
+	transition: all 0.2s linear;
 }
