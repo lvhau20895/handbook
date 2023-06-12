@@ -1,0 +1,21 @@
+@import "/src/Assets/Scss/main.scss";
+
+.home {
+	position: relative;
+	max-width: 1280px;
+	margin: 0 auto;
+
+	.left {
+		position: fixed;
+		top: 10vh;
+		left: 0;
+		width: calc(1280px / 3 - auto);
+		height: 90vh;
+		overflow-y: scroll;
+	}
+
+	.center {
+		width: calc(100% / 3);
+		margin: 0 auto;
+	}
+}
