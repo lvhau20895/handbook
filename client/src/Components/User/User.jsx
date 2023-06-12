@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "Slices/userSlice";
 import { Link } from "react-router-dom";
@@ -6,11 +6,16 @@ import { FaUser, FaUserSecret } from "react-icons/fa";
 import { AiFillSetting } from "react-icons/ai";
 import { MdLiveHelp, MdMeetingRoom } from "react-icons/md";
 import style from "./user.module.scss";
+import useCheckOutside from "Hooks/useCheckOutside";
 
 const User = () => {
 	const [dropdown, setDropdown] = useState(false);
 	const { user } = useSelector(state => state.user);
 	const dispatch = useDispatch();
+
+	const menuRef = useRef();
+
+	useCheckOutside(menuRef, () => setDropdown(false));
 
 	useEffect(() => {
 		dispatch(getUser());
@@ -27,47 +32,50 @@ const User = () => {
 
 	return (
 		<div className={style.user}>
-			<button
-				className={style.avatar}
-				onClick={() => setDropdown(!dropdown)}
-			>
-				<img
-					src={
-						profile?.avatar
-							? profile.avatar
-							: "/images/avatar/default.png"
-					}
-					alt="avatar"
-				/>
-			</button>
+			<div ref={menuRef} className={style.avatar}>
+				<button onClick={() => setDropdown(!dropdown)}>
+					<img
+						src={
+							profile?.avatar
+								? profile.avatar
+								: "/images/avatar/default.png"
+						}
+						alt="avatar"
+					/>
+				</button>
 
-			<div className={`${style.dropdown} ${dropdown ? style.show : ""}`}>
-				<div className={style.option}>
-					{user.role === "admin" && (
-						<Link className={style.link}>
-							<p className={style.icon}>
-								<FaUserSecret />
-							</p>
-							<p className={style.title}>Admin</p>
-						</Link>
-					)}
-					{option.map((item, index) => {
-						return (
-							<Link key={index} className={style.link}>
-								<p className={style.icon}>{item.icon}</p>
-								<p className={style.title}>{item.title}</p>
+				<div
+					className={`${style.dropdown} ${
+						dropdown ? style.show : ""
+					}`}
+				>
+					<div className={style.option}>
+						{user.role === "admin" && (
+							<Link className={style.link}>
+								<p className={style.icon}>
+									<FaUserSecret />
+								</p>
+								<p className={style.title}>Admin</p>
 							</Link>
-						);
-					})}
-					<div
-						style={{
-							height:
-								user.role === "admin"
-									? `calc(100% / ${option.length + 1})`
-									: `calc(100% / ${option.length})`
-						}}
-						className={style.animate}
-					></div>
+						)}
+						{option.map((item, index) => {
+							return (
+								<Link key={index} className={style.link}>
+									<p className={style.icon}>{item.icon}</p>
+									<p className={style.title}>{item.title}</p>
+								</Link>
+							);
+						})}
+						<div
+							style={{
+								height:
+									user.role === "admin"
+										? `calc(100% / ${option.length + 1})`
+										: `calc(100% / ${option.length})`
+							}}
+							className={style.animate}
+						></div>
+					</div>
 				</div>
 			</div>
 

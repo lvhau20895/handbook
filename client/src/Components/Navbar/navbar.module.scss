@@ -1,23 +1,23 @@
 @import "/src/Assets/Scss/main.scss";
 
 .navbar {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
 
-    .item {
-        margin-right: 25px;
-        border: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 25px;
-        background: transparent;
-        color: var(--content);
-        cursor: pointer;
-    }
+	.item {
+		margin-right: 25px;
+		border: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 25px;
+		background: transparent;
+		color: var(--content);
+		cursor: pointer;
+	}
 
-    .user {
-        margin-right: 25px;
-    }
+	.user {
+		margin-right: 25px;
+	}
 }

@@ -1,15 +1,15 @@
 import React from "react";
-import { AiOutlineUserAdd } from "react-icons/ai";
+import { FiBell } from "react-icons/fi";
 import style from "./bell.module.scss";
 
 const Bell = () => {
-    return (
-        <>
-            <AiOutlineUserAdd />
+	return (
+		<>
+			<FiBell />
 
-            <div className={style.box}></div>
-        </>
-    );
+			<div className={style.box}></div>
+		</>
+	);
 };
 
 export default Bell;
