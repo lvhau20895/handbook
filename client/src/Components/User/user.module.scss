@@ -1,118 +1,120 @@
 @import "/src/Assets/Scss/main.scss";
 
 .user {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-	.avatar {
-		position: relative;
+    .avatar {
+        position: relative;
 
-		button {
-			width: 40px;
-			height: 40px;
-			border: none;
-			border-radius: 50%;
-			background: $color-light;
-			cursor: pointer;
+        button {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: $color-light;
+            cursor: pointer;
 
-			img {
-				border-radius: 50%;
-				width: 100%;
-				height: 100%;
-			}
-		}
+            img {
+                border-radius: 50%;
+                width: 100%;
+                height: 100%;
+            }
+        }
 
-		.dropdown {
-			position: absolute;
-			top: calc(100% + 5px);
-			left: 0;
-			width: auto;
-			height: auto;
-			background: var(--background-content);
-			box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
-			border-radius: 5px;
-			padding: 5px;
-			opacity: 0;
-			transition: all 0.2s linear;
-			&.show {
-				opacity: 1;
-			}
+        .dropdown {
+            position: absolute;
+            top: calc(100% + 5px);
+            left: 0;
+            width: auto;
+            height: auto;
+            background: var(--background-content);
+            box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 5px;
+            opacity: 0;
+            transition: all 0.2s linear;
+            z-index: 100;
+            &.show {
+                opacity: 1;
+            }
 
-			.option {
-				position: relative;
-				display: flex;
-				flex-direction: column;
+            .option {
+                position: relative;
+                display: flex;
+                flex-direction: column;
 
-				.link {
-					display: flex;
-					align-items: center;
-					padding: 10px 15px;
-					color: var(--content);
-					text-decoration: none;
-					z-index: 100;
-					&:nth-child(1):hover ~ .animate {
-						transform: translateY(0);
-						display: block;
-					}
-					&:nth-child(2):hover ~ .animate {
-						transform: translateY(100%);
-						display: block;
-					}
-					&:nth-child(3):hover ~ .animate {
-						transform: translateY(200%);
-						display: block;
-					}
-					&:nth-child(4):hover ~ .animate {
-						transform: translateY(300%);
-						display: block;
-					}
-					&:nth-child(5):hover ~ .animate {
-						transform: translateY(400%);
-						display: block;
-					}
+                .link {
+                    display: flex;
+                    align-items: center;
+                    padding: 10px 15px;
+                    color: var(--content);
+                    text-decoration: none;
+                    z-index: 100;
+                    &:nth-child(1):hover ~ .animate {
+                        transform: translateY(0);
+                        display: block;
+                    }
+                    &:nth-child(2):hover ~ .animate {
+                        transform: translateY(100%);
+                        display: block;
+                    }
+                    &:nth-child(3):hover ~ .animate {
+                        transform: translateY(200%);
+                        display: block;
+                    }
+                    &:nth-child(4):hover ~ .animate {
+                        transform: translateY(300%);
+                        display: block;
+                    }
+                    &:nth-child(5):hover ~ .animate {
+                        transform: translateY(400%);
+                        display: block;
+                    }
 
-					.icon svg {
-						width: 20px;
-						height: 20px;
-						display: flex;
-						justify-content: center;
-						align-items: center;
-					}
+                    .icon svg {
+                        width: 20px;
+                        height: 20px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
 
-					.title {
-						margin-left: 10px;
-						font-weight: $fw-medium;
-						font-size: 14px;
-					}
-				}
+                    .title {
+                        margin-left: 10px;
+                        font-weight: $fw-medium;
+                        font-size: 14px;
+                    }
+                }
 
-				.animate {
-					position: absolute;
-					top: 0;
-					left: 0;
-					width: 100%;
-					border-radius: 5px;
-					background: var(--rgba);
-					display: none;
-					transition: all 0.1s linear;
-				}
-			}
-		}
-	}
+                .animate {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    border-radius: 5px;
+                    background: var(--rgba);
+                    display: none;
+                    transition: all 0.1s linear;
+                }
+            }
+        }
+    }
 
-	.info {
-		margin-left: 10px;
-		font-size: 12px;
+    .info {
+        margin-left: 10px;
+        font-size: 12px;
 
-		.name {
-			font-weight: bold;
-			color: var(--title);
-		}
+        .name {
+            font-weight: bold;
+            color: var(--title);
+            transition: all 0.2s linear;
+        }
 
-		.coin {
-			font-weight: $fw-medium;
-			color: $color-gold;
-		}
-	}
+        .coin {
+            font-weight: $fw-medium;
+            color: $color-gold;
+        }
+    }
 }
