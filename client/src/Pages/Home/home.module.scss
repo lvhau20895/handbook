@@ -2,16 +2,16 @@
 
 .home {
     position: relative;
-    max-width: 1280px;
     margin: 0 auto;
-    background: var(--background-content);
 
     .left,
     .right {
         position: fixed;
         top: 10vh;
-        width: calc(1280px * 25 / 100);
+        width: 25%;
         height: 90vh;
+        background: var(--background-content);
+        transition: all 0.2s linear;
         &::after {
             content: "";
             position: absolute;
@@ -20,7 +20,6 @@
             width: 8px;
             height: 100%;
             background: var(--background-content);
-            border-radius: 10px;
             opacity: 1;
             transition: all 0.2s linear;
         }
@@ -34,11 +33,11 @@
             padding: 15px;
             &::-webkit-scrollbar {
                 width: 8px;
-                background: var(--background-content);
+                background-color: var(--background-content);
             }
             &::-webkit-scrollbar-thumb {
-                border-radius: 10px;
                 background: var(--rgba);
+                border-radius: 10px;
             }
         }
     }
@@ -46,15 +45,31 @@
     .center {
         width: 50%;
         margin: 0 auto;
-        background: var(--background);
         padding: 15px;
     }
 
     .left {
-        left: calc((100% - 1280px) / 2);
+        left: 0;
     }
 
     .right {
-        right: calc((100% - 1280px) / 2);
+        right: 0;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    .home {
+        .left,
+        .right {
+            width: calc(2000px * 25 / 100);
+        }
+
+        .left {
+            left: calc((100% - 2000px) / 2);
+        }
+
+        .right {
+            right: calc((100% - 2000px) / 2);
+        }
     }
 }
