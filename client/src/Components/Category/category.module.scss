@@ -1,6 +1,45 @@
 @import "/src/Assets/Scss/main.scss";
 
 .category {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+
+	.menu {
+		position: relative;
+
+		.link {
+			display: flex;
+			align-items: center;
+			color: var(--content);
+			text-decoration: none;
+			font-size: 15px;
+			font-weight: $fw-medium;
+			padding: 10px 5px;
+			transition: color 0.2s linear;
+
+			.icon {
+				width: 25px;
+				height: 25px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 25px;
+			}
+
+			.name {
+				margin-left: 10px;
+			}
+		}
+
+		.animate {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: calc(100% / 8);
+			background: var(--rgba);
+			border-radius: 5px;
+			z-index: -1;
+		}
+	}
 }

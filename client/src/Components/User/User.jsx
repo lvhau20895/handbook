@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "Slices/userSlice";
 import { Link } from "react-router-dom";
-import { FaUser, FaUserSecret } from "react-icons/fa";
+import { FaCoins, FaUser, FaUserSecret } from "react-icons/fa";
 import { AiFillSetting } from "react-icons/ai";
 import { MdLiveHelp, MdMeetingRoom } from "react-icons/md";
-import style from "./user.module.scss";
 import useCheckOutside from "Hooks/useCheckOutside";
+import style from "./user.module.scss";
 
 const User = () => {
 	const [dropdown, setDropdown] = useState(false);
@@ -23,6 +23,7 @@ const User = () => {
 
 	const option = [
 		{ icon: <FaUser />, title: "Profile" },
+		{ icon: <FaCoins />, title: "Payment" },
 		{ icon: <AiFillSetting />, title: "Option" },
 		{ icon: <MdLiveHelp />, title: "Help" },
 		{ icon: <MdMeetingRoom />, title: "Logout" }
