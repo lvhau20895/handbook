@@ -1,18 +1,18 @@
 @import "/src/Assets/Scss/main.scss";
 
 .header {
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--background-content);
-    transition: all 0.2s linear;
-    border-bottom: 2px solid var(--color-line);
-    padding: 0 15px;
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: var(--background-content);
+	transition: all 0.2s linear;
+	border-bottom: 2px solid var(--rgba);
+	padding: 0 15px;
 
-    .logo,
-    .search,
-    .navbar {
-        width: calc(100% / 3);
-    }
+	.logo,
+	.search,
+	.navbar {
+		width: calc(100% / 3);
+	}
 }
