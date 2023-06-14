@@ -37,6 +37,12 @@
 				background: var(--rgba);
 				border-radius: 10px;
 			}
+
+			.line {
+				border: none;
+				border-top: 1px solid var(--rgba);
+				margin: 0 15px;
+			}
 		}
 	}
 

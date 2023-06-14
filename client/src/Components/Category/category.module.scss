@@ -16,7 +16,7 @@
 			font-size: 15px;
 			font-weight: $fw-medium;
 			padding: 10px 5px;
-			transition: color 0.2s linear;
+			transition: all 0.2s linear;
 
 			.icon {
 				width: 25px;
@@ -36,10 +36,51 @@
 			position: absolute;
 			top: 0;
 			width: 100%;
-			height: calc(100% / 8);
 			background: var(--rgba);
 			border-radius: 5px;
 			z-index: -1;
+			display: none;
+			transition: all 0.1s linear;
+			&.show {
+				display: block;
+			}
+		}
+	}
+
+	.more {
+		button {
+			padding: 10px 5px;
+			border: none;
+			outline: none;
+			background: transparent;
+			display: flex;
+			align-items: center;
+			font-family: "Poppins", sans-serif;
+			cursor: pointer;
+			&:hover {
+				opacity: 0.8;
+			}
+
+			.chevron {
+				width: 25px;
+				height: 25px;
+				font-size: 15px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background: var(--rgba);
+				color: var(--content);
+				border-radius: 50%;
+				transition: all 0.2s linear;
+			}
+
+			.text {
+				font-size: 15px;
+				font-weight: $fw-medium;
+				color: var(--content);
+				margin-left: 10px;
+				transition: all 0.2s linear;
+			}
 		}
 	}
 }
