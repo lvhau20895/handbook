@@ -7,6 +7,7 @@
 
 	.avatar {
 		position: relative;
+		display: flex;
 
 		button {
 			width: 40px;
@@ -25,7 +26,7 @@
 
 		.dropdown {
 			position: absolute;
-			top: calc(100% + 5px);
+			top: calc(100% + (70px - 100%) / 2);
 			left: 0;
 			width: auto;
 			height: auto;

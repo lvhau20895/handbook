@@ -5,11 +5,11 @@
 	flex-direction: column;
 
 	.header {
-		height: 10vh;
+		height: 70px;
 	}
 
 	.content {
-		height: 90vh;
+		height: calc(100vh - 70px);
 		overflow-y: scroll;
 		background: var(--background-content);
 		transition: all 0.2s linear;

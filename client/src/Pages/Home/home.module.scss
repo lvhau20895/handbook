@@ -7,7 +7,7 @@
 	.left,
 	.right {
 		position: fixed;
-		top: 10vh;
+		top: 70px;
 		width: 25%;
 		height: 90vh;
 
@@ -34,7 +34,7 @@
 				background-color: var(--background-content);
 			}
 			&::-webkit-scrollbar-thumb {
-				background: var(--rgba);
+				background: var(--color-line);
 				border-radius: 10px;
 			}
 
