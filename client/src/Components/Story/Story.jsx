@@ -1,13 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Grid, Navigation } from "swiper";
+import { IoClose } from "react-icons/io5";
 import style from "./story.module.scss";
 
 const Story = () => {
-	const [play, setPlay] = useState(false);
-	const [indexVideo, setIndexVideo] = useState(null);
+	const [playingIndex, setPlayingIndex] = useState(null);
+	const [showModal, setShowModal] = useState(false);
 
-	const videoRef = useRef(null);
+	const videoRefs = useRef([]);
 
 	const videos = [
 		{ src: "/videos/video1.mp4" },
@@ -19,14 +20,19 @@ const Story = () => {
 		{ src: "/videos/video7.mp4" }
 	];
 
-	const handlePlayVideo = () => {
-		console.log(videoRef.current);
-		if (!play) {
-			videoRef.current.play();
-			setPlay(true);
+	const handlePlayVideo = index => {
+		setShowModal(true);
+		setPlayingIndex(index);
+	};
+
+	const handlePauseVideo = index => {
+		const video = videoRefs.current[index];
+		if (playingIndex === index) {
+			video.pause();
+			setPlayingIndex(null);
 		} else {
-			videoRef.current.pause();
-			setPlay(false);
+			video.play();
+			setPlayingIndex(index);
 		}
 	};
 
@@ -43,14 +49,55 @@ const Story = () => {
 					return (
 						<SwiperSlide key={index} className={style.item}>
 							<video
-								ref={videoRef}
 								src={video.src}
-								onClick={handlePlayVideo}
-							/>
+								onClick={() => handlePlayVideo(index)}
+							></video>
 						</SwiperSlide>
 					);
 				})}
 			</Swiper>
+
+			{showModal && (
+				<div className={style.modal}>
+					<span
+						className={style.close}
+						onClick={() => setShowModal(false)}
+					>
+						<IoClose />
+					</span>
+					<Swiper
+						initialSlide={playingIndex}
+						slidesPerView={1}
+						navigation={true}
+						modules={[Navigation]}
+					>
+						{videos.map((video, index) => {
+							return (
+								<SwiperSlide key={index}>
+									<video
+										ref={el =>
+											(videoRefs.current[index] = el)
+										}
+										src={video.src}
+										autoPlay={
+											index === playingIndex
+												? true
+												: false
+										}
+										onClick={() => handlePauseVideo(index)}
+									></video>
+								</SwiperSlide>
+							);
+						})}
+					</Swiper>
+				</div>
+			)}
+			{showModal && (
+				<div
+					className={style.overlay}
+					onClick={() => setShowModal(false)}
+				></div>
+			)}
 		</div>
 	);
 };
