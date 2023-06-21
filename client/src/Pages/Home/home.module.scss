@@ -64,19 +64,19 @@
 	}
 }
 
-@media screen and (min-width: 2000px) {
+@media screen and (min-width: 1600px) {
 	.home {
 		.left,
 		.right {
-			width: calc(2000px * 25 / 100);
+			width: calc(1600px * 25 / 100);
 		}
 
 		.left {
-			left: calc((100% - 2000px) / 2);
+			left: calc((100% - 1600px) / 2);
 		}
 
 		.right {
-			right: calc((100% - 2000px) / 2);
+			right: calc((100% - 1600px) / 2);
 		}
 	}
 }

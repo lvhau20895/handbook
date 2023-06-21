@@ -11,10 +11,10 @@ const ProfileSchema = new Schema(
 		avatar: String,
 		coin: Number,
 		birthday: Date,
-		phone: Number
+		phone: String
 	},
 	{
-		timestamps: true
+		timestamps: false
 	}
 );
 
