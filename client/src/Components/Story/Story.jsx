@@ -1,15 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Grid, Navigation } from "swiper";
-import { IoClose } from "react-icons/io5";
+import React from "react";
 import style from "./story.module.scss";
 
 const Story = () => {
-	const [playingIndex, setPlayingIndex] = useState(null);
-	const [showModal, setShowModal] = useState(false);
-
-	const videoRefs = useRef([]);
-
 	const videos = [
 		{ src: "/videos/video1.mp4" },
 		{ src: "/videos/video2.mp4" },
@@ -19,85 +11,27 @@ const Story = () => {
 		{ src: "/videos/video6.mp4" },
 		{ src: "/videos/video7.mp4" }
 	];
-
-	const handlePlayVideo = index => {
-		setShowModal(true);
-		setPlayingIndex(index);
-	};
-
-	const handlePauseVideo = index => {
-		const video = videoRefs.current[index];
-		if (playingIndex === index) {
-			video.pause();
-			setPlayingIndex(null);
-		} else {
-			video.play();
-			setPlayingIndex(index);
-		}
-	};
-
 	return (
 		<div className={style.story}>
-			<Swiper
-				slidesPerView={5}
-				spaceBetween={5}
-				grid={{ rows: 1 }}
-				navigation={true}
-				modules={[Grid, Navigation]}
-			>
-				{videos.map((video, index) => {
+			<div className={style.list}>
+				<button className={`${style.navigation} ${style.prev}`}>
+					Prev
+				</button>
+
+				{videos.map((video, i) => {
 					return (
-						<SwiperSlide key={index} className={style.item}>
-							<video
-								src={video.src}
-								onClick={() => handlePlayVideo(index)}
-							></video>
-						</SwiperSlide>
+						<div key={i} className={style.video}>
+							<div className={style.wrap}>
+								<video src={video.src}></video>
+							</div>
+						</div>
 					);
 				})}
-			</Swiper>
 
-			{showModal && (
-				<div className={style.modal}>
-					<span
-						className={style.close}
-						onClick={() => setShowModal(false)}
-					>
-						<IoClose />
-					</span>
-					<Swiper
-						initialSlide={playingIndex}
-						slidesPerView={1}
-						navigation={true}
-						modules={[Navigation]}
-					>
-						{videos.map((video, index) => {
-							return (
-								<SwiperSlide key={index}>
-									<video
-										ref={el =>
-											(videoRefs.current[index] = el)
-										}
-										src={video.src}
-										autoPlay={
-											index === playingIndex
-												? true
-												: false
-										}
-										onClick={() => handlePauseVideo(index)}
-									></video>
-								</SwiperSlide>
-							);
-						})}
-					</Swiper>
-				</div>
-			)}
-			{showModal && (
-				<div
-					className={style.overlay}
-					onClick={() => setShowModal(false)}
-				></div>
-			)}
+				<button className={`${style.navigation} ${style.next}`}>
+					Next
+				</button>
+			</div>
 		</div>
 	);
 };

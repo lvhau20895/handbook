@@ -11,15 +11,10 @@ import style from "./user.module.scss";
 const User = () => {
 	const [dropdown, setDropdown] = useState(false);
 	const { user } = useSelector(state => state.user);
-	const dispatch = useDispatch();
 
 	const menuRef = useRef();
 
 	useCheckOutside(menuRef, () => setDropdown(false));
-
-	useEffect(() => {
-		dispatch(getUser());
-	}, [dispatch]);
 
 	const option = [
 		{ icon: <FaUser />, title: "Profile" },
@@ -69,10 +64,11 @@ const User = () => {
 						})}
 						<div
 							style={{
-								height:
+								height: `calc(100% / ${
 									user.role === "admin"
-										? `calc(100% / ${option.length + 1})`
-										: `calc(100% / ${option.length})`
+										? option.length + 1
+										: option.length
+								})`
 							}}
 							className={style.animate}
 						></div>
