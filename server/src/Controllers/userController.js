@@ -14,15 +14,17 @@ const register = async (req, res) => {
 		const checkEmail = await User.findOne({ email });
 		if (checkUsername) return failCode(res, "Username exists");
 		if (checkEmail) return failCode(res, "Email exists");
-		const id = (Math.random() + 1).toString(36).substring(2).toUpperCase();
+		const id = (Math.random() + 1)
+			.toString(36)
+			.substring(2, 12)
+			.toUpperCase();
 		const profile = new Profile({
-			nickname: "",
+			nickname: username,
 			avatar: "",
 			coin: 0,
 			birthday: new Date(),
 			phone: ""
 		});
-
 		const user = {
 			_id: id,
 			username,
@@ -31,8 +33,6 @@ const register = async (req, res) => {
 			profile
 		};
 		const result = await User.create(user);
-		console.log(profile, result);
-
 		successCode(res, "ok", result);
 	} catch (error) {
 		errorCode(res, "error: " + error);

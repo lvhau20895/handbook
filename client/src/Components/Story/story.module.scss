@@ -1,15 +1,151 @@
+@import "/src/Assets/Scss/main.scss";
+
+// .story {
+// 	position: relative;
+// 	padding: 10px;
+// 	background: var(--background-content);
+// 	border-radius: 10px;
+// 	transition: background 0.2s linear;
+
+// 	.list {
+// 		border-radius: 10px;
+// 		display: flex;
+// 		overflow-x: auto;
+// 		overflow-y: hidden;
+// 		scroll-behavior: smooth;
+// 		scroll-snap-type: x mandatory;
+// 		margin: 0 -3px;
+// 		&::-webkit-scrollbar {
+// 			display: none;
+// 		}
+
+// 		.wrap {
+// 			scroll-snap-align: start;
+// 			flex: 0 0 calc(100% / 5);
+// 			padding: 0 3px;
+
+// 			.add {
+// 				border-radius: 10px;
+// 				width: 100%;
+// 				height: 200px;
+// 				background: var(--background);
+// 				cursor: pointer;
+// 				&:hover img {
+// 					opacity: 0.8;
+// 				}
+
+// 				.image {
+// 					position: relative;
+// 					border-radius: 10px;
+// 					width: 100%;
+// 					height: 70%;
+// 					background: var(--background);
+
+// 					img {
+// 						border-radius: 10px 10px 5px 5px;
+// 						width: 100%;
+// 						height: 100%;
+// 						object-fit: cover;
+// 						transition: all 0.2s ease;
+// 					}
+
+// 					.icon {
+// 						position: absolute;
+// 						bottom: -20px;
+// 						left: 50%;
+// 						width: 40px;
+// 						height: 40px;
+// 						background: $color-main-light;
+// 						color: $color-light;
+// 						font-size: 25px;
+// 						display: flex;
+// 						justify-content: center;
+// 						align-items: center;
+// 						border-radius: 50%;
+// 						border: 4px solid var(--background);
+// 						transform: translateX(-50%);
+// 					}
+// 				}
+
+// 				.desc {
+// 					position: absolute;
+// 					bottom: 10px;
+// 					left: 50%;
+// 					transform: translateX(-50%);
+// 					font-size: 14px;
+// 					font-weight: $fw-medium;
+// 					white-space: nowrap;
+// 					color: var(--content);
+// 				}
+// 			}
+
+// 			.video {
+// 				border-radius: 10px;
+// 				width: 100%;
+// 				height: 200px;
+// 				overflow: hidden;
+// 				background: $color-dark;
+// 				display: flex;
+// 				align-items: center;
+// 				background-size: cover;
+
+// 				video {
+// 					border-radius: 10px;
+// 					width: 100%;
+// 					height: auto;
+// 					object-fit: cover;
+// 					transform: scale(1.01);
+// 					transition: all 0.2s ease;
+// 					cursor: pointer;
+// 					&:hover {
+// 						opacity: 0.8;
+// 						transform: scale(1.05);
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+
+// 	.navigation {
+// 		position: absolute;
+// 		top: 50%;
+// 		transform: translateY(-50%);
+// 		width: 40px;
+// 		height: 40px;
+// 		background: var(--background);
+// 		color: var(--title);
+// 		box-shadow: 0 0 2px 2px var(--rgba);
+// 		border-radius: 50%;
+// 		border: none;
+// 		outline: none;
+// 		display: flex;
+// 		justify-content: center;
+// 		align-items: center;
+// 		font-size: 15px;
+// 		z-index: 99;
+// 		cursor: pointer;
+// 		&.prev {
+// 			left: 25px;
+// 		}
+
+// 		&.next {
+// 			right: 25px;
+// 		}
+// 	}
+// }
+
 .story {
 	position: relative;
-	padding: 10px;
-	background: var(--background-content);
+	width: 100%;
+	height: 200px;
 	border-radius: 10px;
-	transition: background 0.2s linear;
+	background: var(--background-content);
 
 	.list {
+		width: 100%;
+		height: 100%;
 		border-radius: 10px;
 		display: flex;
-		align-items: center;
-		margin-left: -6px;
 		overflow-x: auto;
 		overflow-y: hidden;
 		scroll-behavior: smooth;
@@ -19,30 +155,24 @@
 		}
 
 		.wrap {
-			scroll-snap-align: start;
+			border-radius: 10px;
 			flex: 0 0 calc(100% / 5);
-			padding-left: 6px;
-			&.add {
-			}
+			height: 100%;
+			scroll-snap-align: center;
+			padding: 10px;
 
 			.video {
 				border-radius: 10px;
 				width: 100%;
-				height: 200px;
-				overflow: hidden;
+				height: 100%;
+				display: flex;
+				align-items: center;
 
 				video {
 					border-radius: 10px;
 					width: 100%;
 					height: 100%;
 					object-fit: cover;
-					transform: scale(1);
-					transition: all 0.2s ease;
-					cursor: pointer;
-					&:hover {
-						opacity: 0.8;
-						transform: scale(1.05);
-					}
 				}
 			}
 		}

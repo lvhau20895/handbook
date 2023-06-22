@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "Slices/userSlice";
+import React, { useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaCoins, FaUser, FaUserSecret } from "react-icons/fa";
 import { AiFillSetting } from "react-icons/ai";
@@ -11,6 +10,8 @@ import style from "./user.module.scss";
 const User = () => {
 	const [dropdown, setDropdown] = useState(false);
 	const { user } = useSelector(state => state.user);
+
+	const { profile } = user;
 
 	const menuRef = useRef();
 
@@ -23,8 +24,6 @@ const User = () => {
 		{ icon: <MdLiveHelp />, title: "Help" },
 		{ icon: <MdMeetingRoom />, title: "Logout" }
 	];
-
-	const { profile } = user;
 
 	return (
 		<div className={style.user}>
@@ -77,13 +76,9 @@ const User = () => {
 			</div>
 
 			<div className={style.info}>
-				<p className={style.name}>
-					{profile?.nickname ? profile.nickname : user.username}
-				</p>
+				<p className={style.name}>{profile?.nickname}</p>
 				<p className={style.coin}>
-					{profile?.coin
-						? Number(profile.coin).toLocaleString()
-						: 0 + ".00$"}
+					{Number(profile?.coin).toLocaleString() + ".00$"}
 				</p>
 			</div>
 		</div>

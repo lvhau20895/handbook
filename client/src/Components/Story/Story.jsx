@@ -1,27 +1,60 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import style from "./story.module.scss";
 import { MdAdd } from "react-icons/md";
 import { useSelector } from "react-redux";
+import style from "./story.module.scss";
 
 const Story = () => {
 	const [hidePrev, setHidePrev] = useState(true);
 	const [hideNext, setHideNext] = useState(false);
 
 	const { user } = useSelector(state => state.user);
-	console.log(user);
+	const { profile } = user;
 
 	const mainRef = useRef();
 	const videoRefs = useRef([]);
 
 	const videos = [
-		{ src: "/videos/video1.mp4" },
-		{ src: "/videos/video2.mp4" },
-		{ src: "/videos/video3.mp4" },
-		{ src: "/videos/video4.mp4" },
-		{ src: "/videos/video5.mp4" },
-		{ src: "/videos/video6.mp4" },
-		{ src: "/videos/video7.mp4" }
+		{
+			src: "/videos/video1.mp4",
+			name: "demo",
+			avatar: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
+		},
+		{
+			src: "/videos/video2.mp4",
+			name: "demo",
+			avatar: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
+		},
+		{
+			src: "/videos/video3.mp4",
+			name: "demo",
+			avatar: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
+		},
+		{
+			src: "/videos/video4.mp4",
+			name: "demo",
+			avatar: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
+		},
+		{
+			src: "/videos/video5.mp4",
+			name: "demo",
+			avatar: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
+		},
+		{
+			src: "/videos/video6.mp4",
+			name: "demo",
+			avatar: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
+		},
+		{
+			src: "/videos/video7.mp4",
+			name: "demo",
+			avatar: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
+		},
+		{
+			src: "/videos/video8.mp4",
+			name: "demo",
+			avatar: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
+		}
 	];
 
 	useEffect(() => {
@@ -56,13 +89,24 @@ const Story = () => {
 			</button>
 
 			<div ref={mainRef} className={style.list}>
-				<div className={`${style.wrap} ${style.add}`}>
-					<img src="" alt="" />
-					<span>
-						<MdAdd />
-					</span>
-					<p className={style.desc}>Add story</p>
-				</div>
+				{/* <div className={style.wrap}>
+					<div className={style.add}>
+						<div className={style.image}>
+							<img
+								src={
+									profile?.avatar
+										? profile.avatar
+										: "/images/avatar/default.png"
+								}
+								alt="avatar"
+							/>
+							<span className={style.icon}>
+								<MdAdd />
+							</span>
+						</div>
+						<p className={style.desc}>Add story</p>
+					</div>
+				</div> */}
 
 				{videos.map((video, i) => {
 					return (
