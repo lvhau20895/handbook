@@ -1,197 +1,180 @@
 @import "/src/Assets/Scss/main.scss";
 
 .story {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    border-radius: 10px;
-    background: var(--background-content);
-    padding: 10px 0;
-    transition: background 0.2s linear;
+	position: relative;
+	width: 100%;
+	height: 200px;
+	border-radius: 10px;
+	background: var(--background-content);
+	padding: 10px 0;
+	transition: background 0.2s linear;
 
-    .list {
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-        display: flex;
-        overflow-x: auto;
-        overflow-y: hidden;
-        scroll-behavior: smooth;
-        scroll-snap-type: x mandatory;
-        padding: 0 5px;
-        &::-webkit-scrollbar {
-            display: none;
-        }
+	.list {
+		width: 100%;
+		height: 100%;
+		border-radius: 10px;
+		display: flex;
+		overflow-x: auto;
+		overflow-y: hidden;
+		scroll-behavior: smooth;
+		scroll-snap-type: x mandatory;
+		padding: 0 5px;
+		&::-webkit-scrollbar {
+			display: none;
+		}
 
-        .wrap {
-            position: relative;
-            border-radius: 10px;
-            flex: 0 0 calc(100% / 5);
-            height: 100%;
-            scroll-snap-align: center;
-            padding: 0 5px;
-            transition: opacity 0.2s ease;
-            &:hover {
-                opacity: 0.8;
-                video {
-                    transform: scale(1.02);
-                }
-            }
+		.wrap {
+			position: relative;
+			border-radius: 10px;
+			flex: 0 0 calc(100% / 5);
+			height: 100%;
+			scroll-snap-align: center;
+			padding: 0 5px;
+			transition: opacity 0.2s ease;
+			&:hover {
+				opacity: 0.8;
+				video {
+					transform: scale(1.02);
+				}
+			}
 
-            .add {
-                border-radius: 10px;
-                width: 100%;
-                height: 100%;
-                background: var(--background);
-                transition: background 0.2s linear;
-                cursor: pointer;
-                &:hover img {
-                    opacity: 0.8;
-                }
+			.add {
+				border-radius: 10px;
+				width: 100%;
+				height: 100%;
+				background: var(--background);
+				transition: background 0.2s linear;
+				cursor: pointer;
+				&:hover img {
+					opacity: 0.8;
+				}
 
-                .image {
-                    position: relative;
-                    border-radius: 10px;
-                    width: 100%;
-                    height: 60%;
+				.image {
+					position: relative;
+					border-radius: 10px;
+					width: 100%;
+					height: 60%;
 
-                    img {
-                        border-radius: 10px 10px 5px 5px;
-                        width: 100%;
-                        height: 100%;
-                        transition: all 0.2s ease;
-                    }
+					img {
+						border-radius: 10px 10px 5px 5px;
+						width: 100%;
+						height: 100%;
+						transition: all 0.2s ease;
+					}
 
-                    .icon {
-                        position: absolute;
-                        bottom: -20px;
-                        left: 50%;
-                        width: 40px;
-                        height: 40px;
-                        background: $color-main-light;
-                        color: $color-light;
-                        font-size: 25px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        border-radius: 50%;
-                        border: 4px solid var(--background);
-                        transform: translateX(-50%);
-                        transition: all 0.2s linear;
-                    }
-                }
+					.icon {
+						position: absolute;
+						bottom: -20px;
+						left: 50%;
+						width: 40px;
+						height: 40px;
+						background: $color-main-light;
+						color: $color-light;
+						font-size: 25px;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						border-radius: 50%;
+						border: 4px solid var(--background);
+						transform: translateX(-50%);
+						transition: all 0.2s linear;
+					}
+				}
 
-                .desc {
-                    position: absolute;
-                    bottom: 10px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    font-size: 14px;
-                    font-weight: $fw-medium;
-                    white-space: nowrap;
-                    color: var(--content);
-                    transition: color 0.2s linear;
-                }
-            }
+				.desc {
+					position: absolute;
+					bottom: 10px;
+					left: 50%;
+					transform: translateX(-50%);
+					font-size: 14px;
+					font-weight: $fw-medium;
+					white-space: nowrap;
+					color: var(--content);
+					transition: color 0.2s linear;
+				}
+			}
 
-            .video {
-                position: relative;
-                border-radius: 10px;
-                width: 100%;
-                height: 100%;
-                display: flex;
-                align-items: center;
-                overflow: hidden;
+			.video {
+				position: relative;
+				border-radius: 10px;
+				width: 100%;
+				height: 100%;
+				display: flex;
+				align-items: center;
+				overflow: hidden;
 
-                cursor: pointer;
+				cursor: pointer;
 
-                .avatar {
-                    position: absolute;
-                    top: 10px;
-                    left: 15px;
-                    width: 40px;
-                    height: 40px;
-                    border: 3px solid $color-main-dark;
-                    border-radius: 50%;
-                    overflow: hidden;
-                    z-index: 99;
-                    cursor: pointer;
+				.avatar {
+					position: absolute;
+					top: 10px;
+					left: 15px;
+					width: 40px;
+					height: 40px;
+					border: 3px solid $color-main-dark;
+					border-radius: 50%;
+					overflow: hidden;
+					z-index: 99;
+					cursor: pointer;
 
-                    img {
-                        border-radius: 50%;
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        transition: all 0.2s ease;
-                    }
-                }
+					img {
+						border-radius: 50%;
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						transition: all 0.2s ease;
+					}
+				}
 
-                video {
-                    border-radius: 10px;
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    filter: brightness(90%);
-                    transition: all 0.2s ease;
-                }
+				video {
+					border-radius: 10px;
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					filter: brightness(90%);
+					transition: all 0.2s ease;
+				}
 
-                .name {
-                    position: absolute;
-                    bottom: 10px;
-                    left: 0;
-                    width: 100%;
-                    padding: 0 15px;
-                    color: $color-light;
-                    font-size: 14px;
-                    font-weight: $fw-medium;
-                    text-transform: capitalize;
-                    word-break: break-word;
-                }
-            }
-        }
-    }
+				.name {
+					position: absolute;
+					bottom: 10px;
+					left: 0;
+					width: 100%;
+					padding: 0 15px;
+					color: $color-light;
+					font-size: 14px;
+					font-weight: $fw-medium;
+					text-transform: capitalize;
+					word-break: break-word;
+				}
+			}
+		}
+	}
 
-    .navigation {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 40px;
-        height: 40px;
-        background: var(--background);
-        color: var(--title);
-        box-shadow: 0 0 2px 2px var(--rgba);
-        border-radius: 50%;
-        border: none;
-        outline: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 15px;
-        z-index: 99;
-        cursor: pointer;
-        &.prev {
-            left: 25px;
-        }
+	.navigation {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 40px;
+		height: 40px;
+		background: var(--background);
+		color: var(--title);
+		box-shadow: 0 0 2px 2px var(--rgba);
+		border-radius: 50%;
+		border: none;
+		outline: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 15px;
+		z-index: 99;
+		cursor: pointer;
+		&.prev {
+			left: 25px;
+		}
 
-        &.next {
-            right: 25px;
-        }
-    }
-
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: black;
-        z-index: 99;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.2s ease;
-        &.show {
-            opacity: 1;
-            visibility: visible;
-        }
-    }
+		&.next {
+			right: 25px;
+		}
+	}
 }
