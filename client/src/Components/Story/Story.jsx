@@ -15,7 +15,6 @@ const Story = () => {
 	const { profile } = user;
 
 	const mainRef = useRef();
-	const videoRefs = useRef([]);
 
 	const videos = [
 		{
@@ -77,7 +76,7 @@ const Story = () => {
 
 	const handleSlide = direction => {
 		const main = mainRef.current;
-		const viewSlide = videoRefs.current[0].offsetWidth + 5;
+		const viewSlide = main.offsetWidth / 5;
 		main.scrollLeft += direction === "prev" ? -viewSlide : viewSlide;
 	};
 
@@ -88,6 +87,7 @@ const Story = () => {
 
 	const handleCloseModal = () => {
 		setShowVideo(false);
+		setCurrentVideo(null);
 	};
 
 	return (
@@ -127,11 +127,7 @@ const Story = () => {
 
 				{videos.map((video, i) => {
 					return (
-						<div
-							ref={el => (videoRefs.current[i] = el)}
-							key={i}
-							className={style.wrap}
-						>
+						<div key={i} className={style.wrap}>
 							<div
 								className={style.video}
 								onClick={() => handleShowModal(i)}
