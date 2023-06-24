@@ -1,0 +1,70 @@
+@import "/src/Assets/Scss/main.scss";
+
+.stories {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.type {
+		width: 700px;
+		height: 300px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.add {
+			width: calc(100% / 3);
+			height: 100%;
+			padding: 0 10px;
+
+			.content {
+				width: 100%;
+				height: 100%;
+				box-shadow: 0 0 2px 2px var(--rgba);
+				border-radius: 10px;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				transition: all 0.2s linear;
+				cursor: pointer;
+				&.text {
+					background: linear-gradient($color-main-dark, $color-red);
+				}
+				&.image {
+					background: linear-gradient($color-main-dark, $color-green);
+				}
+				&.video {
+					background: linear-gradient(
+						$color-main-dark,
+						$color-orange
+					);
+				}
+				&:hover {
+					transform: scale(1.03);
+				}
+
+				.icon {
+					width: 50px;
+					height: 50px;
+					background: var(--rgba);
+					color: $color-white;
+					font-size: 25px;
+					border-radius: 50%;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					transition: background 0.2s linear;
+				}
+
+				.title {
+					color: $color-white;
+					font-weight: $fw-medium;
+					margin-top: 15px;
+				}
+			}
+		}
+	}
+}

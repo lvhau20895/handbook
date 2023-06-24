@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import { useSelector } from "react-redux";
-import ModalStory from "Components/ModalStory";
-import style from "./story.module.scss";
+import StoryModal from "Components/StoryModal";
+import { Link } from "react-router-dom";
+import style from "./storySlide.module.scss";
 
-const Story = () => {
+const StorySlide = () => {
 	const [showPrev, setShowPrev] = useState(false);
 	const [showNext, setShowNext] = useState(true);
 	const [showVideo, setShowVideo] = useState(false);
@@ -102,7 +103,7 @@ const Story = () => {
 
 			<div ref={mainRef} className={style.list}>
 				<div className={style.wrap}>
-					<div className={style.add}>
+					<Link to="/stories" className={style.add}>
 						<div className={style.image}>
 							<img
 								style={{
@@ -122,7 +123,7 @@ const Story = () => {
 							</span>
 						</div>
 						<p className={style.desc}>Add story</p>
-					</div>
+					</Link>
 				</div>
 
 				{videos.map((video, i) => {
@@ -151,7 +152,7 @@ const Story = () => {
 				<FaChevronRight />
 			</button>
 
-			<ModalStory
+			<StoryModal
 				open={showVideo}
 				videos={videos}
 				current={currentVideo}
@@ -161,4 +162,4 @@ const Story = () => {
 	);
 };
 
-export default Story;
+export default StorySlide;

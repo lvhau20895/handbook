@@ -1,7 +1,7 @@
 import React from "react";
-import style from "./home.module.scss";
 import Category from "Components/Category";
-import Story from "Components/Story";
+import Story from "Components/StorySlide";
+import style from "./home.module.scss";
 
 const Home = () => {
 	return (

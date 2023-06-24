@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import style from "./modalStory.module.scss";
+import style from "./storyModal.module.scss";
 
-const ModalStory = ({ open, videos, current, onClose }) => {
+const StoryModal = ({ open, videos, current, onClose }) => {
 	const [time, setTime] = useState(0);
 	const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -85,7 +85,6 @@ const ModalStory = ({ open, videos, current, onClose }) => {
 								<video
 									ref={el => (videoRefs.current[i] = el)}
 									src={video.src}
-									autoPlay
 								></video>
 							</div>
 						);
@@ -96,4 +95,4 @@ const ModalStory = ({ open, videos, current, onClose }) => {
 	);
 };
 
-export default ModalStory;
+export default StoryModal;
