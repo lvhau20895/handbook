@@ -1,16 +1,34 @@
 @import "/src/Assets/Scss/main.scss";
 
 .stories {
+	position: relative;
 	width: 100%;
 	height: 100%;
-	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	.back {
+		position: absolute;
+		top: 15px;
+		left: 15px;
+		width: 40px;
+		height: 40px;
+		justify-content: center;
+		align-items: center;
+		border-radius: 50%;
+		background: var(--rgba);
+		color: var(--content);
+		font-size: 15px;
+		transition: all 0.2s linear;
+		cursor: pointer;
+		&:hover {
+			opacity: 0.8;
+		}
+	}
 
 	.type {
 		width: 700px;
 		height: 300px;
-		display: flex;
 		justify-content: center;
 		align-items: center;
 
