@@ -1,16 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoTextSharp } from "react-icons/io5";
 import { RiImageAddFill } from "react-icons/ri";
 import { BiMoviePlay } from "react-icons/bi";
 import { FaChevronLeft } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import StoryText from "Components/StoryText";
 import StoryImage from "Components/StoryImage";
 import StoryVideo from "Components/StoryVideo";
 import style from "./stories.module.scss";
 
 const Stories = () => {
-	const [type, setType] = useState("");
+	const [type, setType] = useState(
+		"" || JSON.parse(localStorage.getItem("storyType"))
+	);
+
+	useEffect(() => {
+		const removeStorageStory = () => {
+			localStorage.removeItem("storyType");
+		};
+
+		return removeStorageStory;
+	}, []);
 
 	const types = [
 		{
@@ -30,7 +39,15 @@ const Stories = () => {
 		}
 	];
 
-	console.log(type);
+	const handleSetType = storyType => {
+		setType(storyType);
+		localStorage.setItem("storyType", JSON.stringify(storyType));
+	};
+
+	const handleBack = () => {
+		setType("");
+		localStorage.removeItem("storyType");
+	};
 
 	return (
 		<div
@@ -40,7 +57,7 @@ const Stories = () => {
 			<div
 				style={{ display: !type ? "none" : "flex" }}
 				className={style.back}
-				onClick={() => setType("")}
+				onClick={handleBack}
 			>
 				<FaChevronLeft />
 			</div>
@@ -57,7 +74,7 @@ const Stories = () => {
 								className={`${style.content} ${
 									style[item.type]
 								}`}
-								onClick={() => setType(item.type)}
+								onClick={() => handleSetType(item.type)}
 							>
 								<p className={style.icon}>{item.icon}</p>
 								<p className={style.title}>{item.title}</p>

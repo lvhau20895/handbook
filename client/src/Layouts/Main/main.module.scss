@@ -10,15 +10,7 @@
 
 	.content {
 		height: calc(100vh - 70px);
-		overflow-y: scroll;
 		background: var(--background-content);
 		transition: all 0.2s linear;
-		&::-webkit-scrollbar {
-			width: 5px;
-		}
-		&::-webkit-scrollbar-thumb {
-			border-radius: 10px;
-			background: $color-gray;
-		}
 	}
 }

@@ -1,66 +1,77 @@
 @import "/src/Assets/Scss/main.scss";
 
 .home {
-	position: relative;
-	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
+	&::-webkit-scrollbar {
+		width: 5px;
+	}
+	&::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		background: $color-gray;
+	}
 
-	.left,
-	.right {
-		position: fixed;
-		top: 70px;
-		width: 25%;
-		height: 90vh;
+	.wrapper {
+		margin: 0 auto;
+		.left,
+		.right {
+			position: fixed;
+			top: 70px;
+			width: 25%;
+			height: 90vh;
 
-		&::after {
-			content: "";
-			position: absolute;
-			top: 0;
-			right: 0;
-			width: 8px;
-			height: 100%;
-			background: var(--background-content);
-			opacity: 1;
+			&::after {
+				content: "";
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 8px;
+				height: 100%;
+				background: var(--background-content);
+				opacity: 1;
+				transition: all 0.2s linear;
+			}
+			&:hover::after {
+				opacity: 0;
+			}
+
+			.content {
+				height: 100%;
+				overflow-y: scroll;
+				&::-webkit-scrollbar {
+					width: 8px;
+					background-color: var(--background-content);
+				}
+				&::-webkit-scrollbar-thumb {
+					background: var(--color-line);
+					border-radius: 10px;
+				}
+
+				.line {
+					border: none;
+					border-top: 1px solid var(--color-line);
+					margin: 0 15px;
+				}
+			}
+		}
+
+		.center {
+			width: 50%;
+			margin: 0 auto;
+			background: var(--background);
+			padding: 10px;
 			transition: all 0.2s linear;
 		}
-		&:hover::after {
-			opacity: 0;
+
+		.left {
+			left: 0;
 		}
 
-		.content {
-			height: 100%;
-			overflow-y: scroll;
-			&::-webkit-scrollbar {
-				width: 8px;
-				background-color: var(--background-content);
-			}
-			&::-webkit-scrollbar-thumb {
-				background: var(--color-line);
-				border-radius: 10px;
-			}
-
-			.line {
-				border: none;
-				border-top: 1px solid var(--color-line);
-				margin: 0 15px;
-			}
+		.right {
+			padding-left: 10px;
+			right: 10px;
 		}
-	}
-
-	.center {
-		width: 50%;
-		margin: 0 auto;
-		background: var(--background);
-		padding: 10px;
-		transition: all 0.2s linear;
-	}
-
-	.left {
-		left: 0;
-	}
-
-	.right {
-		padding-left: 10px;
-		right: 10px;
 	}
 }
 
