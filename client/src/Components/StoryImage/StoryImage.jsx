@@ -4,6 +4,12 @@ import style from "./storyImage.module.scss";
 import Emoji from "Components/Emoji/Emoji";
 
 const StoryImage = () => {
+	window.onbeforeunload = () => {
+		const currentURL = window.location.href;
+		if (currentURL) return;
+		localStorage.removeItem("storyType");
+	};
+
 	return (
 		<div className={style.storyImage}>
 			<div className={style.option}>
