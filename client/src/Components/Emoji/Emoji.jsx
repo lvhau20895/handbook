@@ -1,163 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import icons from "../../Assets/Data/icon.json";
 import style from "./emoji.module.scss";
 
-const icons = {
-	emoji: [
-		"🙂",
-		"😀",
-		"😄",
-		"😆",
-		"😅",
-		"😂",
-		"🤣",
-		"😊",
-		"😌",
-		"😉",
-		"😏",
-		"😍",
-		"😘",
-		"😗",
-		"😙",
-		"😚",
-		"🤗",
-		"😳",
-		"🙃",
-		"😇",
-		"😛",
-		"😝",
-		"😜",
-		"😋",
-		"🤤",
-		"🤓",
-		"😎",
-		"🤑",
-		"😒",
-		"🙁",
-		"☹️",
-		"😞",
-		"😔",
-		"😖",
-		"😓",
-		"🥹",
-		"😢",
-		"😭",
-		"😟",
-		"😣",
-		"😩",
-		"😫",
-		"😕",
-		"🤔",
-		"🙄",
-		"😤",
-		"😠",
-		"😡",
-		"😶",
-		"🤐",
-		"😐",
-		"😑",
-		"😯",
-		"😲",
-		"😧",
-		"😨",
-		"😰",
-		"😱",
-		"😪",
-		"😴",
-		"😬",
-		"🤥",
-		"🤧",
-		"🤒",
-		"😷",
-		"🤕",
-		"😵",
-		"🤠",
-		"🤢",
-		"😈",
-		"🤡",
-		"👺",
-		"👻",
-		"💀",
-		"👽",
-		"🤖",
-		"🎃",
-		"💩"
-	],
-	gesture: [
-		"👍",
-		"👎",
-		"✌️",
-		"🤞",
-		"👌",
-		"🤙",
-		"🤘",
-		"🖕",
-		"☝️",
-		"👉",
-		"👈",
-		"👇",
-		"👆",
-		"👊",
-		"✊",
-		"🤜",
-		"🤛",
-		"💪",
-		"✍️",
-		"🙏",
-		"👏",
-		"🤝",
-		"👋",
-		"🖐️",
-		"👀"
-	],
-	other: [
-		"❤️",
-		"💔",
-		"🎉️",
-		"🎶️",
-		"👑️",
-		"🛒",
-		"🐤",
-		"🌻",
-		"🌹",
-		"🍀",
-		"🌧️",
-		"🐧"
-	]
-};
-
-const Emoji = () => {
+const Emoji = ({ onSetEmoji }) => {
 	const [iconList, setIconList] = useState(icons.emoji);
-	const [active, setActive] = useState(1);
+	const [active, setActive] = useState(0);
 
 	const { emoji, gesture, other } = icons;
-	const represent = [emoji[0], gesture[0], other[0]];
+	const represent = [emoji, gesture, other];
 
 	const handleClick = (typeEmoji, index) => {
 		setIconList(typeEmoji);
 		setActive(index);
 	};
 
+	const handleSetEmoji = icon => {
+		onSetEmoji(icon);
+	};
+
 	return (
 		<div className={style.emoji}>
 			<div className={style.represent}>
-				<button
-					className={`${active === 1 ? style.active : ""}`}
-					onClick={() => handleClick(icons.emoji, 1)}
-				>
-					{icons.emoji[0]}
-				</button>
-				<button
-					className={`${active === 2 ? style.active : ""}`}
-					onClick={() => handleClick(icons.gesture, 2)}
-				>
-					{icons.gesture[0]}
-				</button>
-				<button
-					className={`${active === 3 ? style.active : ""}`}
-					onClick={() => handleClick(icons.other, 3)}
-				>
-					{icons.other[0]}
-				</button>
+				{represent.map((item, i) => {
+					return (
+						<button key={i} onClick={() => handleClick(item, i)}>
+							{item[0]}
+						</button>
+					);
+				})}
+				<div
+					style={{ left: `calc(${active} * 35px)` }}
+					className={style.active}
+				></div>
 			</div>
 
 			<hr className={style.line} />
@@ -165,7 +39,11 @@ const Emoji = () => {
 			<div className={style.list}>
 				{iconList.map((icon, i) => {
 					return (
-						<button key={i} className={style.item}>
+						<button
+							key={i}
+							className={style.item}
+							onClick={() => handleSetEmoji(icon)}
+						>
 							{icon}
 						</button>
 					);

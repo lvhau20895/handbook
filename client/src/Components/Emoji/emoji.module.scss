@@ -1,47 +1,53 @@
 @import "/src/Assets/Scss/main.scss";
 
 .emoji {
-	width: 100%;
-	height: 100%;
 	background: var(--background);
 	border-radius: 10px;
-	padding: 10px;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	padding: 5px;
 	transition: background 0.2s linear;
 
 	.represent {
-		display: flex;
+		position: relative;
 
 		button {
 			font-family: "Noto Color Emoji", sans-serif;
+			width: 25px;
+			height: 20px;
+			line-height: 20px;
 			font-size: 20px;
-			text-align: center;
-			margin-right: 10px;
 			border: none;
 			outline: none;
 			background: transparent;
+			margin: 5px;
 			cursor: pointer;
-			&.active {
-				border-bottom: 2px solid red;
-			}
+		}
+
+		.active {
+			position: absolute;
+			top: 100%;
+			width: 35px;
+			height: 2px;
+			background: $color-main-light;
+			border-radius: 10px;
+			transition: all 0.2s linear;
 		}
 	}
 
 	.line {
 		border: none;
 		border-top: 1px solid var(--color-line);
-		margin: 3px 0;
+		margin: 0 0 5px;
 	}
 
 	.list {
 		display: grid;
-		grid-template-columns: repeat(10, calc(100% / 10));
-		margin: 0 -10px;
+		grid-template-columns: repeat(10, 1fr);
+		padding: 5px;
+		gap: 5px;
 
 		.item {
-			margin-bottom: 5px;
 			font-family: "Noto Color Emoji", sans-serif;
 			border: none;
 			outline: none;

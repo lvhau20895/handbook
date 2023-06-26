@@ -3,90 +3,57 @@ import { IoTextSharp } from "react-icons/io5";
 import { RiImageAddFill } from "react-icons/ri";
 import { BiMoviePlay } from "react-icons/bi";
 import { FaChevronLeft } from "react-icons/fa";
-import StoryText from "Components/StoryText";
-import StoryImage from "Components/StoryImage";
-import StoryVideo from "Components/StoryVideo";
+import { Link, Outlet } from "react-router-dom";
 import style from "./stories.module.scss";
 
 const Stories = () => {
-	const [type, setType] = useState(
-		"" || JSON.parse(localStorage.getItem("storyType"))
-	);
-
-	useEffect(() => {
-		const removeStorageStory = () => {
-			localStorage.removeItem("storyType");
-		};
-
-		return removeStorageStory;
-	}, []);
-
 	const types = [
 		{
+			url: "text",
 			icon: <IoTextSharp />,
 			title: "Create text",
 			type: "text"
 		},
 		{
+			url: "image",
 			icon: <RiImageAddFill />,
 			title: "Create image",
 			type: "image"
 		},
 		{
+			url: "video",
 			icon: <BiMoviePlay />,
 			title: "Create video",
 			type: "video"
 		}
 	];
 
-	const handleSetType = storyType => {
-		setType(storyType);
-		localStorage.setItem("storyType", JSON.stringify(storyType));
-	};
-
-	const handleBack = () => {
-		setType("");
-		localStorage.removeItem("storyType");
-	};
-
 	return (
-		<div
-			style={{ display: !type ? "flex" : "unset" }}
-			className={style.stories}
-		>
-			<div
-				style={{ display: !type ? "none" : "flex" }}
-				className={style.back}
-				onClick={handleBack}
-			>
+		<div className={style.stories}>
+			<Link to="/" className={style.back}>
 				<FaChevronLeft />
-			</div>
+			</Link>
+
 			{/* <input type="file" accept="video/*" />
 			<input type="file" accept="image/*" /> */}
-			<div
-				style={{ display: type ? "none" : "flex" }}
-				className={style.type}
-			>
+			<div className={style.type}>
 				{types.map((item, i) => {
 					return (
-						<div key={i} className={style.add}>
-							<div
-								className={`${style.content} ${
-									style[item.type]
-								}`}
-								onClick={() => handleSetType(item.type)}
-							>
-								<p className={style.icon}>{item.icon}</p>
-								<p className={style.title}>{item.title}</p>
-							</div>
-						</div>
+						<Link
+							to={item.url}
+							key={i}
+							className={`${style.add} ${style[item.type]}`}
+						>
+							<p className={style.icon}>{item.icon}</p>
+							<p className={style.title}>{item.title}</p>
+						</Link>
 					);
 				})}
 			</div>
 
-			{type === "text" && <StoryText />}
-			{type === "image" && <StoryImage />}
-			{type === "video" && <StoryVideo />}
+			<div>
+				<Outlet />
+			</div>
 		</div>
 	);
 };
