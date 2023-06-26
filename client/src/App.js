@@ -18,11 +18,10 @@ function App() {
 				<Route element={<CheckoutRoute />}>
 					<Route path="/" element={<Main />}>
 						<Route index element={<Home />} />
-						<Route path="/stories" element={<Stories />}>
-							<Route path="text" element={<StoryText />} />
-							<Route path="image" element={<StoryImage />} />
-							<Route path="video" element={<StoryVideo />} />
-						</Route>
+						<Route path="/stories" element={<Stories />} />
+						<Route path="/stories/text" element={<StoryText />} />
+						<Route path="/stories/image" element={<StoryImage />} />
+						<Route path="/stories/video" element={<StoryVideo />} />
 					</Route>
 				</Route>
 

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { IoTextSharp } from "react-icons/io5";
 import { RiImageAddFill } from "react-icons/ri";
 import { BiMoviePlay } from "react-icons/bi";
 import { FaChevronLeft } from "react-icons/fa";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import style from "./stories.module.scss";
 
 const Stories = () => {
@@ -49,10 +49,6 @@ const Stories = () => {
 						</Link>
 					);
 				})}
-			</div>
-
-			<div>
-				<Outlet />
 			</div>
 		</div>
 	);
