@@ -14,11 +14,11 @@
 		position: relative;
 
 		button {
-			font-family: "Noto Color Emoji", sans-serif;
 			width: 25px;
 			height: 20px;
 			line-height: 20px;
 			font-size: 20px;
+			color: $color-gray;
 			border: none;
 			outline: none;
 			background: transparent;
@@ -58,7 +58,7 @@
 			transition: all 0.2s ease;
 			cursor: pointer;
 			&:hover {
-				opacity: 0.8;
+				opacity: 0.7;
 			}
 		}
 	}

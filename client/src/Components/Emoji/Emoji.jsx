@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { BsFillEmojiSmileFill } from "react-icons/bs";
+import { MdCategory, MdEmojiPeople } from "react-icons/md";
 import icons from "../../Assets/Data/icon.json";
 import style from "./emoji.module.scss";
 
@@ -6,8 +8,11 @@ const Emoji = ({ onSetEmoji }) => {
 	const [iconList, setIconList] = useState(icons.emoji);
 	const [active, setActive] = useState(0);
 
-	const { emoji, gesture, other } = icons;
-	const represent = [emoji, gesture, other];
+	const represent = [
+		{ icon: <BsFillEmojiSmileFill />, type: "emoji" },
+		{ icon: <MdEmojiPeople />, type: "gesture" },
+		{ icon: <MdCategory />, type: "other" }
+	];
 
 	const handleClick = (typeEmoji, index) => {
 		setIconList(typeEmoji);
@@ -23,8 +28,11 @@ const Emoji = ({ onSetEmoji }) => {
 			<div className={style.represent}>
 				{represent.map((item, i) => {
 					return (
-						<button key={i} onClick={() => handleClick(item, i)}>
-							{item[0]}
+						<button
+							key={i}
+							onClick={() => handleClick(icons[item.type], i)}
+						>
+							{item.icon}
 						</button>
 					);
 				})}
