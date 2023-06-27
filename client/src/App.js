@@ -7,9 +7,7 @@ import Home from "Pages/Home";
 import Login from "Pages/Login";
 import Register from "Pages/Register";
 import Stories from "Pages/Stories";
-import StoryText from "Pages/StoryText";
-import StoryImage from "Pages/StoryImage";
-import StoryVideo from "Pages/StoryVideo";
+import StoryType from "Pages/StoryType";
 
 function App() {
 	return (
@@ -19,9 +17,7 @@ function App() {
 					<Route path="/" element={<Main />}>
 						<Route index element={<Home />} />
 						<Route path="/stories" element={<Stories />} />
-						<Route path="/stories/text" element={<StoryText />} />
-						<Route path="/stories/image" element={<StoryImage />} />
-						<Route path="/stories/video" element={<StoryVideo />} />
+						<Route path="/stories/:type" element={<StoryType />} />
 					</Route>
 				</Route>
 

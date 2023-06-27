@@ -5,17 +5,18 @@ import {
 	AiOutlineRotateRight,
 	AiOutlineSwap
 } from "react-icons/ai";
+import { FaChevronLeft } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import Emoji from "Components/Emoji/Emoji";
 import useCheckOutside from "Hooks/useCheckOutside";
 import style from "./storyImage.module.scss";
-import { Link } from "react-router-dom";
-import { FaChevronLeft, FaExchangeAlt } from "react-icons/fa";
 
 const StoryImage = () => {
 	const [showEmoji, setShowEmoji] = useState(false);
 	const [value, setValue] = useState("");
 	const [imagePreview, setImagePreview] = useState("");
 	const [rotateImage, setRotateImage] = useState(0);
+	const [zoomLevel, setZoomLevel] = useState(1);
 
 	const emojiRef = useRef();
 
@@ -37,6 +38,7 @@ const StoryImage = () => {
 		reader.onload = event => {
 			setImagePreview(event.target.result);
 		};
+		setZoomLevel(1);
 	};
 
 	const handleChangeImage = e => {
@@ -58,7 +60,10 @@ const StoryImage = () => {
 		setRotateImage(prev => prev + 90);
 	};
 
-	console.log(rotateImage);
+	const handleZoom = e => {
+		const value = parseFloat(e.target.value);
+		setZoomLevel(value);
+	};
 
 	return (
 		<div className={style.storyImage}>
@@ -100,25 +105,46 @@ const StoryImage = () => {
 					<p className={style.title}>Preview</p>
 					<div className={style.view}>
 						{imagePreview ? (
-							<div className={style.picture}>
-								<div className={style.image}>
-									<img
+							<div className={style.wrap}>
+								<div className={style.picture}>
+									<div
 										style={{
-											transform: `rotate(${rotateImage}deg)`
+											transform: `scale(${zoomLevel})`
 										}}
-										src={imagePreview}
-										alt="preview"
-									/>
-								</div>
+										className={style.image}
+									>
+										<img
+											style={{
+												transform: `rotate(${rotateImage}deg)`
+											}}
+											src={imagePreview}
+											alt="preview"
+										/>
+									</div>
 
-								<div className={style.setting}>
-									<label htmlFor="image">
-										<AiOutlineSwap />
-									</label>
+									<div className={style.setting}>
+										<label htmlFor="image">
+											<AiOutlineSwap />
+										</label>
 
-									<label onClick={handleRotateImage}>
-										<AiOutlineRotateRight />
-									</label>
+										<label onClick={handleRotateImage}>
+											<AiOutlineRotateRight />
+										</label>
+									</div>
+
+									<div className={style.zoom}>
+										<input
+											type="range"
+											min="0.5"
+											max="1.5"
+											step="0.01"
+											value={zoomLevel}
+											onInput={handleZoom}
+										/>
+										<span className={style.size}>
+											{zoomLevel}
+										</span>
+									</div>
 								</div>
 							</div>
 						) : (

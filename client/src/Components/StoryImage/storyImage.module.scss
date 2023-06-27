@@ -122,7 +122,7 @@
 		width: 70%;
 		display: flex;
 		flex-direction: column;
-		padding: 15px;
+		padding: 15px 15px 15px 0;
 		transition: background 0.2s linear;
 
 		.content {
@@ -152,57 +152,105 @@
 					display: none;
 				}
 
-				.picture {
+				.wrap {
 					position: relative;
 					width: 380px;
 					height: 100%;
 					margin: 0 auto;
-					display: flex;
-					justify-content: center;
-					align-items: center;
+					background: $color-dark;
 					border-radius: 10px;
 
-					.image {
+					.picture {
 						width: 100%;
 						height: 100%;
-						background: $color-dark;
-						overflow: hidden;
+						display: flex;
+						justify-content: center;
+						align-items: center;
 						border-radius: 10px;
+						overflow: hidden;
 
-						img {
-							overflow: hidden;
-							width: 500px;
+						.image {
+							width: 100%;
 							height: 100%;
-							object-fit: cover;
-							object-position: right;
-							border-radius: 10px;
-							transition: transform 0.2s ease;
-						}
-					}
-
-					.setting {
-						position: absolute;
-						top: 50%;
-						left: calc(100% + 50px);
-						transform: translateY(-50%);
-
-						label {
-							display: block;
-							width: 50px;
-							height: 50px;
-							background: rgba(0, 0, 0, 0.2);
-							border-radius: 50%;
 							display: flex;
 							justify-content: center;
 							align-items: center;
-							font-size: 25px;
-							color: $color-white;
-							margin: 15px 0;
-							transition: opacity 0.2s ease;
-							user-select: none;
-							cursor: pointer;
-							&:hover {
-								opacity: 0.7;
+							transition: transform 100ms ease;
+
+							img {
+								overflow: hidden;
+								width: 100%;
+								height: auto;
+								object-fit: cover;
+								transition: transform 0.3s ease;
+							}
+						}
+
+						.setting {
+							position: absolute;
+							top: 50%;
+							left: calc(100% + 50px);
+							transform: translateY(-50%);
+
+							label {
+								display: block;
+								width: 50px;
+								height: 50px;
+								background: rgba(0, 0, 0, 0.2);
+								border-radius: 50%;
+								display: flex;
+								justify-content: center;
+								align-items: center;
+								font-size: 25px;
+								color: $color-white;
+								margin: 15px 0;
+								transition: opacity 0.2s ease;
+								user-select: none;
+								cursor: pointer;
+								&:hover {
+									opacity: 0.7;
+								}
+							}
+						}
+
+						.zoom {
+							position: absolute;
+							top: 50%;
+							right: calc(100% + 50px);
+							transform: translateY((-50%));
+							display: flex;
+							justify-content: center;
+							align-items: center;
+
+							input[type="range"] {
+								appearance: none;
+								width: 150px;
+								height: 6px;
+								background: rgba(255, 255, 255, 0.8);
+								border-radius: 5px;
+								box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+								&::-webkit-slider-thumb {
+									appearance: none;
+									height: 20px;
+									width: 20px;
+									border-radius: 50%;
+									background: $color-main-dark;
+									cursor: grabbing;
+								}
+							}
+
+							.size {
+								color: $color-black;
+								font-size: 15px;
+								font-weight: $fw-medium;
+								margin-left: 15px;
+								width: 50px;
+								height: 50px;
+								background: $color-white;
+								border-radius: 50%;
+								display: flex;
+								justify-content: center;
+								align-items: center;
 							}
 						}
 					}
