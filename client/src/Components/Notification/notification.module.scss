@@ -3,17 +3,18 @@
 .notification {
     position: fixed;
     top: 0;
+    left: 50%;
+    transform: translateX(-50%) scale(0.8);
     width: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     background: var(--notification);
     padding: 10px;
-    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 5px 1px var(--rgba);
     border-radius: 5px;
     visibility: hidden;
     opacity: 0;
-    transform: scale(0.8);
     transition: all 0.2s linear;
     z-index: 1000;
 
@@ -21,7 +22,7 @@
         top: 15px;
         visibility: visible;
         opacity: 1;
-        transform: scale(1);
+        transform: translateX(-50%) scale(1);
     }
 
     .icon {
