@@ -3,11 +3,12 @@
 .emoji {
 	width: auto;
 	height: auto;
-	background: var(--background);
+	background: var(--background-content);
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
 	padding: 5px;
+	box-shadow: 0 0 2px 2px var(--rgba);
 	transition: background 0.2s linear;
 
 	.represent {

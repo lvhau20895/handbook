@@ -97,9 +97,45 @@
 					}
 				}
 			}
+
+			.background,
+			.color {
+				margin-top: 15px;
+
+				.title {
+					color: var(--content);
+					font-size: 15px;
+					font-weight: $fw-medium;
+					margin-bottom: 10px;
+					border: 3px solid transparent;
+					transition: color 0.2s linear;
+				}
+
+				.wrap {
+					background: var(--background);
+					border-radius: 5px;
+					padding: 10px 5px;
+					display: flex;
+					align-items: center;
+					transition: background 0.2s linear;
+
+					span {
+						display: inline-block;
+						width: 25px;
+						height: 25px;
+						border-radius: 50%;
+						margin-right: 10px;
+						cursor: pointer;
+						&.active {
+							border: 3px solid $color-main-light;
+						}
+					}
+				}
+			}
 		}
 
 		.up {
+			color: dark;
 			width: 100%;
 			padding: 14px 0;
 			border-radius: 5px;
@@ -183,6 +219,24 @@
 								height: auto;
 								object-fit: cover;
 								transition: transform 0.3s ease;
+							}
+						}
+
+						.text {
+							font-family: "Noto Color Emoji", sans-serif;
+							position: absolute;
+							top: 1%;
+							left: 1%;
+							color: black;
+							border-radius: 5px;
+							font-size: 15px;
+							font-weight: $fw-bold;
+							padding: 10px;
+							opacity: 0;
+							visibility: hidden;
+							&.show {
+								opacity: 1;
+								visibility: visible;
 							}
 						}
 
