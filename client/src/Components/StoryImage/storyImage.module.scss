@@ -114,7 +114,7 @@
 				.wrap {
 					background: var(--background);
 					border-radius: 5px;
-					padding: 10px 5px;
+					padding: 10px;
 					display: flex;
 					align-items: center;
 					transition: background 0.2s linear;
@@ -125,9 +125,12 @@
 						height: 25px;
 						border-radius: 50%;
 						margin-right: 10px;
+						border: 3px solid $color-silver;
+						transition: all 0.2s linear;
 						cursor: pointer;
 						&.active {
-							border: 3px solid $color-main-light;
+							border-color: $color-main-light;
+							transform: scale(1.3);
 						}
 					}
 				}
@@ -202,7 +205,7 @@
 						display: flex;
 						justify-content: center;
 						align-items: center;
-						border-radius: 10px;
+						border-radius: 5px;
 						overflow: hidden;
 
 						.image {
@@ -225,15 +228,19 @@
 						.text {
 							font-family: "Noto Color Emoji", sans-serif;
 							position: absolute;
-							top: 1%;
-							left: 1%;
 							color: black;
 							border-radius: 5px;
 							font-size: 15px;
 							font-weight: $fw-bold;
+							max-width: 200px;
+							height: auto;
+							word-wrap: break-word;
 							padding: 10px;
 							opacity: 0;
 							visibility: hidden;
+							user-select: none;
+							transition: all 0.2s linear;
+							cursor: grab;
 							&.show {
 								opacity: 1;
 								visibility: visible;

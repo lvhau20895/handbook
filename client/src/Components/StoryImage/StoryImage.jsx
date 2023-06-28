@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BsEmojiSmile } from "react-icons/bs";
 import {
 	AiOutlineCloudUpload,
@@ -19,12 +19,81 @@ const StoryImage = () => {
 	const [zoomLevel, setZoomLevel] = useState(1);
 	const [background, setBackground] = useState("white");
 	const [color, setColor] = useState("black");
-	const [contentPosition, setContentPosition] = useState({ x: 0, y: 0 });
-	const [isDragging, setIsDragging] = useState(false);
 
 	const emojiRef = useRef();
 	const containerRef = useRef();
 	const boxRef = useRef();
+	const isClicked = useRef(false);
+	const coords = useRef({
+		startX: 0,
+		startY: 0,
+		lastX: 0,
+		lastY: 0
+	});
+
+	useEffect(() => {
+		if (!containerRef.current || !boxRef.current) return;
+
+		const container = containerRef.current;
+		const box = boxRef.current;
+
+		const containerWidth = container.offsetWidth;
+		const containerHeight = container.offsetHeight;
+		const boxWidth = box.offsetWidth;
+		const boxHeight = box.offsetHeight;
+
+		if (!isClicked) {
+			const initialX = (containerWidth - boxWidth) / 2;
+			const initialY = (containerHeight - boxHeight) / 2;
+
+			box.style.left = `${initialX}px`;
+			box.style.top = `${initialY}px`;
+		}
+
+		const onMouseDown = e => {
+			isClicked.current = true;
+			coords.current = {
+				startX: e.clientX,
+				startY: e.clientY,
+				lastX: box.offsetLeft,
+				lastY: box.offsetTop
+			};
+			box.style.transition = "unset";
+		};
+
+		const onMouseUp = () => {
+			isClicked.current = false;
+			box.style.transition = "all 0.2s linear";
+		};
+		const onMouseMove = e => {
+			if (!isClicked.current) return;
+			const { startX, startY, lastX, lastY } = coords.current;
+
+			const moveX = e.clientX - startX + lastX;
+			const moveY = e.clientY - startY + lastY;
+
+			const minX = 0;
+			const minY = 0;
+			const maxX = containerWidth - boxWidth;
+			const maxY = containerHeight - boxHeight;
+
+			const constrainedX = Math.max(minX, Math.min(moveX, maxX));
+			const constrainedY = Math.max(minY, Math.min(moveY, maxY));
+
+			box.style.left = `${constrainedX}px`;
+			box.style.top = `${constrainedY}px`;
+		};
+
+		box.addEventListener("mousedown", onMouseDown);
+		document.addEventListener("mouseup", onMouseUp);
+		document.addEventListener("mousemove", onMouseMove);
+
+		return () => {
+			box.removeEventListener("mousedown", onMouseDown);
+			document.removeEventListener("mouseup", onMouseUp);
+			document.removeEventListener("mousemove", onMouseMove);
+		};
+	}, [value]);
 
 	useCheckOutside(emojiRef, () => setShowEmoji(false));
 
@@ -69,13 +138,6 @@ const StoryImage = () => {
 	const handleZoom = e => {
 		const value = parseFloat(e.target.value);
 		setZoomLevel(value);
-	};
-
-	const handleContentMouseDown = event => {
-		setIsDragging(true);
-		const offsetX = event.clientX - contentPosition.x;
-		const offsetY = event.clientY - contentPosition.y;
-		setContentPosition({ x: offsetX, y: offsetY });
 	};
 
 	const backgrounds = ["white", "black"];
@@ -170,7 +232,7 @@ const StoryImage = () => {
 					<p className={style.title}>Preview</p>
 					<div className={style.view}>
 						{imagePreview ? (
-							<div className={style.wrap}>
+							<div ref={containerRef} className={style.wrap}>
 								<div className={style.picture}>
 									<div
 										style={{
@@ -188,6 +250,7 @@ const StoryImage = () => {
 									</div>
 
 									<p
+										ref={boxRef}
 										style={{
 											background,
 											color
@@ -195,7 +258,6 @@ const StoryImage = () => {
 										className={`${style.text} ${
 											value ? style.show : ""
 										}`}
-										onMouseDown={handleContentMouseDown}
 									>
 										{value}
 									</p>
@@ -256,84 +318,3 @@ const StoryImage = () => {
 };
 
 export default StoryImage;
-
-// import React, { useEffect, useRef } from "react";
-// import "./styles.css";
-
-// function App() {
-//   const containerRef = useRef(null);
-//   const boxRef = useRef(null);
-
-//   const isClicked = useRef(false);
-
-//   const coords = useRef({
-//     startX: 0,
-//     startY: 0,
-//     lastX: 0,
-//     lastY: 0
-//   });
-
-//   useEffect(() => {
-//     if (!boxRef.current || !containerRef.current) return;
-
-//     const box = boxRef.current;
-//     const container = containerRef.current;
-
-//     const onMouseDown = (e) => {
-//       isClicked.current = true;
-//       coords.current.startX = e.clientX;
-//       coords.current.startY = e.clientY;
-//     };
-
-//     const onMouseUp = (e) => {
-//       isClicked.current = false;
-//       coords.current.lastX = box.offsetLeft;
-//       coords.current.lastY = box.offsetTop;
-//     };
-
-//     const onMouseMove = (e) => {
-//       if (!isClicked.current) return;
-
-//       const nextX = e.clientX - coords.current.startX + coords.current.lastX;
-//       const nextY = e.clientY - coords.current.startY + coords.current.lastY;
-
-//       const boxWidth = box.offsetWidth;
-//       const boxHeight = box.offsetHeight;
-//       const containerWidth = container.offsetWidth;
-//       const containerHeight = container.offsetHeight;
-
-//       const minX = 0;
-//       const maxX = containerWidth - boxWidth;
-//       const minY = 0;
-//       const maxY = containerHeight - boxHeight;
-
-//       const constrainedX = Math.max(minX, Math.min(nextX, maxX));
-//       const constrainedY = Math.max(minY, Math.min(nextY, maxY));
-
-//       box.style.top = `${constrainedY}px`;
-//       box.style.left = `${constrainedX}px`;
-//     };
-
-//     document.addEventListener("mousedown", onMouseDown);
-//     document.addEventListener("mouseup", onMouseUp);
-//     document.addEventListener("mousemove", onMouseMove);
-
-//     const cleanup = () => {
-//       document.removeEventListener("mousedown", onMouseDown);
-//       document.removeEventListener("mouseup", onMouseUp);
-//       document.removeEventListener("mousemove", onMouseMove);
-//     };
-
-//     return cleanup;
-//   }, []);
-
-//   return (
-//     <main>
-//       <div ref={containerRef} className="container">
-//         <div ref={boxRef} className="box"></div>
-//       </div>
-//     </main>
-//   );
-// }
-
-// export default App;
