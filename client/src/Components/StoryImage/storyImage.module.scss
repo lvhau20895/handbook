@@ -247,14 +247,14 @@
 							border-radius: 5px;
 							font-size: 15px;
 							font-weight: $fw-bold;
-							max-width: 200px;
+							max-width: 70%;
 							height: auto;
 							word-wrap: break-word;
 							padding: 10px;
 							opacity: 0;
 							visibility: hidden;
 							user-select: none;
-							transition: all 0.2s linear;
+							transition: all 0.1s linear;
 							cursor: grab;
 							&.show {
 								opacity: 1;

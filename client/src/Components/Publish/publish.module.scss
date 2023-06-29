@@ -2,14 +2,20 @@
 
 .publish {
 	.represent {
-		width: 50px;
-		height: 50px;
-		font-size: 25px;
+		width: 40px;
+		height: 40px;
+		background: var(--rgba);
+		border-radius: 50%;
+		font-size: 20px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		color: var(--content);
-		transition: color 0.2s linear;
+		transition: all 0.2s linear;
+		cursor: pointer;
+		&:hover {
+			opacity: 0.8;
+		}
 	}
 
 	.modal {
@@ -19,8 +25,8 @@
 		width: 100%;
 		height: 100%;
 		color: white;
-		opacity: 1;
-		visibility: visible;
+		opacity: 0;
+		visibility: hidden;
 		transition: all 0.2s ease;
 		z-index: 99;
 		&.show {
@@ -34,7 +40,7 @@
 			left: 0;
 			width: 100%;
 			height: 100%;
-			background: var(--rgba);
+			background: var(--color-line);
 			cursor: pointer;
 		}
 
@@ -44,18 +50,115 @@
 			left: 50%;
 			transform: translate(-50%, -50%);
 			width: 380px;
-			height: 380px;
+			height: auto;
 			background: var(--background-content);
 			border-radius: 10px;
-			margin: 10px 0;
+			padding: 20px 10px;
+
+			.head {
+				font-size: 20px;
+				text-align: center;
+				margin-bottom: 10px;
+				color: var(--content);
+			}
 
 			.group {
+				.wrap {
+					padding: 10px;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					transition: all 100ms ease;
+					cursor: pointer;
+					&:hover {
+						background: var(--rgba);
+						border-radius: 10px;
+					}
+
+					.description {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+
+						.icon {
+							width: 50px;
+							height: 50px;
+							background: var(--rgba);
+							color: var(--content);
+							border-radius: 50%;
+							font-size: 25px;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+						}
+
+						.text {
+							margin-left: 10px;
+							display: flex;
+							flex-direction: column;
+							justify-content: center;
+
+							.title {
+								font-size: 15px;
+								font-weight: $fw-medium;
+								text-transform: capitalize;
+								color: var(--content);
+							}
+
+							.sub {
+								font-size: 14px;
+								font-weight: $fw-regular;
+								color: $color-gray;
+							}
+						}
+					}
+
+					.check {
+						width: 20px;
+						height: 20px;
+						border: 2px solid $color-main-light;
+						border-radius: 50%;
+						padding: 2px;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						box-shadow: 0 0 2px 2px var(--rgba);
+
+						.circle {
+							display: inline-block;
+							width: 12px;
+							height: 12px;
+							background: $color-main-light;
+							border-radius: 50%;
+							opacity: 0;
+							visibility: hidden;
+							transition: all 0.1s ease;
+							&.checked {
+								opacity: 1;
+								visibility: visible;
+							}
+						}
+					}
+				}
+
+				.radio {
+					display: none;
+				}
+			}
+
+			.line {
+				border: none;
+				border-top: 2px solid var(--rgba);
+				margin: 3px 0;
+			}
+
+			.comment {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				margin: 0 10px;
+				padding: 10px;
 
-				.desc {
+				.description {
 					display: flex;
 					align-items: center;
 
@@ -63,10 +166,82 @@
 						width: 50px;
 						height: 50px;
 						background: var(--rgba);
+						color: var(--content);
 						border-radius: 50%;
+						font-size: 25px;
 						display: flex;
 						justify-content: center;
 						align-items: center;
+					}
+
+					.title {
+						font-size: 14px;
+						font-weight: $fw-medium;
+						color: var(--content);
+						margin-left: 10px;
+					}
+				}
+
+				.switch {
+					width: 40px;
+					height: 18px;
+					border-radius: 25px;
+					background: $color-silver;
+					box-shadow: 0 0 1px 1px var(--rgba);
+					display: flex;
+					align-items: center;
+					transition: background 0.2s linear;
+					cursor: pointer;
+
+					.mode {
+						display: inline-block;
+						width: 20px;
+						height: 20px;
+						border-radius: 50%;
+						box-shadow: 0 0 2px 3px var(--rgba);
+						background: $color-light;
+						transition: transform 0.2s linear;
+					}
+				}
+
+				.checked {
+					background: $color-main-light;
+
+					.mode {
+						transform: translateX(100%);
+					}
+				}
+			}
+
+			.action {
+				text-align: right;
+
+				button {
+					width: 100px;
+					height: 40px;
+					border-radius: 4px;
+					border: none;
+					outline: none;
+					font-size: 15px;
+					font-weight: $fw-bold;
+					margin-left: 5px;
+					transition: all 0.2s ease;
+					cursor: pointer;
+				}
+
+				.cancel {
+					background: transparent;
+					color: $color-main-dark;
+					&:hover {
+						background: var(--rgba);
+					}
+				}
+
+				.save {
+					background: $color-main-dark;
+					color: $color-white;
+					&:hover {
+						background: $color-main-light;
 					}
 				}
 			}

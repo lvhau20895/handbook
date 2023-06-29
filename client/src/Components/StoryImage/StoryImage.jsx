@@ -47,6 +47,10 @@ const StoryImage = () => {
 		const boxWidth = box.offsetWidth;
 		const boxHeight = box.offsetHeight;
 
+		const boundingRect = box.getBoundingClientRect();
+		const rotatedWidth = Math.floor(boundingRect.width);
+		const rotatedHeight = Math.floor(boundingRect.height);
+
 		if (motionless) {
 			const initialX = (containerWidth - boxWidth) / 2;
 			const initialY = (containerHeight - boxHeight) / 2;
@@ -77,19 +81,18 @@ const StoryImage = () => {
 
 			const minX = 0;
 			const minY = 0;
-			const maxX = containerWidth - boxWidth;
-			const maxY = containerHeight - boxHeight;
+			const maxX = containerWidth - rotatedWidth;
+			const maxY = containerHeight - rotatedHeight;
 
 			const constrainedX = Math.max(minX, Math.min(moveX, maxX));
 			const constrainedY = Math.max(minY, Math.min(moveY, maxY));
-
 			box.style.left = `${constrainedX}px`;
 			box.style.top = `${constrainedY}px`;
 		};
 
 		const onMouseUp = () => {
 			isClicked.current = false;
-			box.style.transition = "all 0.2s linear";
+			box.style.transition = "all 0.1s linear";
 			document.removeEventListener("mousemove", onMouseMove);
 		};
 
@@ -102,7 +105,7 @@ const StoryImage = () => {
 			document.removeEventListener("mousemove", onMouseMove);
 			document.removeEventListener("mouseup", onMouseUp);
 		};
-	}, [value, motionless]);
+	}, [value, motionless, rotateLevel]);
 
 	useCheckOutside(emojiRef, () => setShowEmoji(false));
 
@@ -134,6 +137,8 @@ const StoryImage = () => {
 	};
 
 	const handleChangeImage = e => {
+		setMotionless(true);
+		setValue("");
 		const file = e.target.files[0];
 		reader(file);
 	};
@@ -320,7 +325,7 @@ const StoryImage = () => {
 												type="range"
 												min="-90"
 												max="90"
-												step="2"
+												step="1"
 												value={rotateLevel}
 												onInput={e =>
 													handleRange(e, "rotate")
