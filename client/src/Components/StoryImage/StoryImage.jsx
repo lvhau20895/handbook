@@ -21,7 +21,6 @@ const StoryImage = () => {
 	const [zoomLevel, setZoomLevel] = useState(1);
 	const [background, setBackground] = useState("white");
 	const [color, setColor] = useState("black");
-	const [motionless, setMotionless] = useState(true);
 	const [notification, setNotification] = useState({});
 
 	const emojiRef = useRef();
@@ -44,20 +43,17 @@ const StoryImage = () => {
 		const containerWidth = container.offsetWidth;
 		const containerHeight = container.offsetHeight;
 
-		const boundingRect = box.getBoundingClientRect();
-		const boxWidth = boundingRect.width;
-		const boxHeight = boundingRect.height;
+		const boxRect = box.getBoundingClientRect();
+		const boxWidth = boxRect.width;
+		const boxHeight = boxRect.height;
 
-		if (motionless) {
-			const initialX = (containerWidth - boxWidth) / 2;
-			const initialY = (containerHeight - boxHeight) / 2;
+		const initialX = (containerWidth - boxWidth) / 2;
+		const initialY = (containerHeight - boxHeight) / 2;
 
-			box.style.left = `${initialX}px`;
-			box.style.top = `${initialY}px`;
-		}
+		box.style.left = `${initialX}px`;
+		box.style.top = `${initialY}px`;
 
 		const onMouseDown = e => {
-			setMotionless(false);
 			isClicked.current = true;
 			coords.current = {
 				startX: e.clientX,
@@ -81,6 +77,7 @@ const StoryImage = () => {
 
 			const constrainedX = Math.max(0, Math.min(moveX, maxX));
 			const constrainedY = Math.max(0, Math.min(moveY, maxY));
+
 			box.style.left = `${constrainedX}px`;
 			box.style.top = `${constrainedY}px`;
 		};
@@ -100,7 +97,7 @@ const StoryImage = () => {
 			document.removeEventListener("mousemove", onMouseMove);
 			document.removeEventListener("mouseup", onMouseUp);
 		};
-	}, [value, motionless]);
+	}, [value]);
 
 	useCheckOutside(emojiRef, () => setShowEmoji(false));
 
@@ -132,7 +129,6 @@ const StoryImage = () => {
 	};
 
 	const handleChangeImage = e => {
-		setMotionless(true);
 		setValue("");
 		const file = e.target.files[0];
 		reader(file);

@@ -82,10 +82,11 @@
 						align-items: center;
 						border: none;
 						outline: none;
-						background: transparent;
+						background: var(--background);
+						border-radius: 50%;
 						font-size: 25px;
 						color: $color-gray;
-						transition: color 0.2s ease;
+						transition: all 0.2s ease;
 						cursor: pointer;
 						&:hover {
 							color: $color-main-light;
@@ -241,14 +242,16 @@
 						}
 
 						.text {
-							text-align: center;
-							font-family: "Noto Color Emoji", sans-serif;
 							position: absolute;
+							font-family: "Poppins", "Noto Color Emoji",
+								sans-serif;
+							text-align: center;
 							color: black;
 							border-radius: 5px;
 							font-size: 15px;
 							font-weight: $fw-bold;
 							max-width: 70%;
+							max-height: 70%;
 							height: auto;
 							word-wrap: break-word;
 							padding: 10px;
