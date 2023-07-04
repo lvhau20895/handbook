@@ -11,7 +11,7 @@ import { IoSettingsSharp } from "react-icons/io5";
 const Publish = () => {
 	const [open, setOpen] = useState(false);
 	const [checked, setChecked] = useState(0);
-	const [mode, setMode] = useState(false);
+	const [mode, setMode] = useState(true);
 
 	const options = [
 		{

@@ -248,12 +248,12 @@
 							text-align: center;
 							color: black;
 							border-radius: 5px;
-							font-size: 15px;
+							font-size: 16px;
 							font-weight: $fw-bold;
 							max-width: 70%;
-							max-height: 70%;
 							height: auto;
 							word-wrap: break-word;
+							white-space: pre-wrap;
 							padding: 10px;
 							opacity: 0;
 							visibility: hidden;

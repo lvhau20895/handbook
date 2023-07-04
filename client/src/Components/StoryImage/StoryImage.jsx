@@ -15,7 +15,7 @@ import style from "./storyImage.module.scss";
 
 const StoryImage = () => {
 	const [showEmoji, setShowEmoji] = useState(false);
-	const [value, setValue] = useState("");
+	const [content, setContent] = useState("");
 	const [imagePreview, setImagePreview] = useState("");
 	const [rotateImage, setRotateImage] = useState(0);
 	const [zoomLevel, setZoomLevel] = useState(1);
@@ -25,6 +25,7 @@ const StoryImage = () => {
 
 	const emojiRef = useRef();
 	const containerRef = useRef();
+	const imageRef = useRef();
 	const boxRef = useRef();
 	const isClicked = useRef(false);
 	const coords = useRef({
@@ -97,25 +98,25 @@ const StoryImage = () => {
 			document.removeEventListener("mousemove", onMouseMove);
 			document.removeEventListener("mouseup", onMouseUp);
 		};
-	}, [value]);
+	}, [content]);
 
 	useCheckOutside(emojiRef, () => setShowEmoji(false));
 
 	const handleChangeContent = e => {
-		if (!imagePreview) {
+		const { value } = e.target;
+		if (value.length > 250) {
 			setNotification({
 				icon: "warning",
-				message: "please add picture!",
+				message: "content up to 200 characters",
 				time: 2000
 			});
 			return;
 		}
-		const { value } = e.target;
-		setValue(value);
+		setContent(value);
 	};
 
 	const handleSetEmoji = icon => {
-		setValue(prev => prev + icon);
+		setContent(prev => prev + icon);
 	};
 
 	const reader = file => {
@@ -129,7 +130,7 @@ const StoryImage = () => {
 	};
 
 	const handleChangeImage = e => {
-		setValue("");
+		setContent("");
 		const file = e.target.files[0];
 		reader(file);
 	};
@@ -167,6 +168,19 @@ const StoryImage = () => {
 		"pink"
 	];
 
+	const handleSave = () => {
+		const image = imageRef.current;
+		const canvas = document.createElement("canvas");
+		const ctx = canvas.getContext("2d");
+
+		canvas.width = containerRef.current.offsetWidth;
+		canvas.height = containerRef.current.offsetHeight;
+		ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+		const dataUrl = canvas.toDataURL("image/jpeg");
+		console.log(dataUrl);
+	};
+
 	return (
 		<div className={style.storyImage}>
 			<Notification option={notification} />
@@ -180,70 +194,80 @@ const StoryImage = () => {
 						<Publish />
 					</div>
 
-					<div className={style.group}>
-						<textarea
-							placeholder="Enter your content..."
-							value={value}
-							onChange={handleChangeContent}
-						></textarea>
-						<div ref={emojiRef} className={style.emoji}>
-							<button
-								disabled={!imagePreview ? true : false}
-								className={`${style.icon} ${
-									!imagePreview ? style.disabled : ""
-								}`}
-								onClick={() => setShowEmoji(!showEmoji)}
-							>
-								<BsEmojiSmile />
-							</button>
-							<div
-								className={`${style.icons} ${
-									showEmoji ? style.show : ""
-								}`}
-							>
-								<Emoji onSetEmoji={handleSetEmoji} />
+					{imagePreview && (
+						<>
+							<div className={style.group}>
+								<textarea
+									placeholder="Enter your content..."
+									value={content}
+									onChange={handleChangeContent}
+								></textarea>
+								<div ref={emojiRef} className={style.emoji}>
+									<button
+										disabled={!imagePreview ? true : false}
+										className={`${style.icon} ${
+											!imagePreview ? style.disabled : ""
+										}`}
+										onClick={() => setShowEmoji(!showEmoji)}
+									>
+										<BsEmojiSmile />
+									</button>
+									<div
+										className={`${style.icons} ${
+											showEmoji ? style.show : ""
+										}`}
+									>
+										<Emoji onSetEmoji={handleSetEmoji} />
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
 
-					<div className={style.background}>
-						<p className={style.title}>Background</p>
-						<div className={style.wrap}>
-							{backgrounds.map((bg, i) => {
-								return (
-									<span
-										key={i}
-										style={{ background: bg }}
-										className={`${
-											bg === background
-												? style.active
-												: ""
-										}`}
-										onClick={() => setBackground(bg)}
-									></span>
-								);
-							})}
-						</div>
-					</div>
+							<div className={style.background}>
+								<p className={style.title}>Background</p>
+								<div className={style.wrap}>
+									{backgrounds.map((bg, i) => {
+										return (
+											<span
+												key={i}
+												style={{ background: bg }}
+												className={`${
+													bg === background
+														? style.active
+														: ""
+												}`}
+												onClick={() =>
+													setBackground(bg)
+												}
+											></span>
+										);
+									})}
+								</div>
+							</div>
 
-					<div className={style.color}>
-						<p className={style.title}>Color</p>
-						<div className={style.wrap}>
-							{colors.map((clr, i) => {
-								return (
-									<span
-										key={i}
-										style={{ background: clr }}
-										className={`${
-											clr === color ? style.active : ""
-										}`}
-										onClick={() => setColor(clr)}
-									></span>
-								);
-							})}
-						</div>
-					</div>
+							<div className={style.color}>
+								<p className={style.title}>Color</p>
+								<div className={style.wrap}>
+									{colors.map((clr, i) => {
+										return (
+											<span
+												key={i}
+												style={{ background: clr }}
+												className={`${
+													clr === color
+														? style.active
+														: ""
+												}`}
+												onClick={() => setColor(clr)}
+											></span>
+										);
+									})}
+								</div>
+							</div>
+						</>
+					)}
 				</div>
+
+				<button onClick={handleSave}>Save</button>
 
 				<button className={style.up}>Up Story</button>
 			</div>
@@ -262,6 +286,7 @@ const StoryImage = () => {
 										className={style.image}
 									>
 										<img
+											ref={imageRef}
 											style={{
 												transform: `rotate(${rotateImage}deg)`
 											}}
@@ -278,10 +303,10 @@ const StoryImage = () => {
 											color
 										}}
 										className={`${style.text} ${
-											value ? style.show : ""
+											content ? style.show : ""
 										}`}
 									>
-										{value}
+										{content}
 									</p>
 
 									<div className={style.setting}>
