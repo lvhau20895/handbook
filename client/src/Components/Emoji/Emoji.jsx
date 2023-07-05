@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { BsFillEmojiSmileFill } from "react-icons/bs";
+import { BsEmojiSmile, BsFillEmojiSmileFill } from "react-icons/bs";
 import { MdCategory, MdEmojiPeople } from "react-icons/md";
 import icons from "../../Assets/Data/icon.json";
 import style from "./emoji.module.scss";
 
 const Emoji = ({ onSetEmoji }) => {
+	const [showEmoji, setShowEmoji] = useState(false);
 	const [iconList, setIconList] = useState(icons.emoji);
 	const [active, setActive] = useState(0);
 
@@ -25,7 +26,27 @@ const Emoji = ({ onSetEmoji }) => {
 
 	return (
 		<div className={style.emoji}>
-			<div className={style.represent}>
+			<div className={style.action}>
+				<BsEmojiSmile onClick={() => setShowEmoji(!showEmoji)} />
+			</div>
+
+			<div className={`${style.box} ${showEmoji ? style.show : ""}`}>
+				<div className={style.represent}>
+					{represent.map((icon, i) => {
+						return <button key={i}>{icon.icon}</button>;
+					})}
+				</div>
+
+				<hr className={style.line} />
+
+				<div className={style.list}>
+					{iconList.map((icon, i) => {
+						return <button key={i}>{icon}</button>;
+					})}
+				</div>
+			</div>
+
+			{/* <div className={style.represent}>
 				{represent.map((item, i) => {
 					return (
 						<button
@@ -56,7 +77,7 @@ const Emoji = ({ onSetEmoji }) => {
 						</button>
 					);
 				})}
-			</div>
+			</div> */}
 		</div>
 	);
 };

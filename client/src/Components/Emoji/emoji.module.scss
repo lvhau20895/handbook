@@ -1,66 +1,115 @@
 @import "/src/Assets/Scss/main.scss";
 
+// .emoji {
+// 	width: auto;
+// 	height: auto;
+// 	background: var(--background-content);
+// 	border-radius: 10px;
+// 	display: flex;
+// 	flex-direction: column;
+// 	padding: 5px;
+// 	box-shadow: 0 0 2px 2px var(--rgba);
+// 	transition: background 0.2s linear;
+
+// 	.represent {
+// 		position: relative;
+
+// 		button {
+// 			width: 25px;
+// 			height: 20px;
+// 			line-height: 20px;
+// 			font-size: 20px;
+// 			color: $color-gray;
+// 			border: none;
+// 			outline: none;
+// 			background: transparent;
+// 			margin: 5px;
+// 			cursor: pointer;
+// 		}
+
+// 		.active {
+// 			position: absolute;
+// 			top: 100%;
+// 			width: 35px;
+// 			height: 2px;
+// 			background: $color-main-light;
+// 			border-radius: 10px;
+// 			transition: all 0.2s linear;
+// 		}
+// 	}
+
+// 	.line {
+// 		border: none;
+// 		border-top: 1px solid var(--color-line);
+// 		margin: 0 0 5px;
+// 	}
+
+// 	.list {
+// 		display: grid;
+// 		grid-template-columns: repeat(10, 1fr);
+// 		padding: 5px;
+// 		gap: 5px;
+
+// 		.item {
+// 			font-family: "Noto Color Emoji", sans-serif;
+// 			border: none;
+// 			outline: none;
+// 			background: transparent;
+// 			font-size: 20px;
+// 			transition: all 0.2s ease;
+// 			cursor: pointer;
+// 			&:hover {
+// 				opacity: 0.7;
+// 			}
+// 		}
+// 	}
+// }
+
 .emoji {
-	width: auto;
-	height: auto;
-	background: var(--background-content);
-	border-radius: 10px;
-	display: flex;
-	flex-direction: column;
-	padding: 5px;
-	box-shadow: 0 0 2px 2px var(--rgba);
-	transition: background 0.2s linear;
+	position: relative;
 
-	.represent {
-		position: relative;
-
-		button {
-			width: 25px;
-			height: 20px;
-			line-height: 20px;
-			font-size: 20px;
-			color: $color-gray;
-			border: none;
-			outline: none;
-			background: transparent;
-			margin: 5px;
-			cursor: pointer;
-		}
-
-		.active {
-			position: absolute;
-			top: 100%;
-			width: 35px;
-			height: 2px;
-			background: $color-main-light;
-			border-radius: 10px;
-			transition: all 0.2s linear;
+	.action {
+		width: 25px;
+		height: 25px;
+		font-size: 25px;
+		background: transparent;
+		color: $color-gray;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 50%;
+		transition: all 0.2s linear;
+		cursor: pointer;
+		&:hover {
+			color: $color-main-light;
 		}
 	}
 
-	.line {
-		border: none;
-		border-top: 1px solid var(--color-line);
-		margin: 0 0 5px;
-	}
+	.box {
+		position: absolute;
+		top: calc(100% + 10px);
+		right: 0;
+		opacity: 0;
+		visibility: hidden;
+		transition: all 0.2s ease;
+		&.show {
+			opacity: 1;
+			visibility: visible;
+		}
 
-	.list {
-		display: grid;
-		grid-template-columns: repeat(10, 1fr);
-		padding: 5px;
-		gap: 5px;
-
-		.item {
-			font-family: "Noto Color Emoji", sans-serif;
-			border: none;
-			outline: none;
-			background: transparent;
-			font-size: 20px;
-			transition: all 0.2s ease;
-			cursor: pointer;
-			&:hover {
-				opacity: 0.7;
+		.represent {
+			display: flex;
+			button {
+				background: transparent;
+				border: none;
+				outline: none;
 			}
+		}
+
+		.line {
+			border: none;
+			border-top: 1px solid var(--color-line);
+			margin: 0 0 5px;
 		}
 	}
 }

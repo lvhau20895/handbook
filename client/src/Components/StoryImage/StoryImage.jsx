@@ -11,6 +11,7 @@ import Emoji from "Components/Emoji/Emoji";
 import useCheckOutside from "Hooks/useCheckOutside";
 import Notification from "Components/Notification";
 import Publish from "Components/Publish";
+import html2canvas from "html2canvas";
 import style from "./storyImage.module.scss";
 
 const StoryImage = () => {
@@ -48,8 +49,8 @@ const StoryImage = () => {
 		const boxWidth = boxRect.width;
 		const boxHeight = boxRect.height;
 
-		const initialX = (containerWidth - boxWidth) / 2;
-		const initialY = (containerHeight - boxHeight) / 2;
+		const initialX = Math.round((containerWidth - boxWidth) / 2);
+		const initialY = Math.round((containerHeight - boxHeight) / 2);
 
 		box.style.left = `${initialX}px`;
 		box.style.top = `${initialY}px`;
@@ -63,7 +64,6 @@ const StoryImage = () => {
 				lastY: box.offsetTop
 			};
 			box.style.transition = "unset";
-			document.addEventListener("mousemove", onMouseMove);
 		};
 
 		const onMouseMove = e => {
@@ -86,7 +86,6 @@ const StoryImage = () => {
 		const onMouseUp = () => {
 			isClicked.current = false;
 			box.style.transition = "all 0.1s linear";
-			document.removeEventListener("mousemove", onMouseMove);
 		};
 
 		box.addEventListener("mousedown", onMouseDown);
@@ -167,18 +166,9 @@ const StoryImage = () => {
 		"violet",
 		"pink"
 	];
-
-	const handleSave = () => {
-		const image = imageRef.current;
-		const canvas = document.createElement("canvas");
-		const ctx = canvas.getContext("2d");
-
-		canvas.width = containerRef.current.offsetWidth;
-		canvas.height = containerRef.current.offsetHeight;
-		ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-		const dataUrl = canvas.toDataURL("image/jpeg");
-		console.log(dataUrl);
+	const handleSave = async () => {
+		const canvas = await html2canvas(containerRef.current);
+		console.log(canvas.toDataURL("image/jpeg"));
 	};
 
 	return (
@@ -203,22 +193,7 @@ const StoryImage = () => {
 									onChange={handleChangeContent}
 								></textarea>
 								<div ref={emojiRef} className={style.emoji}>
-									<button
-										disabled={!imagePreview ? true : false}
-										className={`${style.icon} ${
-											!imagePreview ? style.disabled : ""
-										}`}
-										onClick={() => setShowEmoji(!showEmoji)}
-									>
-										<BsEmojiSmile />
-									</button>
-									<div
-										className={`${style.icons} ${
-											showEmoji ? style.show : ""
-										}`}
-									>
-										<Emoji onSetEmoji={handleSetEmoji} />
-									</div>
+									<Emoji />
 								</div>
 							</div>
 
@@ -267,9 +242,9 @@ const StoryImage = () => {
 					)}
 				</div>
 
-				<button onClick={handleSave}>Save</button>
-
-				<button className={style.up}>Up Story</button>
+				<button className={style.up} onClick={handleSave}>
+					Up Story
+				</button>
 			</div>
 
 			<div className={style.preview}>
