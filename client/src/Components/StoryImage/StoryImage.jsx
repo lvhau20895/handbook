@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import { BsEmojiSmile } from "react-icons/bs";
+import React, { useRef, useState } from "react";
 import {
 	AiOutlineCloudUpload,
 	AiOutlineRotateRight,
@@ -8,14 +7,14 @@ import {
 import { FaChevronLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Emoji from "Components/Emoji/Emoji";
-import useCheckOutside from "Hooks/useCheckOutside";
 import Notification from "Components/Notification";
 import Publish from "Components/Publish";
 import html2canvas from "html2canvas";
+import useDraggableBox from "Hooks/useDraggableBox";
+import colorful from "../../Assets/Data/colorful.json";
 import style from "./storyImage.module.scss";
 
 const StoryImage = () => {
-	const [showEmoji, setShowEmoji] = useState(false);
 	const [content, setContent] = useState("");
 	const [imagePreview, setImagePreview] = useState("");
 	const [rotateImage, setRotateImage] = useState(0);
@@ -24,82 +23,48 @@ const StoryImage = () => {
 	const [color, setColor] = useState("black");
 	const [notification, setNotification] = useState({});
 
-	const emojiRef = useRef();
 	const containerRef = useRef();
 	const imageRef = useRef();
 	const boxRef = useRef();
-	const isClicked = useRef(false);
-	const coords = useRef({
-		startX: 0,
-		startY: 0,
-		lastX: 0,
-		lastY: 0
-	});
 
-	useEffect(() => {
-		if (!containerRef.current || !boxRef.current) return;
+	useDraggableBox(containerRef, boxRef, content);
 
-		const container = containerRef.current;
-		const box = boxRef.current;
+	const { colors, backgrounds } = colorful;
 
-		const containerWidth = container.offsetWidth;
-		const containerHeight = container.offsetHeight;
-
-		const boxRect = box.getBoundingClientRect();
-		const boxWidth = boxRect.width;
-		const boxHeight = boxRect.height;
-
-		const initialX = Math.round((containerWidth - boxWidth) / 2);
-		const initialY = Math.round((containerHeight - boxHeight) / 2);
-
-		box.style.left = `${initialX}px`;
-		box.style.top = `${initialY}px`;
-
-		const onMouseDown = e => {
-			isClicked.current = true;
-			coords.current = {
-				startX: e.clientX,
-				startY: e.clientY,
-				lastX: box.offsetLeft,
-				lastY: box.offsetTop
-			};
-			box.style.transition = "unset";
+	const reader = file => {
+		if (!file) return;
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = event => {
+			setImagePreview(event.target.result);
 		};
+		setZoomLevel(1);
+	};
 
-		const onMouseMove = e => {
-			if (!isClicked.current) return;
-			const { startX, startY, lastX, lastY } = coords.current;
+	const handleDragPicture = e => {
+		e.preventDefault();
+	};
 
-			const moveX = e.clientX - startX + lastX;
-			const moveY = e.clientY - startY + lastY;
+	const handleDropPicture = e => {
+		e.preventDefault();
+		const file = e.dataTransfer.files[0];
+		reader(file);
+	};
 
-			const maxX = containerWidth - boxWidth;
-			const maxY = containerHeight - boxHeight;
+	const handleRotateImage = () => {
+		setRotateImage(prev => prev + 90);
+	};
 
-			const constrainedX = Math.max(0, Math.min(moveX, maxX));
-			const constrainedY = Math.max(0, Math.min(moveY, maxY));
+	const handleChangeImage = e => {
+		setContent("");
+		const file = e.target.files[0];
+		reader(file);
+	};
 
-			box.style.left = `${constrainedX}px`;
-			box.style.top = `${constrainedY}px`;
-		};
-
-		const onMouseUp = () => {
-			isClicked.current = false;
-			box.style.transition = "all 0.1s linear";
-		};
-
-		box.addEventListener("mousedown", onMouseDown);
-		document.addEventListener("mousemove", onMouseMove);
-		document.addEventListener("mouseup", onMouseUp);
-
-		return () => {
-			box.removeEventListener("mousedown", onMouseDown);
-			document.removeEventListener("mousemove", onMouseMove);
-			document.removeEventListener("mouseup", onMouseUp);
-		};
-	}, [content]);
-
-	useCheckOutside(emojiRef, () => setShowEmoji(false));
+	const handleRange = e => {
+		const value = e.target.value;
+		setZoomLevel(value);
+	};
 
 	const handleChangeContent = e => {
 		const { value } = e.target;
@@ -114,58 +79,6 @@ const StoryImage = () => {
 		setContent(value);
 	};
 
-	const handleSetEmoji = icon => {
-		setContent(prev => prev + icon);
-	};
-
-	const reader = file => {
-		if (!file) return;
-		const reader = new FileReader();
-		reader.readAsDataURL(file);
-		reader.onload = event => {
-			setImagePreview(event.target.result);
-		};
-		setZoomLevel(1);
-	};
-
-	const handleChangeImage = e => {
-		setContent("");
-		const file = e.target.files[0];
-		reader(file);
-	};
-
-	const handleDrag = e => {
-		e.preventDefault();
-	};
-
-	const handleDrop = e => {
-		e.preventDefault();
-		const file = e.dataTransfer.files[0];
-		reader(file);
-	};
-
-	const handleRotateImage = () => {
-		setRotateImage(prev => prev + 90);
-	};
-
-	const handleRange = e => {
-		const value = e.target.value;
-		setZoomLevel(value);
-	};
-
-	const backgrounds = ["white", "black"];
-	const colors = [
-		"white",
-		"black",
-		"brown",
-		"red",
-		"green",
-		"darkblue",
-		"darkcyan",
-		"yellow",
-		"violet",
-		"pink"
-	];
 	const handleSave = async () => {
 		const canvas = await html2canvas(containerRef.current);
 		console.log(canvas.toDataURL("image/jpeg"));
@@ -192,8 +105,16 @@ const StoryImage = () => {
 									value={content}
 									onChange={handleChangeContent}
 								></textarea>
-								<div ref={emojiRef} className={style.emoji}>
-									<Emoji />
+								<div className={style.emoji}>
+									<Emoji
+										position={{
+											top: "calc(100% + 15px)",
+											right: "-10px"
+										}}
+										onEmoji={icon =>
+											setContent(prev => prev + icon)
+										}
+									/>
 								</div>
 							</div>
 
@@ -314,8 +235,8 @@ const StoryImage = () => {
 						) : (
 							<div
 								className={style.group}
-								onDragOver={handleDrag}
-								onDrop={handleDrop}
+								onDragOver={handleDragPicture}
+								onDrop={handleDropPicture}
 							>
 								<label htmlFor="image">
 									<p className={style.icon}>

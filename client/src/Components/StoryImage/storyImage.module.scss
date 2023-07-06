@@ -70,53 +70,10 @@
 					}
 				}
 
-				// .emoji {
-				// 	.icon {
-				// 		position: absolute;
-				// 		bottom: 10px;
-				// 		right: 10px;
-				// 		width: 25px;
-				// 		height: 25px;
-				// 		display: flex;
-				// 		justify-content: center;
-				// 		align-items: center;
-				// 		border: none;
-				// 		outline: none;
-				// 		background: var(--background);
-				// 		border-radius: 50%;
-				// 		font-size: 25px;
-				// 		color: $color-gray;
-				// 		transition: all 0.2s ease;
-				// 		cursor: pointer;
-				// 		&:hover {
-				// 			color: $color-main-light;
-				// 		}
-				// 		&.disabled {
-				// 			cursor: not-allowed;
-				// 			&:hover {
-				// 				color: $color-gray;
-				// 			}
-				// 		}
-				// 	}
-
-				// 	.icons {
-				// 		position: absolute;
-				// 		top: calc(100% + 5px);
-				// 		right: 0;
-				// 		opacity: 0;
-				// 		visibility: hidden;
-				// 		transition: all 0.2s ease;
-				// 		&.show {
-				// 			opacity: 1;
-				// 			visibility: visible;
-				// 		}
-				// 	}
-				// }
-
 				.emoji {
 					position: absolute;
-					bottom: 0;
-					right: 0;
+					bottom: 10px;
+					right: 10px;
 				}
 			}
 

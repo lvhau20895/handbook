@@ -1,13 +1,12 @@
-import React, { useRef, useState } from "react";
-import style from "./storyText.module.scss";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaChevronLeft } from "react-icons/fa";
+import Emoji from "Components/Emoji";
 import Publish from "Components/Publish/Publish";
-import { BsEmojiSmile } from "react-icons/bs";
+import style from "./storyText.module.scss";
 
 const StoryText = () => {
 	const [content, setContent] = useState("");
-	const emojiRef = useRef();
 
 	const handleChangeContent = e => {
 		const { value } = e.target;
@@ -34,17 +33,16 @@ const StoryText = () => {
 							value={content}
 							onChange={handleChangeContent}
 						></textarea>
-						<div ref={emojiRef} className={style.emoji}>
-							<button className={style.icon}>
-								<BsEmojiSmile />
-							</button>
-							{/* <div
-								className={`${style.icons} ${
-									showEmoji ? style.show : ""
-								}`}
-							>
-								<Emoji onSetEmoji={handleSetEmoji} />
-							</div> */}
+						<div className={style.emoji}>
+							<Emoji
+								position={{
+									top: "calc(100% + 15px)",
+									right: "-10px"
+								}}
+								onEmoji={icon =>
+									setContent(prev => prev + icon)
+								}
+							/>
 						</div>
 					</div>
 				</div>

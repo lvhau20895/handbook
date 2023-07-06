@@ -1,0 +1,16 @@
+{
+	"colors": [
+		"white",
+		"black",
+		"brown",
+		"red",
+		"green",
+		"darkblue",
+		"darkcyan",
+		"yellow",
+		"violet",
+		"pink"
+	],
+	"backgrounds": ["white", "black"],
+	"themes": []
+}

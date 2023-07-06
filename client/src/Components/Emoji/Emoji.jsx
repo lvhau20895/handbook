@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { BsEmojiSmile, BsFillEmojiSmileFill } from "react-icons/bs";
 import { MdCategory, MdEmojiPeople } from "react-icons/md";
 import icons from "../../Assets/Data/icon.json";
 import style from "./emoji.module.scss";
+import useCheckOutside from "Hooks/useCheckOutside";
 
-const Emoji = ({ onSetEmoji }) => {
+const Emoji = ({ position, onEmoji }) => {
 	const [showEmoji, setShowEmoji] = useState(false);
 	const [iconList, setIconList] = useState(icons.emoji);
 	const [active, setActive] = useState(0);
+
+	const emojiRef = useRef();
+
+	useCheckOutside(emojiRef, () => setShowEmoji(false));
 
 	const represent = [
 		{ icon: <BsFillEmojiSmileFill />, type: "emoji" },
@@ -20,64 +25,46 @@ const Emoji = ({ onSetEmoji }) => {
 		setActive(index);
 	};
 
-	const handleSetEmoji = icon => {
-		onSetEmoji(icon);
-	};
-
 	return (
-		<div className={style.emoji}>
+		<div ref={emojiRef} className={style.emoji}>
 			<div className={style.action}>
 				<BsEmojiSmile onClick={() => setShowEmoji(!showEmoji)} />
 			</div>
 
-			<div className={`${style.box} ${showEmoji ? style.show : ""}`}>
+			<div
+				style={position}
+				className={`${style.box} ${showEmoji ? style.show : ""}`}
+			>
 				<div className={style.represent}>
 					{represent.map((icon, i) => {
-						return <button key={i}>{icon.icon}</button>;
+						return (
+							<button
+								key={i}
+								onClick={() => handleClick(icons[icon.type], i)}
+							>
+								{icon.icon}
+							</button>
+						);
 					})}
+
+					<div
+						style={{ left: `calc(${active} * 35px)` }}
+						className={style.active}
+					></div>
 				</div>
 
 				<hr className={style.line} />
 
 				<div className={style.list}>
 					{iconList.map((icon, i) => {
-						return <button key={i}>{icon}</button>;
+						return (
+							<button key={i} onClick={() => onEmoji(icon)}>
+								{icon}
+							</button>
+						);
 					})}
 				</div>
 			</div>
-
-			{/* <div className={style.represent}>
-				{represent.map((item, i) => {
-					return (
-						<button
-							key={i}
-							onClick={() => handleClick(icons[item.type], i)}
-						>
-							{item.icon}
-						</button>
-					);
-				})}
-				<div
-					style={{ left: `calc(${active} * 35px)` }}
-					className={style.active}
-				></div>
-			</div>
-
-			<hr className={style.line} />
-
-			<div className={style.list}>
-				{iconList.map((icon, i) => {
-					return (
-						<button
-							key={i}
-							className={style.item}
-							onClick={() => handleSetEmoji(icon)}
-						>
-							{icon}
-						</button>
-					);
-				})}
-			</div> */}
 		</div>
 	);
 };

@@ -1,70 +1,5 @@
 @import "/src/Assets/Scss/main.scss";
 
-// .emoji {
-// 	width: auto;
-// 	height: auto;
-// 	background: var(--background-content);
-// 	border-radius: 10px;
-// 	display: flex;
-// 	flex-direction: column;
-// 	padding: 5px;
-// 	box-shadow: 0 0 2px 2px var(--rgba);
-// 	transition: background 0.2s linear;
-
-// 	.represent {
-// 		position: relative;
-
-// 		button {
-// 			width: 25px;
-// 			height: 20px;
-// 			line-height: 20px;
-// 			font-size: 20px;
-// 			color: $color-gray;
-// 			border: none;
-// 			outline: none;
-// 			background: transparent;
-// 			margin: 5px;
-// 			cursor: pointer;
-// 		}
-
-// 		.active {
-// 			position: absolute;
-// 			top: 100%;
-// 			width: 35px;
-// 			height: 2px;
-// 			background: $color-main-light;
-// 			border-radius: 10px;
-// 			transition: all 0.2s linear;
-// 		}
-// 	}
-
-// 	.line {
-// 		border: none;
-// 		border-top: 1px solid var(--color-line);
-// 		margin: 0 0 5px;
-// 	}
-
-// 	.list {
-// 		display: grid;
-// 		grid-template-columns: repeat(10, 1fr);
-// 		padding: 5px;
-// 		gap: 5px;
-
-// 		.item {
-// 			font-family: "Noto Color Emoji", sans-serif;
-// 			border: none;
-// 			outline: none;
-// 			background: transparent;
-// 			font-size: 20px;
-// 			transition: all 0.2s ease;
-// 			cursor: pointer;
-// 			&:hover {
-// 				opacity: 0.7;
-// 			}
-// 		}
-// 	}
-// }
-
 .emoji {
 	position: relative;
 
@@ -87,22 +22,42 @@
 
 	.box {
 		position: absolute;
-		top: calc(100% + 10px);
-		right: 0;
+		background: var(--background-content);
+		box-shadow: 0 0 0 2px var(--rgba);
+		border-radius: 10px;
 		opacity: 0;
 		visibility: hidden;
 		transition: all 0.2s ease;
+		z-index: 100;
 		&.show {
 			opacity: 1;
 			visibility: visible;
 		}
 
 		.represent {
-			display: flex;
+			position: relative;
+
 			button {
-				background: transparent;
+				width: 25px;
+				height: 20px;
+				line-height: 20px;
+				font-size: 20px;
+				color: $color-gray;
 				border: none;
 				outline: none;
+				background: transparent;
+				margin: 5px;
+				cursor: pointer;
+			}
+
+			.active {
+				position: absolute;
+				top: 100%;
+				width: 35px;
+				height: 2px;
+				background: $color-main-light;
+				border-radius: 10px;
+				transition: all 0.2s linear;
 			}
 		}
 
@@ -110,6 +65,26 @@
 			border: none;
 			border-top: 1px solid var(--color-line);
 			margin: 0 0 5px;
+		}
+
+		.list {
+			display: grid;
+			grid-template-columns: repeat(10, 1fr);
+			gap: 5px;
+			padding: 5px;
+
+			button {
+				font-family: "Noto Color Emoji", sans-serif;
+				background: transparent;
+				border: none;
+				outline: none;
+				font-size: 20px;
+				transition: opacity 0.2s ease;
+				cursor: pointer;
+				&:hover {
+					opacity: 0.7;
+				}
+			}
 		}
 	}
 }
