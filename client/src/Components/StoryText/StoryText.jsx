@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 import { FaChevronLeft } from "react-icons/fa";
 import Emoji from "Components/Emoji";
 import Publish from "Components/Publish/Publish";
+import colorful from "../../Assets/Data/colorful.json";
 import style from "./storyText.module.scss";
 
 const StoryText = () => {
 	const [content, setContent] = useState("");
+	const [color, setColor] = useState("black");
+	const [background, setBackground] = useState("white");
+
+	const { colors, backgrounds, themes } = colorful;
 
 	const handleChangeContent = e => {
 		const { value } = e.target;
@@ -43,6 +48,44 @@ const StoryText = () => {
 									setContent(prev => prev + icon)
 								}
 							/>
+						</div>
+					</div>
+
+					<div className={style.background}>
+						<p className={style.title}>Background</p>
+						<div className={style.wrap}>
+							{backgrounds.map((bg, i) => {
+								return (
+									<span
+										key={i}
+										style={{ background: bg }}
+										className={`${
+											bg === background
+												? style.active
+												: ""
+										}`}
+										onClick={() => setBackground(bg)}
+									></span>
+								);
+							})}
+						</div>
+					</div>
+
+					<div className={style.color}>
+						<p className={style.title}>Text</p>
+						<div className={style.wrap}>
+							{colors.map((clr, i) => {
+								return (
+									<span
+										key={i}
+										style={{ background: clr }}
+										className={`${
+											clr === color ? style.active : ""
+										}`}
+										onClick={() => setColor(clr)}
+									></span>
+								);
+							})}
 						</div>
 					</div>
 				</div>

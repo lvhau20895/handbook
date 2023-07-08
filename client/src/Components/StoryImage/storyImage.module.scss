@@ -182,6 +182,7 @@
 						display: flex;
 						justify-content: center;
 						align-items: center;
+						font-size: 16px;
 						overflow: hidden;
 
 						.image {
@@ -208,7 +209,7 @@
 							text-align: center;
 							color: black;
 							border-radius: 5px;
-							font-size: 16px;
+							font-size: 0.822222rem;
 							font-weight: $fw-bold;
 							max-width: 70%;
 							height: auto;

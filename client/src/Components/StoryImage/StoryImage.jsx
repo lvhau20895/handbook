@@ -22,12 +22,17 @@ const StoryImage = () => {
 	const [background, setBackground] = useState("white");
 	const [color, setColor] = useState("black");
 	const [notification, setNotification] = useState({});
+	const [position, setPosition] = useState({ x: 0, y: 0 });
 
 	const containerRef = useRef();
 	const imageRef = useRef();
 	const boxRef = useRef();
 
-	useDraggableBox(containerRef, boxRef, content);
+	useDraggableBox(containerRef, boxRef, content, (x, y) =>
+		setPosition({ x, y })
+	);
+
+	console.log(position);
 
 	const { colors, backgrounds } = colorful;
 
@@ -141,7 +146,7 @@ const StoryImage = () => {
 							</div>
 
 							<div className={style.color}>
-								<p className={style.title}>Color</p>
+								<p className={style.title}>Text</p>
 								<div className={style.wrap}>
 									{colors.map((clr, i) => {
 										return (

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-const useDraggableBox = (containerRef, boxRef, content) => {
+const useDraggableBox = (containerRef, boxRef, content, handler) => {
 	const isClicked = useRef(false);
 	const coords = useRef({
 		startX: 0,
@@ -25,8 +25,13 @@ const useDraggableBox = (containerRef, boxRef, content) => {
 		const initialX = Math.round((containerWidth - boxWidth) / 2);
 		const initialY = Math.round((containerHeight - boxHeight) / 2);
 
-		box.style.left = `${initialX}px`;
-		box.style.top = `${initialY}px`;
+		const percentX = Math.round((initialX / containerWidth) * 100);
+		const percentY = Math.round((initialY / containerHeight) * 100);
+
+		box.style.left = `${percentX}%`;
+		box.style.top = `${percentY}%`;
+
+		handler(percentX, percentY);
 
 		const onMouseDown = e => {
 			isClicked.current = true;
@@ -49,11 +54,17 @@ const useDraggableBox = (containerRef, boxRef, content) => {
 			const maxX = containerWidth - boxWidth;
 			const maxY = containerHeight - boxHeight;
 
-			const constrainedX = Math.max(0, Math.min(moveX, maxX));
-			const constrainedY = Math.max(0, Math.min(moveY, maxY));
+			const constrainedX =
+				(Math.max(0, Math.min(moveX, maxX)) / containerWidth) * 100;
+			const constrainedY =
+				(Math.max(0, Math.min(moveY, maxY)) / containerHeight) * 100;
 
-			box.style.left = `${constrainedX}px`;
-			box.style.top = `${constrainedY}px`;
+			console.log(constrainedX, constrainedY);
+
+			box.style.left = `${constrainedX}%`;
+			box.style.top = `${constrainedY}%`;
+
+			handler(constrainedX, constrainedY);
 		};
 
 		const onMouseUp = () => {
