@@ -31,7 +31,7 @@
 			width: auto;
 			height: auto;
 			background: var(--background-content);
-			box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+			box-shadow: 0 0 5px 2px var(--rgba);
 			border-radius: 5px;
 			padding: 5px;
 			visibility: hidden;

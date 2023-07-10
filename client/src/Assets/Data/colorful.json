@@ -12,5 +12,78 @@
 		"pink"
 	],
 	"backgrounds": ["white", "black"],
-	"themes": []
+	"themes": [
+		{
+			"name": "theme 1",
+			"url": "/images/themes/theme-1.jpg"
+		},
+		{
+			"name": "theme 2",
+			"url": "/images/themes/theme-2.jpg"
+		},
+		{
+			"name": "theme 3",
+			"url": "/images/themes/theme-3.jpg"
+		},
+		{
+			"name": "theme 4",
+			"url": "/images/themes/theme-4.jpg"
+		},
+		{
+			"name": "theme 5",
+			"url": "/images/themes/theme-5.jpg"
+		},
+		{
+			"name": "theme 6",
+			"url": "/images/themes/theme-6.jpg"
+		},
+		{
+			"name": "theme 7",
+			"url": "/images/themes/theme-7.jpg"
+		},
+		{
+			"name": "theme 8",
+			"url": "/images/themes/theme-8.jpg"
+		},
+		{
+			"name": "theme 9",
+			"url": "/images/themes/theme-9.jpg"
+		},
+		{
+			"name": "theme 10",
+			"url": "/images/themes/theme-10.jpg"
+		},
+		{
+			"name": "theme 11",
+			"url": "/images/themes/theme-11.jpg"
+		},
+		{
+			"name": "theme 12",
+			"url": "/images/themes/theme-12.jpg"
+		},
+		{
+			"name": "theme 13",
+			"url": "/images/themes/theme-13.jpg"
+		},
+		{
+			"name": "theme 14",
+			"url": "/images/themes/theme-14.jpg"
+		},
+		{
+			"name": "theme 15",
+			"url": "/images/themes/theme-15.jpg"
+		},
+		{
+			"name": "theme 16",
+			"url": "/images/themes/theme-16.jpg"
+		},
+		{
+			"name": "theme 17",
+			"url": "/images/themes/theme-17.jpg"
+		},
+		{
+			"name": "theme 18",
+			"url": "/images/themes/theme-18.jpg"
+		}
+	]
 }

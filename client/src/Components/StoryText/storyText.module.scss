@@ -7,110 +7,124 @@
 
 	.option {
 		width: 30%;
+		height: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 		padding: 15px;
 
-		.action {
-			.head {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
+		.head {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 
-				.back {
-					width: 40px;
-					height: 40px;
-					text-decoration: none;
-					display: flex;
-					justify-content: center;
-					align-items: center;
+			.back {
+				width: 40px;
+				height: 40px;
+				text-decoration: none;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border-radius: 50%;
+				background: var(--rgba);
+				color: var(--content);
+				font-size: 15px;
+				transition: all 0.2s linear;
+				cursor: pointer;
+				&:hover {
+					opacity: 0.8;
+				}
+			}
+		}
+
+		.group {
+			position: relative;
+			width: 100%;
+			height: 150px;
+
+			textarea {
+				width: 100%;
+				height: 100%;
+				font-family: "Poppins", "Noto Color Emoji", sans-serif;
+				resize: none;
+				border-radius: 5px;
+				border: none;
+				outline: none;
+				background: var(--background);
+				padding: 10px;
+				color: var(--content);
+				font-size: 15px;
+				font-weight: $fw-medium;
+				transition: all 0.2s linear;
+				&::placeholder {
+					font-size: 14px;
+					font-weight: $fw-medium;
+				}
+				&::-webkit-scrollbar {
+					width: 5px;
+				}
+				&::-webkit-scrollbar-thumb {
+					border-radius: 10px;
+					background: $color-gray;
+				}
+			}
+
+			.emoji {
+				position: absolute;
+				bottom: 10px;
+				right: 10px;
+			}
+		}
+
+		.color,
+		.background,
+		.theme {
+			.title {
+				color: var(--content);
+				font-size: 15px;
+				font-weight: $fw-medium;
+				margin-bottom: 5px;
+				border: 3px solid transparent;
+				transition: color 0.2s linear;
+			}
+
+			.wrap,
+			.box {
+				background: var(--background);
+				border-radius: 5px;
+				display: grid;
+				grid-template-columns: repeat(10, 25px);
+				justify-content: space-between;
+				gap: 5px;
+				padding: 10px;
+				transition: background 0.2s linear;
+
+				span {
+					height: 25px;
 					border-radius: 50%;
-					background: var(--rgba);
-					color: var(--content);
-					font-size: 15px;
+					border: 3px solid $color-silver;
 					transition: all 0.2s linear;
 					cursor: pointer;
-					&:hover {
-						opacity: 0.8;
+					&.active {
+						border-color: $color-main-light;
+						transform: scale(1.3);
 					}
 				}
 			}
 
-			.group {
-				position: relative;
-				margin-top: 15px;
-				width: 100%;
-				height: 150px;
+			.box {
+				grid-template-columns: repeat(10, 1fr);
 
-				textarea {
+				img {
+					aspect-ratio: 1/1;
 					width: 100%;
-					height: 100%;
-					font-family: "Poppins", "Noto Color Emoji", sans-serif;
-					resize: none;
 					border-radius: 5px;
-					border: none;
-					outline: none;
-					background: var(--background);
-					padding: 10px;
-					color: var(--content);
-					font-size: 15px;
-					font-weight: $fw-medium;
-					transition: all 0.2s linear;
-					&::placeholder {
-						font-size: 14px;
-						font-weight: $fw-medium;
-					}
-					&::-webkit-scrollbar {
-						width: 5px;
-					}
-					&::-webkit-scrollbar-thumb {
-						border-radius: 10px;
-						background: $color-gray;
-					}
-				}
-
-				.emoji {
-					position: absolute;
-					bottom: 10px;
-					right: 10px;
-				}
-			}
-
-			.background,
-			.color {
-				margin-top: 15px;
-
-				.title {
-					color: var(--content);
-					font-size: 15px;
-					font-weight: $fw-medium;
-					margin-bottom: 10px;
 					border: 3px solid transparent;
-					transition: color 0.2s linear;
-				}
-
-				.wrap {
-					background: var(--background);
-					border-radius: 5px;
-					padding: 10px;
-					display: flex;
-					align-items: center;
-					transition: background 0.2s linear;
-
-					span {
-						display: inline-block;
-						width: 25px;
-						height: 25px;
-						border-radius: 50%;
-						margin-right: 10px;
-						border: 3px solid $color-silver;
-						transition: all 0.2s linear;
-						cursor: pointer;
-						&.active {
-							border-color: $color-main-light;
-							transform: scale(1.3);
-						}
+					transition: all 0.2s linear;
+					cursor: pointer;
+					&.active {
+						border-color: $color-main-light;
+						transform: scale(1.1);
 					}
 				}
 			}
@@ -159,11 +173,21 @@
 				transition: color 0.2s linear;
 			}
 
-			.view {
+			.screen {
 				width: 100%;
 				height: calc(100% - 55px);
 				background: $color-silver;
 				border-radius: 5px;
+
+				.view {
+					width: 380px;
+					height: 100%;
+
+					img {
+						width: 100%;
+						height: 100%;
+					}
+				}
 			}
 		}
 	}
