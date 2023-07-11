@@ -176,9 +176,23 @@ const StoryImage = () => {
 			<div className={style.preview}>
 				<div className={style.content}>
 					<p className={style.title}>Preview</p>
-					<div className={style.view}>
+					<div id="view" className={style.view}>
 						{imagePreview ? (
 							<div ref={containerRef} className={style.wrap}>
+								<div
+									style={{
+										height: `calc(150px * ${
+											window.innerHeight - 170
+										} / 380)`
+									}}
+									className={style.test}
+								>
+									<img
+										className={style.demo}
+										src="https://thuthuatnhanh.com/wp-content/uploads/2021/11/hinh-anh-chill-dep.jpg"
+										alt=""
+									/>
+								</div>
 								<div className={style.picture}>
 									<div
 										style={{

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import style from "./publish.module.scss";
 import {
 	FaCommentDots,
 	FaGlobeAmericas,
@@ -7,11 +6,14 @@ import {
 	FaUserFriends
 } from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
+import Switch from "Components/Switch";
+import style from "./publish.module.scss";
 
 const Publish = () => {
 	const [open, setOpen] = useState(false);
 	const [checked, setChecked] = useState(0);
-	const [mode, setMode] = useState(true);
+	const [switchMode, setSwitchMode] = useState(true);
+	console.log(switchMode);
 
 	const options = [
 		{
@@ -97,14 +99,10 @@ const Publish = () => {
 							<p className={style.title}>Comments</p>
 						</div>
 
-						<div
-							className={`${style.switch} ${
-								mode ? style.checked : ""
-							}`}
-							onClick={() => setMode(!mode)}
-						>
-							<span className={style.mode}></span>
-						</div>
+						<Switch
+							isChecked={true}
+							onSwitch={value => setSwitchMode(value)}
+						/>
 					</div>
 
 					<div className={style.action}>
@@ -122,4 +120,4 @@ const Publish = () => {
 	);
 };
 
-export default Publish;
+export default React.memo(Publish);

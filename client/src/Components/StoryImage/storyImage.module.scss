@@ -164,6 +164,9 @@
 				height: calc(100% - 55px);
 				background: $color-silver;
 				border-radius: 5px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
 
 				.file {
 					display: none;
@@ -173,8 +176,20 @@
 					position: relative;
 					width: 380px;
 					height: 100%;
-					margin: 0 auto;
 					background: $color-dark;
+
+					.test {
+						width: 150px;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						background: gray;
+						.demo {
+							width: 100%;
+							height: auto;
+							object-fit: cover;
+						}
+					}
 
 					.picture {
 						width: 100%;

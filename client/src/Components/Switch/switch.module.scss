@@ -1,0 +1,30 @@
+@import "/src/Assets/Scss/main.scss";
+
+.switch {
+	width: 40px;
+	height: 18px;
+	border-radius: 25px;
+	background: $color-silver;
+	box-shadow: 0 0 1px 1px var(--rgba);
+	display: flex;
+	align-items: center;
+	transition: background 0.2s linear;
+	cursor: pointer;
+	&.checked {
+		background: $color-main-light;
+
+		.mode {
+			transform: translateX(100%);
+		}
+	}
+
+	.mode {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		box-shadow: 0 0 2px 3px var(--rgba);
+		background: $color-light;
+		transition: transform 0.2s linear;
+	}
+}

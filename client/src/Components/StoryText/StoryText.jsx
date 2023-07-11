@@ -5,12 +5,14 @@ import Emoji from "Components/Emoji";
 import Publish from "Components/Publish/Publish";
 import colorful from "../../Assets/Data/colorful.json";
 import style from "./storyText.module.scss";
+import Switch from "Components/Switch/Switch";
 
 const StoryText = () => {
 	const [content, setContent] = useState("");
 	const [color, setColor] = useState("black");
 	const [background, setBackground] = useState("white");
-	const [theme, setTheme] = useState(0);
+	const [theme, setTheme] = useState(4);
+	const [switchMode, setSwitchMode] = useState(true);
 
 	const { colors, backgrounds, themes } = colorful;
 
@@ -20,6 +22,8 @@ const StoryText = () => {
 	};
 
 	const handleUpStory = () => {};
+
+	console.log(switchMode);
 
 	return (
 		<div className={style.storyText}>
@@ -54,30 +58,44 @@ const StoryText = () => {
 					<div className={style.wrap}>
 						{colors.map((clr, i) => {
 							return (
-								<span
+								<button
+									key={i}
 									style={{ background: clr }}
 									className={`${
 										clr === color ? style.active : ""
 									}`}
 									onClick={() => setColor(clr)}
-								></span>
+								></button>
 							);
 						})}
 					</div>
 				</div>
 
 				<div className={style.background}>
-					<p className={style.title}>Background content</p>
-					<div className={style.wrap}>
+					<div className={style.title}>
+						<p>Background content</p>
+						<Switch
+							isChecked={true}
+							onSwitch={value => setSwitchMode(value)}
+						/>
+					</div>
+
+					<div
+						className={`${style.wrap} ${style.bg} ${
+							switchMode ? style.show : ""
+						}`}
+					>
 						{backgrounds.map((bg, i) => {
 							return (
-								<span
+								<button
+									key={i}
 									style={{ background: bg }}
 									className={`${
 										bg === background ? style.active : ""
 									}`}
 									onClick={() => setBackground(bg)}
-								></span>
+									disabled={!switchMode}
+								></button>
 							);
 						})}
 					</div>
@@ -89,6 +107,7 @@ const StoryText = () => {
 						{themes.map((th, i) => {
 							return (
 								<img
+									key={i}
 									src={th.url}
 									alt={th.name}
 									className={`${
