@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef } from "react";
 
-const useDraggableBox = (containerRef, boxRef, content, handler) => {
+const useDraggableBox = (containerRef, boxRef, handler, ...other) => {
 	const isClicked = useRef(false);
 	const coords = useRef({
 		startX: 0,
@@ -59,8 +60,6 @@ const useDraggableBox = (containerRef, boxRef, content, handler) => {
 			const constrainedY =
 				(Math.max(0, Math.min(moveY, maxY)) / containerHeight) * 100;
 
-			console.log(constrainedX, constrainedY);
-
 			box.style.left = `${constrainedX}%`;
 			box.style.top = `${constrainedY}%`;
 
@@ -81,7 +80,7 @@ const useDraggableBox = (containerRef, boxRef, content, handler) => {
 			document.removeEventListener("mousemove", onMouseMove);
 			document.removeEventListener("mouseup", onMouseUp);
 		};
-	}, [containerRef, boxRef, content]);
+	}, [containerRef, boxRef, ...other]);
 };
 
 export default useDraggableBox;

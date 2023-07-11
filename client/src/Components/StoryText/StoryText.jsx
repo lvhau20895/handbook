@@ -1,32 +1,56 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaChevronLeft } from "react-icons/fa";
 import Emoji from "Components/Emoji";
 import Publish from "Components/Publish/Publish";
 import colorful from "../../Assets/Data/colorful.json";
-import style from "./storyText.module.scss";
+import Notification from "Components/Notification";
 import Switch from "Components/Switch/Switch";
+import style from "./storyText.module.scss";
 
 const StoryText = () => {
 	const [content, setContent] = useState("");
-	const [color, setColor] = useState("black");
-	const [background, setBackground] = useState("white");
+	const [notification, setNotification] = useState({});
+	const [color, setColor] = useState("white");
+	const [background, setBackground] = useState("black");
 	const [theme, setTheme] = useState(4);
-	const [switchMode, setSwitchMode] = useState(true);
+	const [switchMode, setSwitchMode] = useState(false);
+	const [zoomLevel, setZoomLevel] = useState(1);
+
+	const textRef = useRef();
 
 	const { colors, backgrounds, themes } = colorful;
 
+	const handleScrollView = () => {
+		textRef.current.scrollTop = textRef.current.clientHeight;
+	};
+
 	const handleChangeContent = e => {
 		const { value } = e.target;
+
+		if (value.length > 250) {
+			setNotification({
+				icon: "warning",
+				message: "content up to 200 characters",
+				time: 2000
+			});
+			return;
+		}
 		setContent(value);
+		handleScrollView();
+	};
+
+	const handleRange = e => {
+		const { value } = e.target;
+		setZoomLevel(value);
 	};
 
 	const handleUpStory = () => {};
 
-	console.log(switchMode);
-
 	return (
 		<div className={style.storyText}>
+			<Notification option={notification} />
+
 			<div className={style.option}>
 				<div className={style.head}>
 					<Link to="/stories" className={style.back}>
@@ -38,6 +62,7 @@ const StoryText = () => {
 
 				<div className={style.group}>
 					<textarea
+						spellCheck={false}
 						placeholder="Enter your content..."
 						value={content}
 						onChange={handleChangeContent}
@@ -75,7 +100,7 @@ const StoryText = () => {
 					<div className={style.title}>
 						<p>Background content</p>
 						<Switch
-							isChecked={true}
+							isChecked={false}
 							onSwitch={value => setSwitchMode(value)}
 						/>
 					</div>
@@ -130,7 +155,35 @@ const StoryText = () => {
 					<p className={style.title}>Preview</p>
 					<div className={style.screen}>
 						<div className={style.view}>
+							<div className={style.zoom}>
+								<input
+									type="range"
+									min="0.5"
+									max="1.5"
+									step="0.1"
+									value={zoomLevel}
+									onInput={handleRange}
+								/>
+								<span className={style.result}>
+									{zoomLevel}
+								</span>
+							</div>
+
 							<img src={themes[theme].url} alt="theme" />
+
+							<p
+								ref={textRef}
+								style={{
+									background: switchMode
+										? background
+										: "transparent",
+									color,
+									fontSize: `${zoomLevel}em`
+								}}
+								className={style.text}
+							>
+								{content}
+							</p>
 						</div>
 					</div>
 				</div>

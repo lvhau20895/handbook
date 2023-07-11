@@ -28,8 +28,11 @@ const StoryImage = () => {
 	const imageRef = useRef();
 	const boxRef = useRef();
 
-	useDraggableBox(containerRef, boxRef, content, (x, y) =>
-		setPosition({ x, y })
+	useDraggableBox(
+		containerRef,
+		boxRef,
+		(x, y) => setPosition({ x, y }),
+		content
 	);
 
 	console.log(position);
@@ -106,6 +109,7 @@ const StoryImage = () => {
 						<>
 							<div className={style.group}>
 								<textarea
+									spellCheck={false}
 									placeholder="Enter your content..."
 									value={content}
 									onChange={handleChangeContent}
