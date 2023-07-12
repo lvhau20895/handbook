@@ -265,16 +265,16 @@
 						transform: translate(-50%, -50%);
 						font-family: "Roboto", "Noto Color Emoji", sans-serif;
 						text-align: center;
-						border-radius: 5px;
+						border-radius: 10px;
 						font-size: 1em;
 						font-weight: $fw-bold;
-						width: 70%;
-						max-height: 70%;
+						max-width: 80%;
+						width: max-content;
+						max-height: 50%;
 						height: auto;
-						overflow-y: auto;
+						overflow-y: hidden;
 						word-wrap: break-word;
 						white-space: pre-wrap;
-						padding: 10px;
 						user-select: none;
 						transition: all 0.1s linear;
 						&::-webkit-scrollbar {

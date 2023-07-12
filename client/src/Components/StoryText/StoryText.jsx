@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaChevronLeft } from "react-icons/fa";
 import Emoji from "Components/Emoji";
@@ -17,9 +17,23 @@ const StoryText = () => {
 	const [switchMode, setSwitchMode] = useState(false);
 	const [zoomLevel, setZoomLevel] = useState(1);
 
+	const containerRef = useRef();
 	const textRef = useRef();
 
 	const { colors, backgrounds, themes } = colorful;
+
+	useEffect(() => {
+		const container = containerRef.current;
+		const text = textRef.current;
+
+		const containerHeight = container.offsetHeight;
+		const textHeight = text.scrollHeight;
+		const textMaxHeight = (containerHeight * 50) / 100;
+		console.log(textHeight, textMaxHeight);
+		if (textHeight >= textMaxHeight) {
+			console.log("no no no");
+		}
+	}, [content]);
 
 	const handleScrollView = () => {
 		textRef.current.scrollTop = textRef.current.clientHeight;
@@ -28,16 +42,16 @@ const StoryText = () => {
 	const handleChangeContent = e => {
 		const { value } = e.target;
 
-		if (value.length > 250) {
+		if (value.length > 500) {
 			setNotification({
 				icon: "warning",
-				message: "content up to 200 characters",
+				message: "content up to 500 characters",
 				time: 2000
 			});
 			return;
 		}
 		setContent(value);
-		handleScrollView();
+		// handleScrollView();
 	};
 
 	const handleRange = e => {
@@ -154,7 +168,7 @@ const StoryText = () => {
 				<div className={style.content}>
 					<p className={style.title}>Preview</p>
 					<div className={style.screen}>
-						<div className={style.view}>
+						<div ref={containerRef} className={style.view}>
 							<div className={style.zoom}>
 								<input
 									type="range"
@@ -178,6 +192,7 @@ const StoryText = () => {
 										? background
 										: "transparent",
 									color,
+									padding: content ? "10px" : 0,
 									fontSize: `${zoomLevel}em`
 								}}
 								className={style.text}

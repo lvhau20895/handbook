@@ -13,7 +13,6 @@ const Publish = () => {
 	const [open, setOpen] = useState(false);
 	const [checked, setChecked] = useState(0);
 	const [switchMode, setSwitchMode] = useState(true);
-	console.log(switchMode);
 
 	const options = [
 		{
