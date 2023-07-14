@@ -20,6 +20,11 @@ const Emoji = ({ position, onEmoji }) => {
 		{ icon: <MdCategory />, type: "other" }
 	];
 
+	const handleShowEmoji = e => {
+		e.preventDefault();
+		e.button === 0 && setShowEmoji(!showEmoji);
+	};
+
 	const handleClick = (typeEmoji, index) => {
 		setIconList(typeEmoji);
 		setActive(index);
@@ -28,7 +33,7 @@ const Emoji = ({ position, onEmoji }) => {
 	return (
 		<div ref={emojiRef} className={style.emoji}>
 			<div className={style.action}>
-				<BsEmojiSmile onClick={() => setShowEmoji(!showEmoji)} />
+				<BsEmojiSmile onMouseDown={e => handleShowEmoji(e)} />
 			</div>
 
 			<div

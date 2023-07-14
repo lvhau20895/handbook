@@ -4,36 +4,38 @@ import { FaChevronLeft } from "react-icons/fa";
 import Emoji from "Components/Emoji";
 import Publish from "Components/Publish/Publish";
 import colorful from "../../Assets/Data/colorful.json";
-import Notification from "Components/Notification";
 import Switch from "Components/Switch/Switch";
 import style from "./storyText.module.scss";
 
 const StoryText = () => {
 	const [content, setContent] = useState("");
-	const [notification, setNotification] = useState({});
 	const [color, setColor] = useState("white");
 	const [background, setBackground] = useState("black");
 	const [theme, setTheme] = useState(4);
 	const [switchMode, setSwitchMode] = useState(false);
-	const [zoomLevel, setZoomLevel] = useState(1);
 	const [readMore, setReadMore] = useState(false);
 	const [readMoreClicked, setReadMoreClicked] = useState(false);
 
 	const containerRef = useRef();
 	const textRef = useRef();
+	const textareaRef = useRef();
 
 	const { colors, backgrounds, themes } = colorful;
 
 	useEffect(() => {
-		const regex =
-			/(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/g;
+		const text = textRef.current;
+		const lineHeight = parseFloat(getComputedStyle(text).lineHeight);
+		text.style.textAlign = `${
+			text.clientHeight > lineHeight * 5 ? "left" : "center"
+		}`;
+		console.log(getComputedStyle(text).webkitLineClamp);
 
-		if (content.length < 200) {
+		if (content.length < 150) {
 			setReadMoreClicked(false);
 		}
 
 		if (!readMoreClicked) {
-			setReadMore(content.length > 200);
+			setReadMore(content.length > 150);
 		}
 	}, [content, readMoreClicked]);
 
@@ -44,17 +46,25 @@ const StoryText = () => {
 	const handleChangeContent = e => {
 		const { value } = e.target;
 
-		if (value.length > 500) {
-			setNotification({
-				icon: "warning",
-				message: "content up to 500 characters",
-				time: 2000
-			});
-			return;
-		}
-
 		setContent(value);
 		handleScrollView();
+	};
+
+	const handleSetEmoji = emoji => {
+		const textarea = textareaRef.current;
+		const selectionStart = textarea.selectionStart;
+		const selectionEnd = textarea.selectionEnd;
+		const newValue =
+			content.substring(0, selectionStart) +
+			emoji +
+			content.substring(selectionEnd);
+		const newSelectionStart = selectionStart + emoji.length;
+		const focusTextarea = () => {
+			textarea.setSelectionRange(newSelectionStart, newSelectionStart);
+			textarea.focus();
+		};
+		setTimeout(focusTextarea, 0);
+		setContent(newValue);
 	};
 
 	const handleReadMore = () => {
@@ -62,17 +72,10 @@ const StoryText = () => {
 		setReadMore(!readMore);
 	};
 
-	const handleRange = e => {
-		const { value } = e.target;
-		setZoomLevel(value);
-	};
-
 	const handleUpStory = () => {};
 
 	return (
 		<div className={style.storyText}>
-			<Notification option={notification} />
-
 			<div className={style.option}>
 				<div className={style.head}>
 					<Link to="/stories" className={style.back}>
@@ -84,6 +87,7 @@ const StoryText = () => {
 
 				<div className={style.group}>
 					<textarea
+						ref={textareaRef}
 						spellCheck={false}
 						placeholder="Enter your content..."
 						value={content}
@@ -95,7 +99,7 @@ const StoryText = () => {
 								top: "calc(100% + 15px)",
 								right: "-10px"
 							}}
-							onEmoji={icon => setContent(prev => prev + icon)}
+							onEmoji={handleSetEmoji}
 						/>
 					</div>
 				</div>
@@ -177,46 +181,34 @@ const StoryText = () => {
 					<p className={style.title}>Preview</p>
 					<div className={style.screen}>
 						<div ref={containerRef} className={style.view}>
-							<div className={style.zoom}>
-								<input
-									type="range"
-									min="0.5"
-									max="1.5"
-									step="0.1"
-									value={zoomLevel}
-									onInput={handleRange}
-								/>
-								<span className={style.result}>
-									{zoomLevel}
-								</span>
-							</div>
-
 							<img src={themes[theme].url} alt="theme" />
 
-							<p
-								ref={textRef}
-								style={{
-									background: switchMode
-										? background
-										: "transparent",
-									color,
-									padding: content ? "10px" : 0,
-									fontSize: `${zoomLevel}em`
-								}}
-								className={style.text}
-							>
-								{readMore
-									? content.substring(0, 200) + "..."
-									: content}
-							</p>
-							{content.length > 200 && (
-								<button
-									className={style.more}
-									onClick={handleReadMore}
+							<div className={style.box}>
+								<p
+									ref={textRef}
+									style={{
+										background: switchMode
+											? background
+											: "transparent",
+										color,
+										padding: content ? "10px" : 0
+									}}
+									className={style.text}
 								>
-									{readMore ? "Read more" : "Hide"}
-								</button>
-							)}
+									{readMore
+										? content.substring(0, 150) + "..."
+										: content}
+								</p>
+
+								{content.length > 150 && (
+									<button
+										className={style.more}
+										onClick={handleReadMore}
+									>
+										{readMore ? "Read more" : "Hide"}
+									</button>
+								)}
+							</div>
 						</div>
 					</div>
 				</div>
