@@ -16,7 +16,8 @@ app.get("/", (_, res) => {
 	res.send("Server running...");
 });
 
+connectDatabase();
+
 app.listen(port, () => {
-	connectDatabase();
 	console.log(chalk.blueBright(`http://localhost:${port}`));
 });
