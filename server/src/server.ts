@@ -7,9 +7,9 @@ import router from "./Routers";
 const app = express();
 const port = 1995;
 
+app.use(cors());
 app.use(express.json());
 app.use(express.static("."));
-app.use(cors({ origin: "*" }));
 app.use("/api", router);
 
 app.get("/", (_, res) => {

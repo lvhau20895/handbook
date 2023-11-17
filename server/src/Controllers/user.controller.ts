@@ -80,3 +80,12 @@ export const forgot = async (req: Request, res: Response) => {
 		errorCode(res, "error: " + error);
 	}
 };
+
+export const getUsers = async (req: Request, res: Response) => {
+	try {
+		const userList = await User.find();
+		successCode(res, "get users success", userList);
+	} catch (error) {
+		errorCode(res, "error: " + error);
+	}
+};
