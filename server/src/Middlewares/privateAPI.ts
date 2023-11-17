@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { checkToken, generateRefreshToken } from "../Utils/jwt";
+import { checkToken } from "../Utils/jwt";
 import { errorCode, failCode } from "../Utils/response";
 
 type Token = { token: string };
