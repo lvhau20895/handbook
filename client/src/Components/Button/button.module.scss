@@ -1,0 +1,18 @@
+@import "/src/Assets/Scss/main.scss";
+
+.button {
+	padding: 15px 30px;
+	border-radius: 5px;
+	border: none;
+	outline: none;
+	background: $color-main-dark;
+	color: $color-light;
+	font-size: 14px;
+	font-weight: $fw-bold;
+	letter-spacing: 1px;
+	transition: background 0.2s linear;
+	cursor: pointer;
+	&:hover {
+		background: $color-main-light;
+	}
+}

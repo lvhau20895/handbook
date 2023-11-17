@@ -1,0 +1,25 @@
+@import "/src/Assets/Scss/main.scss";
+
+.form {
+	width: 350px;
+	height: 450px;
+	background: var(--bg-1);
+	border-radius: 15px;
+	padding: 20px;
+	box-shadow: 0 0 10px 2px var(--rgba-1);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	animation: fadeIn 1s ease;
+	transition: all 0.2s linear;
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+}

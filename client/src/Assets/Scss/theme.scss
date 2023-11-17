@@ -1,0 +1,24 @@
+body.dark {
+	--bg-1: #111;
+	--bg-2: #222;
+	--clr-text-1: #fff;
+	--clr-text-2: #eee;
+	--rgba-1: rgba(255, 255, 255, 0.1);
+	--rgba-2: rgba(255, 255, 255, 0.2);
+	--rgba-3: rgba(255, 255, 255, 0.3);
+}
+
+body.light {
+	--bg-1: #fff;
+	--bg-2: #eee;
+	--clr-text-1: #000;
+	--clr-text-2: #555;
+	--rgba-1: rgba(0, 0, 0, 0.1);
+	--rgba-2: rgba(0, 0, 0, 0.2);
+	--rgba-3: rgba(0, 0, 0, 0.3);
+}
+
+body {
+	background: var(--bg-2);
+	transition: all 0.2s linear;
+}

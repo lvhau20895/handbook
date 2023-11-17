@@ -1,0 +1,48 @@
+@import "src/Assets/Scss/main.scss";
+
+.switchMode {
+	position: relative;
+	width: 50px;
+	height: 25px;
+	background: $color-light;
+	border-radius: 50px;
+	box-shadow: 0 0 2px 2px var(--rgba-2);
+	transition: all 0.2s linear;
+	cursor: pointer;
+	&.active {
+		background: $color-dark;
+
+		.icon {
+			left: calc(50px - 20px - 5px);
+			background: $color-light;
+			color: $color-dark;
+		}
+	}
+
+	.icon {
+		position: absolute;
+		top: 50%;
+		left: 5px;
+		transform: translateY(-50%);
+		width: 20px;
+		height: 20px;
+		background: $color-dark;
+		color: $color-light;
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: all 0.2s linear;
+		svg {
+			animation: rotate 0.5s linear;
+		}
+		@keyframes rotate {
+			0% {
+				transform: rotate(180deg) scale(1.5);
+			}
+			100% {
+				transform: rotate(0) scale(1);
+			}
+		}
+	}
+}

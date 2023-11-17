@@ -1,0 +1,17 @@
+@import "/src/Assets/Scss/main.scss";
+
+.form {
+	position: relative;
+
+	.back {
+		position: absolute;
+		top: 20px;
+		left: 20px;
+		font-size: 30px;
+		color: $color-gray;
+		transition: opacity 0.2s linear;
+		&:hover {
+			opacity: 0.5;
+		}
+	}
+}

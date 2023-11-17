@@ -1,0 +1,55 @@
+@import "/src/Assets/Scss/main.scss";
+
+.notification {
+	position: fixed;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%) scale(0.8);
+	width: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: var(--bg-1);
+	padding: 10px;
+	box-shadow: 0 0 5px 1px var(--rgba-1);
+	border-radius: 5px;
+	visibility: hidden;
+	opacity: 0;
+	transition: all 0.2s linear;
+	z-index: 1000;
+
+	&.animate {
+		top: 15px;
+		visibility: visible;
+		opacity: 1;
+		transform: translateX(-50%) scale(1);
+	}
+
+	.icon {
+		font-size: 25px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		&.success {
+			color: $color-green;
+		}
+
+		&.warning {
+			color: $color-orange;
+		}
+
+		&.error {
+			color: $color-red;
+		}
+	}
+
+	.message {
+		margin-left: 10px;
+		color: var(--clr-text-1);
+		font-weight: $fw-medium;
+		&::first-letter {
+			text-transform: uppercase;
+		}
+	}
+}

@@ -1,0 +1,46 @@
+@import "/src/Assets/Scss/main.scss";
+
+.form {
+	position: relative;
+	justify-content: flex-start;
+
+	.back {
+		position: absolute;
+		top: 20px;
+		left: 20px;
+		font-size: 30px;
+		color: $color-gray;
+		transition: opacity 0.2s linear;
+		&:hover {
+			opacity: 0.5;
+		}
+	}
+
+	.group {
+		width: 100%;
+	}
+
+	.submit {
+		margin: 20px 0;
+	}
+
+	.linkEmail {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: $color-blue;
+		font-size: 1rem;
+		font-weight: $fw-medium;
+		&:hover {
+			border-bottom: 2px solid $color-blue;
+		}
+
+		.linkDescription {
+			margin-right: 2px;
+		}
+
+		.linkIcon {
+			font-size: 20px;
+		}
+	}
+}

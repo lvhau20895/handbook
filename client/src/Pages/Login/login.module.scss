@@ -1,0 +1,26 @@
+@import "/src/Assets/Scss/main.scss";
+
+.field {
+	width: 100%;
+}
+
+.navigate {
+	width: 100%;
+
+	.link {
+		display: inline-block;
+		color: $color-main-light;
+		font-weight: $fw-medium;
+		font-size: 15px;
+		margin-bottom: 5px;
+		&:hover {
+			color: $color-main-dark;
+			text-decoration: underline;
+		}
+	}
+
+	.linkDescription {
+		color: $color-gray;
+		font-size: 15px;
+	}
+}
